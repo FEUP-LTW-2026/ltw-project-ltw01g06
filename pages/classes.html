@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes – FitLife Gym</title>
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/pages/classes.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ── Navbar ────────────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="navbar__brand">
+      <div class="navbar__logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+        </svg>
+      </div>
+      <span class="navbar__name">FitLife Gym</span>
+    </div>
+
+    <ul class="navbar__links">
+      <li><a href="dashboard.html" class="navbar__link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a></li>
+      <li><a href="classes.html" class="navbar__link navbar__link--active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+        Classes
+      </a></li>
+      <li><a href="trainers.html" class="navbar__link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Trainers
+      </a></li>
+      <li><a href="equipment.html" class="navbar__link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14M14.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S13 21.33 13 20.5v-5c0-.83.67-1.5 1.5-1.5M2 10h19M2 14h19"/></svg>
+        Equipment
+      </a></li>
+    </ul>
+
+    <div class="navbar__user">U</div>
+  </nav>
+
+  <!-- ── Main content ───────────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <h1 class="page-header__title">Fitness Classes</h1>
+      <p class="page-header__subtitle">Browse and enroll in our fitness classes</p>
+    </div>
+
+    <!-- Filters -->
+    <section class="filters">
+      <div class="filters__header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+        </svg>
+        <span>Filters</span>
+      </div>
+      <div class="filters__row">
+        <div class="filter-group">
+          <label class="filter-group__label" for="filter-type">Class Type</label>
+          <div class="select-wrapper">
+            <select id="filter-type" class="select">
+              <option>All types</option>
+              <option>Yoga</option>
+              <option>Spinning</option>
+              <option>HIIT</option>
+              <option>Pilates</option>
+              <option>Boxing</option>
+            </select>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label class="filter-group__label" for="filter-day">Day</label>
+          <div class="select-wrapper">
+            <select id="filter-day" class="select">
+              <option>All days</option>
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label class="filter-group__label" for="filter-level">Level</label>
+          <div class="select-wrapper">
+            <select id="filter-level" class="select">
+              <option>All levels</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Classes grid -->
+    <section class="classes-grid">
+
+      <!-- Card 1 -->
+      <article class="class-card class-card--yoga">
+        <div class="class-card__body">
+          <h2 class="class-card__title">Morning Yoga Flow</h2>
+          <p class="class-card__desc">Start your day with an energizing yoga flow focusing on breath and movement.</p>
+          <div class="class-card__tags">
+            <span class="tag tag--yoga">Yoga</span>
+            <span class="tag tag--beginner">Beginner</span>
+          </div>
+          <ul class="class-card__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Monday at 07:00
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              60 minutes
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              15/20 enrolled
+            </li>
+          </ul>
+          <div class="class-card__divider"></div>
+          <div class="class-card__instructor">
+            <div class="avatar avatar--sm">SJ</div>
+            <div>
+              <p class="instructor__name">Sarah Johnson</p>
+              <p class="instructor__role">Instructor</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--full">Enroll Now</button>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="class-card class-card--spinning">
+        <div class="class-card__body">
+          <h2 class="class-card__title">Power Spinning</h2>
+          <p class="class-card__desc">High-intensity cycling class with motivating music and interval training.</p>
+          <div class="class-card__tags">
+            <span class="tag tag--spinning">Spinning</span>
+            <span class="tag tag--intermediate">Intermediate</span>
+          </div>
+          <ul class="class-card__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Monday at 18:00
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              45 minutes
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              20/25 enrolled
+            </li>
+          </ul>
+          <div class="class-card__divider"></div>
+          <div class="class-card__instructor">
+            <div class="avatar avatar--sm">MC</div>
+            <div>
+              <p class="instructor__name">Mike Chen</p>
+              <p class="instructor__role">Instructor</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--full">Enroll Now</button>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="class-card class-card--hiit">
+        <div class="class-card__body">
+          <h2 class="class-card__title">HIIT Bootcamp</h2>
+          <p class="class-card__desc">Intense full-body workout combining cardio and strength training.</p>
+          <div class="class-card__tags">
+            <span class="tag tag--hiit">Hiit</span>
+            <span class="tag tag--advanced">Advanced</span>
+          </div>
+          <ul class="class-card__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Tuesday at 06:30
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              50 minutes
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              12/15 enrolled
+            </li>
+          </ul>
+          <div class="class-card__divider"></div>
+          <div class="class-card__instructor">
+            <div class="avatar avatar--sm">AR</div>
+            <div>
+              <p class="instructor__name">Alex Rodriguez</p>
+              <p class="instructor__role">Instructor</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--full">Enroll Now</button>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="class-card class-card--pilates">
+        <div class="class-card__body">
+          <h2 class="class-card__title">Pilates Core</h2>
+          <p class="class-card__desc">Focus on core strength, flexibility, and body awareness.</p>
+          <div class="class-card__tags">
+            <span class="tag tag--pilates">Pilates</span>
+            <span class="tag tag--intermediate">Intermediate</span>
+          </div>
+          <ul class="class-card__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Wednesday at 10:00
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              60 minutes
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              10/18 enrolled
+            </li>
+          </ul>
+          <div class="class-card__divider"></div>
+          <div class="class-card__instructor">
+            <div class="avatar avatar--sm">SJ</div>
+            <div>
+              <p class="instructor__name">Sarah Johnson</p>
+              <p class="instructor__role">Instructor</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--full">Enroll Now</button>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="class-card class-card--yoga">
+        <div class="class-card__body">
+          <h2 class="class-card__title">Evening Yoga</h2>
+          <p class="class-card__desc">Relaxing evening yoga to unwind and restore.</p>
+          <div class="class-card__tags">
+            <span class="tag tag--yoga">Yoga</span>
+            <span class="tag tag--beginner">Beginner</span>
+          </div>
+          <ul class="class-card__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Thursday at 19:00
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              60 minutes
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              18/20 enrolled
+            </li>
+          </ul>
+          <div class="class-card__divider"></div>
+          <div class="class-card__instructor">
+            <div class="avatar avatar--sm">SJ</div>
+            <div>
+              <p class="instructor__name">Sarah Johnson</p>
+              <p class="instructor__role">Instructor</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--full">Enroll Now</button>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="class-card class-card--boxing">
+        <div class="class-card__body">
+          <h2 class="class-card__title">Boxing Basics</h2>
+          <p class="class-card__desc">Learn fundamental boxing techniques and footwork.</p>
+          <div class="class-card__tags">
+            <span class="tag tag--boxing">Boxing</span>
+            <span class="tag tag--beginner">Beginner</span>
+          </div>
+          <ul class="class-card__info">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Friday at 17:30
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              60 minutes
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              8/12 enrolled
+            </li>
+          </ul>
+          <div class="class-card__divider"></div>
+          <div class="class-card__instructor">
+            <div class="avatar avatar--sm">TM</div>
+            <div>
+              <p class="instructor__name">Tony Martinez</p>
+              <p class="instructor__role">Instructor</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary btn--full">Enroll Now</button>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>
