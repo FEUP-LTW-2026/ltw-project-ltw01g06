@@ -47,7 +47,7 @@
             <p class="auth-card__subtitle">Sign in to your account to continue</p>
         </div>
 
-        <form class="form" action="login.php" method="post" novalidate>
+        <form class="form" novalidate>
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form__group">
@@ -64,15 +64,6 @@
 
             <button class="btn btn--primary btn--full" type="submit">Sign In</button>
         </form>
-
-        <aside class="demo-box">
-            <p class="demo-box__title">Demo accounts:</p>
-            <ul class="demo-box__list">
-                <li>Member: <code>member@gym.com</code> / <code>member</code></li>
-                <li>Trainer: <code>trainer@gym.com</code> / <code>trainer</code></li>
-                <li>Admin: <code>admin@gym.com</code> / <code>admin</code></li>
-            </ul>
-        </aside>
     </section>
 
     <!-- Register Panel -->
@@ -82,7 +73,7 @@
             <p class="auth-card__subtitle">Join our fitness community today</p>
         </div>
 
-        <form class="form" action="register.php" method="post" novalidate>
+        <form class="form" novalidate>
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form__group">
