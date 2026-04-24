@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FitLife Gym — Login / Register</title>
+    <title>Equilibrio — Login / Register</title>
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages/auth.css" />
@@ -22,7 +22,7 @@
                 <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
             </svg>
         </div>
-        <h1 class="brand__name">FitLife Gym</h1>
+        <h1 class="brand__name">Equilibrio</h1>
         <p class="brand__tagline">Your journey to better health starts here</p>
     </header>
 
@@ -47,7 +47,7 @@
             <p class="auth-card__subtitle">Sign in to your account to continue</p>
         </div>
 
-        <form class="form" action="login.php" method="post" novalidate>
+        <form class="form" novalidate>
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form__group">
@@ -64,15 +64,6 @@
 
             <button class="btn btn--primary btn--full" type="submit">Sign In</button>
         </form>
-
-        <aside class="demo-box">
-            <p class="demo-box__title">Demo accounts:</p>
-            <ul class="demo-box__list">
-                <li>Member: <code>member@gym.com</code> / <code>member</code></li>
-                <li>Trainer: <code>trainer@gym.com</code> / <code>trainer</code></li>
-                <li>Admin: <code>admin@gym.com</code> / <code>admin</code></li>
-            </ul>
-        </aside>
     </section>
 
     <!-- Register Panel -->
@@ -82,7 +73,7 @@
             <p class="auth-card__subtitle">Join our fitness community today</p>
         </div>
 
-        <form class="form" action="register.php" method="post" novalidate>
+        <form class="form" novalidate>
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form__group">
@@ -117,31 +108,6 @@
 
 <!-- Help button -->
 <button class="help-btn" aria-label="Help">?</button>
-
-<script>
-    function switchTab(tab) {
-        const loginPanel    = document.getElementById('panel-login');
-        const registerPanel = document.getElementById('panel-register');
-        const loginTab      = document.getElementById('tab-login');
-        const registerTab   = document.getElementById('tab-register');
-
-        if (tab === 'login') {
-            loginPanel.classList.remove('auth-card--hidden');
-            registerPanel.classList.add('auth-card--hidden');
-            loginTab.classList.add('auth-tabs__tab--active');
-            loginTab.setAttribute('aria-selected', 'true');
-            registerTab.classList.remove('auth-tabs__tab--active');
-            registerTab.setAttribute('aria-selected', 'false');
-        } else {
-            registerPanel.classList.remove('auth-card--hidden');
-            loginPanel.classList.add('auth-card--hidden');
-            registerTab.classList.add('auth-tabs__tab--active');
-            registerTab.setAttribute('aria-selected', 'true');
-            loginTab.classList.remove('auth-tabs__tab--active');
-            loginTab.setAttribute('aria-selected', 'false');
-        }
-    }
-</script>
 
 </body>
 </html>
