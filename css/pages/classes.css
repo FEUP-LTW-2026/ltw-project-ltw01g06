@@ -2,30 +2,6 @@
    pages/classes.css — specific styles for the classes page
    ============================================================ */
 
-/* ── Main layout ─────────────────────────────────────────────── */
-.main {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
-}
-
-/* ── Page header ─────────────────────────────────────────────── */
-.page-header {
-  margin-bottom: var(--space-xl);
-}
-
-.page-header__title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin-bottom: 4px;
-}
-
-.page-header__subtitle {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-}
-
 /* ── Filters ─────────────────────────────────────────────────── */
 .filters {
   background: var(--color-surface);

@@ -1,7 +1,69 @@
 /* ============================================================
-   reset.css — base & reset rules
+   reset.css — base rules & CSS variables
    ============================================================ */
 
+/* ── CSS Variables ──────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-bg:             #faf9f7;
+  --color-surface:        #ffffff;
+  --color-border:         #e7e5e4;
+
+  --color-text:           #1c1917;
+  --color-text-sub:       #57534e;
+  --color-text-muted:     #78716c;
+  --color-text-light:     #a8a29e;
+
+  --color-primary:        #d97706;
+  --color-primary-hover:  #b45309;
+  --color-primary-dark:   #b45309;
+  --color-primary-light:  #fef3c7;
+
+  /* Stat / accent background */
+  --color-stat-bg:        #fef3e2;
+
+  /* Card accent colors (class type top borders) */
+  --color-yoga:           #f59e0b;
+  --color-spinning:       #f97316;
+  --color-hiit:           #ef4444;
+  --color-pilates:        #f59e0b;
+  --color-boxing:         #ef4444;
+
+  /* Tag colors */
+  --tag-yoga-bg:           #fef3c7;  --tag-yoga-text:           #92400e;
+  --tag-spinning-bg:       #ffedd5;  --tag-spinning-text:       #9a3412;
+  --tag-hiit-bg:           #fee2e2;  --tag-hiit-text:           #991b1b;
+  --tag-pilates-bg:        #fef3c7;  --tag-pilates-text:        #92400e;
+  --tag-boxing-bg:         #fee2e2;  --tag-boxing-text:         #991b1b;
+  --tag-beginner-bg:       #f0fdf4;  --tag-beginner-text:       #166534;
+  --tag-intermediate-bg:   #eff6ff;  --tag-intermediate-text:   #1e40af;
+  --tag-advanced-bg:       #fdf4ff;  --tag-advanced-text:       #7e22ce;
+
+  /* Spacing */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  48px;
+
+  /* Border radius */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.05), 0 1px 8px rgba(0,0,0,.04);
+  --shadow-md:  0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg:  0 8px 24px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.06);
+
+  /* Transition */
+  --transition: 160ms ease;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -15,102 +77,17 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.5;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-ul, ol {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-img, svg {
-  display: block;
-  max-width: 100%;
-}
-
-input, select, textarea {
-  font-family: inherit;
-  font-size: inherit;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-/* ── CSS Variables ──────────────────────────────────────────── */
-:root {
-  /* Colors */
-  --color-bg:           #faf9f7;
-  --color-surface:      #ffffff;
-  --color-border:       #e8e4de;
-  --color-text:         #1a1a1a;
-  --color-text-muted:   #6b6b6b;
-  --color-text-light:   #9a9a9a;
-
-  --color-primary:      #d97706;
-  --color-primary-dark: #b45309;
-  --color-primary-light:#fef3c7;
-
-  /* Card accent colors */
-  --color-yoga:         #f59e0b;
-  --color-spinning:     #f97316;
-  --color-hiit:         #ef4444;
-  --color-pilates:      #f59e0b;
-  --color-boxing:       #ef4444;
-
-  /* Tag colors */
-  --tag-yoga-bg:        #fef3c7;
-  --tag-yoga-text:      #92400e;
-  --tag-spinning-bg:    #ffedd5;
-  --tag-spinning-text:  #9a3412;
-  --tag-hiit-bg:        #fee2e2;
-  --tag-hiit-text:      #991b1b;
-  --tag-pilates-bg:     #fef3c7;
-  --tag-pilates-text:   #92400e;
-  --tag-boxing-bg:      #fee2e2;
-  --tag-boxing-text:    #991b1b;
-  --tag-beginner-bg:    #f0fdf4;
-  --tag-beginner-text:  #166534;
-  --tag-intermediate-bg:#eff6ff;
-  --tag-intermediate-text:#1e40af;
-  --tag-advanced-bg:    #fdf4ff;
-  --tag-advanced-text:  #7e22ce;
-
-  /* Spacing */
-  --space-xs:   4px;
-  --space-sm:   8px;
-  --space-md:   16px;
-  --space-lg:   24px;
-  --space-xl:   32px;
-  --space-2xl:  48px;
-
-  /* Border radius */
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  16px;
-  --radius-xl:  20px;
-  --radius-full:9999px;
-
-  /* Shadows */
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:  0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --shadow-lg:  0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
-
-  /* Transitions */
-  --transition: 0.2s ease;
-}
+ul, ol   { list-style: none; }
+a        { text-decoration: none; color: inherit; }
+button   { font-family: inherit; cursor: pointer; border: none; background: none; }
+img, svg { display: block; max-width: 100%; }
+input, select, textarea { font-family: inherit; font-size: inherit; }
+h1, h2, h3, h4, h5, h6 { font-weight: 600; line-height: 1.2; }
