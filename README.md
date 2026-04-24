@@ -27,8 +27,8 @@
 - [ ] Oversee and ensure the smooth operation of the entire system.
 
 **Extra:**
-- [ ] Something extra (e.g., personal training bookings, membership plans, waitlist, ...).
-
+- [ ] Class Waitlist: When a class is full, members can join a waitlist and are automatically enrolled when a spot opens.
+- [ ] Admin Analytics Dashboard: Admins can view gym-wide metrics such as most popular classes, equipment usage, and member retention.
 ## Running
 
 
