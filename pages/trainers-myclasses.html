@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitLife Gym – Trainer Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+          <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+        </svg>
+      </div>
+      <span class="logo-text">FitLife Gym</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a></li>
+      <li><a href="#" class="nav-link"><span class="nav-icon">📅</span> Classes</a></li>
+      <li><a href="#" class="nav-link"><span class="nav-icon">👤</span> Trainers</a></li>
+      <li><a href="#" class="nav-link"><span class="nav-icon">🔧</span> Equipment</a></li>
+      <li><a href="#" class="nav-link active"><span class="nav-icon">🛡️</span> My Classes</a></li>
+    </ul>
+    <div class="nav-user">
+      <img src="https://i.pravatar.cc/36?img=5" alt="Sarah Johnson" class="avatar" />
+      <span>Sarah Johnson</span>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <h1>Trainer Dashboard</h1>
+      <p class="subtitle">Manage your classes and view enrolled members</p>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label"><span class="stat-icon">📅</span> My Classes</div>
+        <div class="stat-value">3</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"><span class="stat-icon">👥</span> Total Students</div>
+        <div class="stat-value">43</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"><span class="stat-icon">📈</span> Avg. Enrollment</div>
+        <div class="stat-value">73.5%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"><span class="stat-icon">⭐</span> Avg. Rating</div>
+        <div class="stat-value">5.0 <span class="stat-sub">(2 reviews)</span></div>
+      </div>
+    </div>
+
+    <!-- MY CLASSES TABLE -->
+    <section class="card">
+      <div class="card-header">
+        <h2>My Classes</h2>
+        <p class="card-subtitle">View and manage your scheduled classes</p>
+      </div>
+      <table class="classes-table">
+        <thead>
+          <tr>
+            <th>Class Name</th>
+            <th>Type</th>
+            <th>Schedule</th>
+            <th>Enrolled</th>
+            <th>Level</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="class-name">Morning Yoga Flow</div>
+              <div class="class-rating">⭐ 5.0 (2)</div>
+            </td>
+            <td><span class="badge badge-yoga">Yoga</span></td>
+            <td>
+              <div class="schedule">📅 Monday</div>
+              <div class="schedule-time">🕐 07:00 (60min)</div>
+            </td>
+            <td>
+              <div class="enrolled-row">
+                <span class="enrolled-icon">👥</span> 15/20
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+              </div>
+            </td>
+            <td><span class="level-badge">Beginner</span></td>
+            <td><button class="btn-view">👁 View Details</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="class-name">Pilates Core</div>
+            </td>
+            <td><span class="badge badge-pilates">Pilates</span></td>
+            <td>
+              <div class="schedule">📅 Wednesday</div>
+              <div class="schedule-time">🕐 10:00 (60min)</div>
+            </td>
+            <td>
+              <div class="enrolled-row">
+                <span class="enrolled-icon">👥</span> 10/18
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 56%"></div>
+              </div>
+            </td>
+            <td><span class="level-badge">Intermediate</span></td>
+            <td><button class="btn-view">👁 View Details</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="class-name">Evening Yoga</div>
+            </td>
+            <td><span class="badge badge-yoga">Yoga</span></td>
+            <td>
+              <div class="schedule">📅 Thursday</div>
+              <div class="schedule-time">🕐 19:00 (60min)</div>
+            </td>
+            <td>
+              <div class="enrolled-row">
+                <span class="enrolled-icon">👥</span> 18/20
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 90%"></div>
+              </div>
+            </td>
+            <td><span class="level-badge">Beginner</span></td>
+            <td><button class="btn-view">👁 View Details</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- RECENT REVIEWS -->
+    <section class="card">
+      <div class="card-header">
+        <h2>Recent Reviews</h2>
+        <p class="card-subtitle">Feedback from your students</p>
+      </div>
+      <div class="reviews-list">
+        <div class="review-card">
+          <div class="review-left">
+            <img src="https://i.pravatar.cc/48?img=12" alt="John Doe" class="review-avatar" />
+            <div class="review-info">
+              <div class="review-name">John Doe</div>
+              <div class="review-class">Morning Yoga Flow</div>
+              <div class="review-text">Amazing class! Sarah is such a great instructor, very patient and knowledgeable.</div>
+              <div class="review-date">2026-04-15</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-card">
+          <div class="review-left">
+            <img src="https://i.pravatar.cc/48?img=47" alt="Emma Wilson" class="review-avatar" />
+            <div class="review-info">
+              <div class="review-name">Emma Wilson</div>
+              <div class="review-class">Morning Yoga Flow</div>
+              <div class="review-text">Perfect way to start the day. The flow is challenging but accessible.</div>
+              <div class="review-date">2026-04-14</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALL MY STUDENTS -->
+    <section class="card">
+      <div class="card-header">
+        <h2>All My Students</h2>
+        <p class="card-subtitle">Members enrolled in your classes</p>
+      </div>
+      <div class="students-grid">
+        <div class="student-card">
+          <img src="https://i.pravatar.cc/48?img=12" alt="John Doe" class="student-avatar" />
+          <div class="student-info">
+            <div class="student-name">John Doe</div>
+            <div class="student-classes">3 classes</div>
+          </div>
+          <span class="member-badge member-premium">Premium</span>
+        </div>
+        <div class="student-card">
+          <img src="https://i.pravatar.cc/48?img=47" alt="Emma Wilson" class="student-avatar" />
+          <div class="student-info">
+            <div class="student-name">Emma Wilson</div>
+            <div class="student-classes">2 classes</div>
+          </div>
+          <span class="member-badge member-standard">Standard</span>
+        </div>
+        <div class="student-card">
+          <img src="https://i.pravatar.cc/48?img=68" alt="David Kim" class="student-avatar" />
+          <div class="student-info">
+            <div class="student-name">David Kim</div>
+            <div class="student-classes">2 classes</div>
+          </div>
+          <span class="member-badge member-premium">Premium</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
