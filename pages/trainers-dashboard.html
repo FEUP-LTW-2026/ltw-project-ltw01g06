@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitLife Gym – Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fitlife-gym.css" />
+</head>
+<body>
+
+<!-- ╔══ NAV ═══════════════════════════════════════╗ -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">💪</div>
+    <span class="nav-brand-name">FitLife Gym</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#" class="active">🏠 Dashboard</a></li>
+    <li><a href="#">📅 Classes</a></li>
+    <li><a href="#">👤 Trainers</a></li>
+    <li><a href="#">🔧 Equipment</a></li>
+    <li><a href="#">🛡 My Classes</a></li>
+  </ul>
+
+  <div class="nav-user">
+    <div class="nav-avatar">SJ</div>
+    Sarah Johnson
+  </div>
+</nav>
+
+<!-- ╔══ MAIN ══════════════════════════════════════╗ -->
+<main>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Welcome back, Sarah Johnson!</h1>
+    <p>Here's what's happening in your fitness journey.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Enrolled Classes</div>
+      <div class="stat-body">
+        <div class="stat-icon">📅</div>
+        <div>
+          <div class="stat-value">0</div>
+          <div class="stat-sub">Active bookings</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Available Classes</div>
+      <div class="stat-body">
+        <div class="stat-icon">👥</div>
+        <div>
+          <div class="stat-value">6</div>
+          <div class="stat-sub">This week</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Equipment Available</div>
+      <div class="stat-body">
+        <div class="stat-icon">⚙️</div>
+        <div>
+          <div class="stat-value">7</div>
+          <div class="stat-sub">Items ready</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">Streak</div>
+      <div class="stat-body">
+        <div class="stat-icon">📈</div>
+        <div>
+          <div class="stat-value">7</div>
+          <div class="stat-sub">Days active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two columns -->
+  <div class="two-col">
+
+    <!-- Upcoming classes -->
+    <div class="card">
+      <div class="card-title">Upcoming Classes</div>
+      <div class="card-sub">Your next scheduled sessions</div>
+      <div class="empty-state">
+        <div class="empty-icon">📅</div>
+        <div class="empty-text">No upcoming classes</div>
+        <button class="btn-primary">Browse Classes</button>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card">
+      <div class="card-title">Quick Actions</div>
+      <div class="card-sub">Get started with these shortcuts</div>
+
+      <div class="action-item">
+        <div class="action-icon">📅</div>
+        <div>
+          <div class="action-title">Browse Classes</div>
+          <div class="action-desc">Find and enroll in fitness classes</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-icon">👥</div>
+        <div>
+          <div class="action-title">View Trainers</div>
+          <div class="action-desc">Meet our expert instructors</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-icon">⚙️</div>
+        <div>
+          <div class="action-title">Check Equipment</div>
+          <div class="action-desc">See what's available in the gym</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-icon">⭐</div>
+        <div>
+          <div class="action-title">Edit Profile</div>
+          <div class="action-desc">Update your account information</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Your Classes -->
+  <div class="classes-section">
+    <div class="classes-header">
+      <div>
+        <div class="card-title">Your Classes</div>
+        <div class="card-sub" style="margin-bottom:0">Classes you're teaching this week</div>
+      </div>
+      <button class="btn-primary">View Full Dashboard</button>
+    </div>
+
+    <div class="class-row">
+      <div>
+        <div class="class-name">Morning Yoga Flow</div>
+        <div class="class-time">Monday at 07:00</div>
+      </div>
+      <div class="class-enrollment">
+        <div class="class-count">15/20</div>
+        <div class="class-enrolled-label">enrolled</div>
+        <div class="class-bar-wrap">
+          <div class="class-bar" style="width:75%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-row">
+      <div>
+        <div class="class-name">Pilates Core</div>
+        <div class="class-time">Wednesday at 10:00</div>
+      </div>
+      <div class="class-enrollment">
+        <div class="class-count">10/18</div>
+        <div class="class-enrolled-label">enrolled</div>
+        <div class="class-bar-wrap">
+          <div class="class-bar" style="width:56%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="class-row">
+      <div>
+        <div class="class-name">Evening Yoga</div>
+        <div class="class-time">Thursday at 19:00</div>
+      </div>
+      <div class="class-enrollment">
+        <div class="class-count">18/20</div>
+        <div class="class-enrolled-label">enrolled</div>
+        <div class="class-bar-wrap">
+          <div class="class-bar" style="width:90%"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /classes-section -->
+
+</main>
+</body>
+</html>
