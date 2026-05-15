@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipment — Equilibrio</title>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages/equipment.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="dashboard.html" class="navbar__brand">
+    <div class="navbar__logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/></svg>
+    </div>
+    <span class="navbar__name">Equilibrio</span>
+  </a>
+  <ul class="navbar__links">
+    <li><a href="dashboard.html" class="navbar__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a></li>
+    <li><a href="classes.html" class="navbar__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>Classes</a></li>
+    <li><a href="trainers.html" class="navbar__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Trainers</a></li>
+    <li><a href="equipment.html" class="navbar__link navbar__link--active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14M14.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S13 21.33 13 20.5v-5c0-.83.67-1.5 1.5-1.5M2 10h19M2 14h19"/></svg>Equipment</a></li>
+  </ul>
+  <div class="navbar__user">U</div>
+</nav>
+
+<main class="main">
+  <div class="page-header">
+    <h1 class="page-header__title">Equipment</h1>
+    <p class="page-header__subtitle">Current availability of equipment in the main training area</p>
+  </div>
+
+  <!-- Summary stats -->
+  <div class="equipment-summary">
+    <div class="equip-stat">
+      <div class="equip-stat__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div>
+        <div class="equip-stat__value">42</div>
+        <div class="equip-stat__label">Total items</div>
+      </div>
+    </div>
+    <div class="equip-stat">
+      <div class="equip-stat__icon" style="background:#22c55e">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <div class="equip-stat__value">36</div>
+        <div class="equip-stat__label">Available now</div>
+      </div>
+    </div>
+    <div class="equip-stat">
+      <div class="equip-stat__icon" style="background:#f59e0b">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4m0 4h.01M22 12A10 10 0 1 1 2 12a10 10 0 0 1 20 0z"/></svg>
+      </div>
+      <div>
+        <div class="equip-stat__value">6</div>
+        <div class="equip-stat__label">In use / maintenance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Equipment table -->
+  <div class="equipment-table-wrap">
+    <table class="equipment-table">
+      <thead>
+        <tr>
+          <th>Equipment</th>
+          <th>Category</th>
+          <th>Availability</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Treadmill</strong></td>
+          <td><span class="category-tag">Cardio</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--full" style="width:100%"></div></div>
+              <span class="avail-label">5 / 5</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--available"><span class="status-dot"></span>Available</span></td>
+        </tr>
+        <tr>
+          <td><strong>Rowing Machine</strong></td>
+          <td><span class="category-tag">Cardio</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--medium" style="width:67%"></div></div>
+              <span class="avail-label">2 / 3</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--available"><span class="status-dot"></span>Available</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stationary Bike</strong></td>
+          <td><span class="category-tag">Cardio</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--low" style="width:25%"></div></div>
+              <span class="avail-label">2 / 8</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--available"><span class="status-dot"></span>Available</span></td>
+        </tr>
+        <tr>
+          <td><strong>Barbell Set</strong></td>
+          <td><span class="category-tag">Weights</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--full" style="width:100%"></div></div>
+              <span class="avail-label">8 / 8</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--available"><span class="status-dot"></span>Available</span></td>
+        </tr>
+        <tr>
+          <td><strong>Kettlebell 16 kg</strong></td>
+          <td><span class="category-tag">Weights</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--medium" style="width:83%"></div></div>
+              <span class="avail-label">5 / 6</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--available"><span class="status-dot"></span>Available</span></td>
+        </tr>
+        <tr>
+          <td><strong>Yoga Mat</strong></td>
+          <td><span class="category-tag">Mobility</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--full" style="width:100%"></div></div>
+              <span class="avail-label">20 / 20</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--available"><span class="status-dot"></span>Available</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pull-up Bar</strong></td>
+          <td><span class="category-tag">Strength</span></td>
+          <td>
+            <div class="avail-bar-wrap">
+              <div class="avail-bar"><div class="avail-bar__fill avail-bar__fill--low" style="width:0%"></div></div>
+              <span class="avail-label">0 / 2</span>
+            </div>
+          </td>
+          <td><span class="status-badge status-badge--maintenance"><span class="status-dot"></span>Maintenance</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="footer__logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/></svg></div>
+      <span class="footer__name">Equilibrio</span>
+    </div>
+    <p class="footer__copy">&copy; 2025 Equilibrio. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
