@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainers — Equilibrio</title>
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/pages/trainers.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <a href="dashboard.html" class="navbar__brand">
+    <div class="navbar__logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+      </svg>
+    </div>
+    <span class="navbar__name">Equilibrio</span>
+  </a>
+  <ul class="navbar__links">
+    <li><a href="dashboard.html" class="navbar__link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard</a></li>
+    <li><a href="classes.html" class="navbar__link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+      Classes</a></li>
+    <li><a href="trainers.html" class="navbar__link navbar__link--active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Trainers</a></li>
+    <li><a href="equipment.html" class="navbar__link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14M14.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S13 21.33 13 20.5v-5c0-.83.67-1.5 1.5-1.5M2 10h19M2 14h19"/></svg>
+      Equipment</a></li>
+  </ul>
+  <div class="navbar__user">U</div>
+</nav>
+
+<!-- Main -->
+<main class="main">
+  <div class="page-header">
+    <h1 class="page-header__title">Our Trainers</h1>
+    <p class="page-header__subtitle">Meet the expert instructors behind your fitness journey</p>
+  </div>
+
+  <div class="trainers-grid">
+
+    <!-- Trainer 1 -->
+    <div class="trainer-card">
+      <div class="trainer-card__header">
+        <div class="trainer-card__avatar">SJ</div>
+        <div>
+          <p class="trainer-card__name">Sarah Johnson</p>
+        </div>
+        <div class="cert-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M12 14v7m-4-3l4 3 4-3"/></svg>
+          CPT · ACE
+        </div>
+      </div>
+      <div class="trainer-card__body">
+        <div>
+          <p class="trainer-card__section-label">Specializations</p>
+          <div class="trainer-card__tags">
+            <span class="tag tag--yoga">Yoga</span>
+            <span class="tag tag--pilates">Pilates</span>
+          </div>
+        </div>
+        <div>
+          <p class="trainer-card__section-label">Classes This Week</p>
+          <div class="trainer-card__classes">
+            <div class="trainer-class-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Morning Yoga Flow — Mon 07:00
+            </div>
+            <div class="trainer-class-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Pilates Core — Wed 10:00
+            </div>
+            <div class="trainer-class-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Evening Yoga — Thu 19:00
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="trainer-card__footer">
+        <a href="classes.html" class="btn btn--primary btn--full">View Classes</a>
+      </div>
+    </div>
+
+    <!-- Trainer 2 -->
+    <div class="trainer-card">
+      <div class="trainer-card__header">
+        <div class="trainer-card__avatar">MC</div>
+        <div>
+          <p class="trainer-card__name">Mike Chen</p>
+        </div>
+        <div class="cert-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M12 14v7m-4-3l4 3 4-3"/></svg>
+          NASM · SFG
+        </div>
+      </div>
+      <div class="trainer-card__body">
+        <div>
+          <p class="trainer-card__section-label">Specializations</p>
+          <div class="trainer-card__tags">
+            <span class="tag tag--spinning">Spinning</span>
+            <span class="tag tag--hiit">HIIT</span>
+          </div>
+        </div>
+        <div>
+          <p class="trainer-card__section-label">Classes This Week</p>
+          <div class="trainer-card__classes">
+            <div class="trainer-class-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Power Spinning — Mon 18:00
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="trainer-card__footer">
+        <a href="classes.html" class="btn btn--primary btn--full">View Classes</a>
+      </div>
+    </div>
+
+    <!-- Trainer 3 -->
+    <div class="trainer-card">
+      <div class="trainer-card__header">
+        <div class="trainer-card__avatar">AR</div>
+        <div>
+          <p class="trainer-card__name">Alex Rodriguez</p>
+        </div>
+        <div class="cert-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M12 14v7m-4-3l4 3 4-3"/></svg>
+          CSCS
+        </div>
+      </div>
+      <div class="trainer-card__body">
+        <div>
+          <p class="trainer-card__section-label">Specializations</p>
+          <div class="trainer-card__tags">
+            <span class="tag tag--hiit">HIIT</span>
+          </div>
+        </div>
+        <div>
+          <p class="trainer-card__section-label">Classes This Week</p>
+          <div class="trainer-card__classes">
+            <div class="trainer-class-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              HIIT Bootcamp — Tue 06:30
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="trainer-card__footer">
+        <a href="classes.html" class="btn btn--primary btn--full">View Classes</a>
+      </div>
+    </div>
+
+    <!-- Trainer 4 -->
+    <div class="trainer-card">
+      <div class="trainer-card__header">
+        <div class="trainer-card__avatar">TM</div>
+        <div>
+          <p class="trainer-card__name">Tony Martinez</p>
+        </div>
+        <div class="cert-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M12 14v7m-4-3l4 3 4-3"/></svg>
+          USA Boxing
+        </div>
+      </div>
+      <div class="trainer-card__body">
+        <div>
+          <p class="trainer-card__section-label">Specializations</p>
+          <div class="trainer-card__tags">
+            <span class="tag tag--boxing">Boxing</span>
+          </div>
+        </div>
+        <div>
+          <p class="trainer-card__section-label">Classes This Week</p>
+          <div class="trainer-card__classes">
+            <div class="trainer-class-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
+              Boxing Basics — Fri 17:30
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="trainer-card__footer">
+        <a href="classes.html" class="btn btn--primary btn--full">View Classes</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="footer__logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/></svg>
+      </div>
+      <span class="footer__name">Equilibrio</span>
+    </div>
+    <p class="footer__copy">&copy; 2025 Equilibrio. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
