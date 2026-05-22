@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equilibrio — Treinadores</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/trainers.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../javascript/components.js" defer></script>
+</head>
+<body class="trainers-page">
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+        <div class="navbar__logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+            </svg>
+        </div>
+        <span>Equilibrio</span>
+    </a>
+    <div class="navbar__links">
+        <a href="schedule.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Horario
+        </a>
+        <a href="trainers.html" class="navbar__link navbar__link--active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Treinadores
+        </a>
+        <a href="equipment.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/></svg>
+            Equipamento
+        </a>
+    </div>
+    <div class="navbar__actions">
+        <a href="dashboard.html" class="btn btn--ghost">Dashboard</a>
+        <div class="avatar avatar--sm">JS</div>
+    </div>
+</nav>
+
+<main class="trainers-container">
+    <!-- Header -->
+    <header class="trainers-header">
+        <h1 class="trainers-header__title">Os Nossos Treinadores</h1>
+        <p class="trainers-header__subtitle">Conheca a equipa de profissionais dedicados ao seu bem-estar e objetivos fitness</p>
+    </header>
+
+    <!-- Filters -->
+    <nav class="trainers-filters">
+        <button class="trainers-filter trainers-filter--active">Todos</button>
+        <button class="trainers-filter">Yoga</button>
+        <button class="trainers-filter">Spinning</button>
+        <button class="trainers-filter">HIIT</button>
+        <button class="trainers-filter">Pilates</button>
+        <button class="trainers-filter">Boxe</button>
+        <button class="trainers-filter">Musculacao</button>
+    </nav>
+
+    <!-- Trainers Grid -->
+    <section class="trainers-grid">
+        <!-- Trainer 1 -->
+        <article class="trainer-card">
+            <div class="trainer-card__image">
+                <div class="trainer-card__avatar">AC</div>
+                <span class="trainer-card__badge">Top Trainer</span>
+            </div>
+            <div class="trainer-card__content">
+                <h3 class="trainer-card__name">Ana Costa</h3>
+                <p class="trainer-card__role">Instrutora de Yoga e Pilates</p>
+                <p class="trainer-card__bio">Certificada em Hatha e Vinyasa Yoga, com mais de 8 anos de experiencia a ajudar alunos a encontrar equilibrio e forca interior.</p>
+                <div class="trainer-card__specializations">
+                    <span class="tag tag--yoga">Yoga</span>
+                    <span class="tag tag--pilates">Pilates</span>
+                    <span class="tag tag--beginner">Iniciantes</span>
+                </div>
+                <div class="trainer-card__stats">
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">8+</span>
+                        <span class="trainer-card__stat-label">Anos Exp.</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">500+</span>
+                        <span class="trainer-card__stat-label">Alunos</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4.9</span>
+                        <span class="trainer-card__stat-label">Avaliacao</span>
+                    </div>
+                </div>
+                <div class="trainer-card__actions">
+                    <a href="trainer-profile.html" class="btn btn--secondary">Ver Perfil</a>
+                    <a href="schedule.html" class="btn btn--primary">Ver Aulas</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Trainer 2 -->
+        <article class="trainer-card">
+            <div class="trainer-card__image">
+                <div class="trainer-card__avatar">MS</div>
+            </div>
+            <div class="trainer-card__content">
+                <h3 class="trainer-card__name">Miguel Santos</h3>
+                <p class="trainer-card__role">Instrutor de Spinning e Cardio</p>
+                <p class="trainer-card__bio">Especialista em treino cardiovascular de alta intensidade. As suas aulas de spinning sao conhecidas por serem energeticas e motivadoras.</p>
+                <div class="trainer-card__specializations">
+                    <span class="tag tag--spinning">Spinning</span>
+                    <span class="tag tag--hiit">Cardio</span>
+                    <span class="tag tag--intermediate">Intermedio</span>
+                </div>
+                <div class="trainer-card__stats">
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">6+</span>
+                        <span class="trainer-card__stat-label">Anos Exp.</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">350+</span>
+                        <span class="trainer-card__stat-label">Alunos</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4.8</span>
+                        <span class="trainer-card__stat-label">Avaliacao</span>
+                    </div>
+                </div>
+                <div class="trainer-card__actions">
+                    <a href="trainer-profile.html" class="btn btn--secondary">Ver Perfil</a>
+                    <a href="schedule.html" class="btn btn--primary">Ver Aulas</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Trainer 3 -->
+        <article class="trainer-card">
+            <div class="trainer-card__image">
+                <div class="trainer-card__avatar">SO</div>
+            </div>
+            <div class="trainer-card__content">
+                <h3 class="trainer-card__name">Sofia Oliveira</h3>
+                <p class="trainer-card__role">Instrutora de Pilates e Flexibilidade</p>
+                <p class="trainer-card__bio">Formada em Educacao Fisica com especializacao em Pilates Clinico. Foca-se na correcao postural e fortalecimento do core.</p>
+                <div class="trainer-card__specializations">
+                    <span class="tag tag--pilates">Pilates</span>
+                    <span class="tag tag--yoga">Alongamento</span>
+                    <span class="tag tag--beginner">Todos Niveis</span>
+                </div>
+                <div class="trainer-card__stats">
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">5+</span>
+                        <span class="trainer-card__stat-label">Anos Exp.</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">280+</span>
+                        <span class="trainer-card__stat-label">Alunos</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4.9</span>
+                        <span class="trainer-card__stat-label">Avaliacao</span>
+                    </div>
+                </div>
+                <div class="trainer-card__actions">
+                    <a href="trainer-profile.html" class="btn btn--secondary">Ver Perfil</a>
+                    <a href="schedule.html" class="btn btn--primary">Ver Aulas</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Trainer 4 -->
+        <article class="trainer-card">
+            <div class="trainer-card__image">
+                <div class="trainer-card__avatar">PM</div>
+                <span class="trainer-card__badge">Novo</span>
+            </div>
+            <div class="trainer-card__content">
+                <h3 class="trainer-card__name">Pedro Martins</h3>
+                <p class="trainer-card__role">Instrutor de HIIT e Funcional</p>
+                <p class="trainer-card__bio">Ex-atleta profissional de CrossFit, especialista em treinos de alta intensidade. Ajuda alunos a superar os seus limites de forma segura.</p>
+                <div class="trainer-card__specializations">
+                    <span class="tag tag--hiit">HIIT</span>
+                    <span class="tag tag--boxing">Funcional</span>
+                    <span class="tag tag--advanced">Avancado</span>
+                </div>
+                <div class="trainer-card__stats">
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4+</span>
+                        <span class="trainer-card__stat-label">Anos Exp.</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">200+</span>
+                        <span class="trainer-card__stat-label">Alunos</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4.7</span>
+                        <span class="trainer-card__stat-label">Avaliacao</span>
+                    </div>
+                </div>
+                <div class="trainer-card__actions">
+                    <a href="trainer-profile.html" class="btn btn--secondary">Ver Perfil</a>
+                    <a href="schedule.html" class="btn btn--primary">Ver Aulas</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Trainer 5 -->
+        <article class="trainer-card">
+            <div class="trainer-card__image">
+                <div class="trainer-card__avatar">RF</div>
+            </div>
+            <div class="trainer-card__content">
+                <h3 class="trainer-card__name">Rita Fernandes</h3>
+                <p class="trainer-card__role">Instrutora de Boxe e Defesa Pessoal</p>
+                <p class="trainer-card__bio">Campeã nacional de kickboxing, ensina técnicas de boxe fitness e defesa pessoal com foco na confiança e condição física.</p>
+                <div class="trainer-card__specializations">
+                    <span class="tag tag--boxing">Boxe</span>
+                    <span class="tag tag--hiit">Kickboxing</span>
+                    <span class="tag tag--intermediate">Intermedio</span>
+                </div>
+                <div class="trainer-card__stats">
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">7+</span>
+                        <span class="trainer-card__stat-label">Anos Exp.</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">320+</span>
+                        <span class="trainer-card__stat-label">Alunos</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4.8</span>
+                        <span class="trainer-card__stat-label">Avaliacao</span>
+                    </div>
+                </div>
+                <div class="trainer-card__actions">
+                    <a href="trainer-profile.html" class="btn btn--secondary">Ver Perfil</a>
+                    <a href="schedule.html" class="btn btn--primary">Ver Aulas</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Trainer 6 -->
+        <article class="trainer-card">
+            <div class="trainer-card__image">
+                <div class="trainer-card__avatar">JA</div>
+            </div>
+            <div class="trainer-card__content">
+                <h3 class="trainer-card__name">Joao Almeida</h3>
+                <p class="trainer-card__role">Personal Trainer e Musculacao</p>
+                <p class="trainer-card__bio">Especialista em hipertrofia e transformação corporal. Cria planos personalizados para cada aluno atingir os seus objetivos.</p>
+                <div class="trainer-card__specializations">
+                    <span class="tag tag--hiit">Musculacao</span>
+                    <span class="tag tag--spinning">Personal</span>
+                    <span class="tag tag--advanced">Avancado</span>
+                </div>
+                <div class="trainer-card__stats">
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">10+</span>
+                        <span class="trainer-card__stat-label">Anos Exp.</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">600+</span>
+                        <span class="trainer-card__stat-label">Alunos</span>
+                    </div>
+                    <div class="trainer-card__stat">
+                        <span class="trainer-card__stat-value">4.9</span>
+                        <span class="trainer-card__stat-label">Avaliacao</span>
+                    </div>
+                </div>
+                <div class="trainer-card__actions">
+                    <a href="trainer-profile.html" class="btn btn--secondary">Ver Perfil</a>
+                    <a href="schedule.html" class="btn btn--primary">Ver Aulas</a>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+
+</body>
+</html>
