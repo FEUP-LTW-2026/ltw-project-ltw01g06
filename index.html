@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equilibrio — Fitness & Wellness</title>
+    <meta name="description" content="Equilibrio - A sua jornada para uma vida mais saudável começa aqui. Aulas de fitness, personal trainers e equipamentos de qualidade." />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<nav class="navbar">
+    <a href="index.html" class="navbar__brand">
+        <div class="navbar__logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+            </svg>
+        </div>
+        <span>Equilibrio</span>
+    </a>
+
+    <ul class="navbar__links">
+        <li><a href="#features" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            Funcionalidades</a></li>
+        <li><a href="#classes" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <path d="M3 9h18M8 4v5M16 4v5"/>
+            </svg>
+            Aulas</a></li>
+        <li><a href="#trainers" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            Treinadores</a></li>
+    </ul>
+
+    <div class="navbar__actions">
+        <a href="pages/auth.html" class="btn btn--ghost">Entrar</a>
+        <a href="pages/auth.html" class="btn btn--primary">Começar Agora</a>
+    </div>
+
+    <button class="mobile-menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
+</nav>
+
+<!-- ── Hero Section ────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="hero__container">
+        <div class="hero__content">
+            <div class="hero__badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+                Novo: Aulas de Yoga ao ar livre
+            </div>
+            <h1 class="hero__title">
+                Encontre o seu <span>Equilíbrio</span> perfeito
+            </h1>
+            <p class="hero__subtitle">
+                Transforme a sua vida com aulas de fitness personalizadas, treinadores especializados 
+                e um ambiente motivador. A sua jornada para uma vida mais saudável começa aqui.
+            </p>
+            <div class="hero__actions">
+                <a href="pages/auth.html" class="btn btn--primary btn--large">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    Começar Agora
+                </a>
+                <a href="#features" class="btn btn--secondary btn--large">
+                    Saber Mais
+                </a>
+            </div>
+            <div class="hero__stats">
+                <div class="hero__stat">
+                    <span class="hero__stat-value">500+</span>
+                    <span class="hero__stat-label">Membros Ativos</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-value">25+</span>
+                    <span class="hero__stat-label">Aulas Semanais</span>
+                </div>
+                <div class="hero__stat">
+                    <span class="hero__stat-value">12</span>
+                    <span class="hero__stat-label">Treinadores Expert</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero__visual">
+            <div class="hero__image-container">
+                <div class="hero__image" aria-label="Pessoa a fazer exercício"></div>
+            </div>
+            <div class="hero__card hero__card--classes">
+                <div class="hero__card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M3 9h18M8 4v5M16 4v5"/>
+                    </svg>
+                </div>
+                <div class="hero__card-text">
+                    <span class="hero__card-value">6</span>
+                    <span class="hero__card-label">Aulas Hoje</span>
+                </div>
+            </div>
+            <div class="hero__card hero__card--streak">
+                <div class="hero__card-icon" style="margin: 0 auto var(--space-sm);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <span class="hero__card-value">7 dias</span>
+                <span class="hero__card-label">Streak médio</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Features Section ────────────────────────────────────────── -->
+<section class="features" id="features">
+    <div class="features__container">
+        <header class="section-header">
+            <span class="section-header__badge">Funcionalidades</span>
+            <h2 class="section-header__title">Tudo o que precisa num só lugar</h2>
+            <p class="section-header__subtitle">
+                O Equilibrio oferece uma experiência completa de fitness, desde a reserva de aulas 
+                até ao acompanhamento do seu progresso.
+            </p>
+        </header>
+        <div class="features__grid">
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M3 9h18M8 4v5M16 4v5"/>
+                    </svg>
+                </div>
+                <h3 class="feature-card__title">Reserva de Aulas</h3>
+                <p class="feature-card__desc">
+                    Reserve as suas aulas favoritas com apenas alguns cliques. Veja horários, 
+                    treinadores e vagas disponíveis em tempo real.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </div>
+                <h3 class="feature-card__title">Treinadores Certificados</h3>
+                <p class="feature-card__desc">
+                    A nossa equipa de treinadores certificados está pronta para o ajudar 
+                    a alcançar os seus objetivos de forma segura e eficaz.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-card__title">Equipamento Moderno</h3>
+                <p class="feature-card__desc">
+                    Acesso a equipamentos de última geração para cardio, musculação 
+                    e treino funcional. Sempre limpo e bem mantido.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                </div>
+                <h3 class="feature-card__title">Acompanhamento de Progresso</h3>
+                <p class="feature-card__desc">
+                    Monitore a sua evolução com estatísticas detalhadas de aulas, 
+                    streak de dias ativos e objetivos alcançados.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="feature-card__title">Comunidade Motivadora</h3>
+                <p class="feature-card__desc">
+                    Faça parte de uma comunidade que se apoia mutuamente. 
+                    Partilhe conquistas e motive-se com outros membros.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <path d="M8 21h8M12 17v4"/>
+                    </svg>
+                </div>
+                <h3 class="feature-card__title">Dashboard Personalizado</h3>
+                <p class="feature-card__desc">
+                    Tenha uma visão completa das suas atividades, próximas aulas 
+                    e recomendações personalizadas no seu dashboard.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Classes Preview Section ─────────────────────────────────── -->
+<section class="classes-preview" id="classes">
+    <div class="classes-preview__container">
+        <header class="section-header">
+            <span class="section-header__badge">Aulas Populares</span>
+            <h2 class="section-header__title">Experimente as nossas aulas</h2>
+            <p class="section-header__subtitle">
+                De Yoga relaxante a HIIT intenso, temos aulas para todos os níveis e objetivos.
+            </p>
+        </header>
+        <div class="classes-preview__grid">
+            <article class="class-card">
+                <div class="class-card__image" aria-label="Aula de Yoga"></div>
+                <div class="class-card__content">
+                    <div class="class-card__tags">
+                        <span class="tag tag--yoga">Yoga</span>
+                        <span class="tag tag--beginner">Iniciante</span>
+                    </div>
+                    <h3 class="class-card__title">Yoga Flow Matinal</h3>
+                    <div class="class-card__meta">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            07:00 - 08:00
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                            </svg>
+                            Ana Silva
+                        </span>
+                    </div>
+                </div>
+            </article>
+            <article class="class-card">
+                <div class="class-card__image" aria-label="Aula de Spinning"></div>
+                <div class="class-card__content">
+                    <div class="class-card__tags">
+                        <span class="tag tag--spinning">Spinning</span>
+                        <span class="tag tag--intermediate">Intermédio</span>
+                    </div>
+                    <h3 class="class-card__title">Spinning Power</h3>
+                    <div class="class-card__meta">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            18:30 - 19:30
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                            </svg>
+                            Marco Oliveira
+                        </span>
+                    </div>
+                </div>
+            </article>
+            <article class="class-card">
+                <div class="class-card__image" aria-label="Aula de HIIT"></div>
+                <div class="class-card__content">
+                    <div class="class-card__tags">
+                        <span class="tag tag--hiit">HIIT</span>
+                        <span class="tag tag--advanced">Avançado</span>
+                    </div>
+                    <h3 class="class-card__title">HIIT Extreme</h3>
+                    <div class="class-card__meta">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            12:00 - 12:45
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                            </svg>
+                            Pedro Santos
+                        </span>
+                    </div>
+                </div>
+            </article>
+            <article class="class-card">
+                <div class="class-card__image" aria-label="Aula de Pilates"></div>
+                <div class="class-card__content">
+                    <div class="class-card__tags">
+                        <span class="tag tag--pilates">Pilates</span>
+                        <span class="tag tag--beginner">Iniciante</span>
+                    </div>
+                    <h3 class="class-card__title">Pilates Core</h3>
+                    <div class="class-card__meta">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            10:00 - 11:00
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                            </svg>
+                            Carla Mendes
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ── Trainers Section ────────────────────────────────────────── -->
+<section class="trainers" id="trainers">
+    <div class="trainers__container">
+        <header class="section-header">
+            <span class="section-header__badge">A Nossa Equipa</span>
+            <h2 class="section-header__title">Treinadores Especializados</h2>
+            <p class="section-header__subtitle">
+                Profissionais certificados e apaixonados por fitness, prontos para o guiar na sua jornada.
+            </p>
+        </header>
+        <div class="trainers__grid">
+            <div class="trainer-card">
+                <div class="trainer-card__avatar">AS</div>
+                <h3 class="trainer-card__name">Ana Silva</h3>
+                <p class="trainer-card__specialty">Instrutora de Yoga</p>
+                <div class="trainer-card__tags">
+                    <span class="tag tag--yoga">Yoga</span>
+                    <span class="tag tag--pilates">Pilates</span>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-card__avatar">MO</div>
+                <h3 class="trainer-card__name">Marco Oliveira</h3>
+                <p class="trainer-card__specialty">Especialista em Spinning</p>
+                <div class="trainer-card__tags">
+                    <span class="tag tag--spinning">Spinning</span>
+                    <span class="tag tag--hiit">HIIT</span>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-card__avatar">PS</div>
+                <h3 class="trainer-card__name">Pedro Santos</h3>
+                <p class="trainer-card__specialty">Personal Trainer</p>
+                <div class="trainer-card__tags">
+                    <span class="tag tag--hiit">HIIT</span>
+                    <span class="tag tag--boxing">Boxing</span>
+                </div>
+            </div>
+            <div class="trainer-card">
+                <div class="trainer-card__avatar">CM</div>
+                <h3 class="trainer-card__name">Carla Mendes</h3>
+                <p class="trainer-card__specialty">Instrutora de Pilates</p>
+                <div class="trainer-card__tags">
+                    <span class="tag tag--pilates">Pilates</span>
+                    <span class="tag tag--yoga">Yoga</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA Section ─────────────────────────────────────────────── -->
+<section class="cta">
+    <div class="cta__container">
+        <div class="cta__card">
+            <div class="cta__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+            </div>
+            <h2 class="cta__title">Pronto para começar?</h2>
+            <p class="cta__subtitle">
+                Junte-se a mais de 500 membros que já transformaram as suas vidas com o Equilibrio. 
+                A sua primeira semana é por nossa conta!
+            </p>
+            <div class="cta__actions">
+                <a href="pages/auth.html" class="btn btn--primary btn--large">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="8.5" cy="7" r="4"/>
+                        <path d="M20 8v6M23 11h-6"/>
+                    </svg>
+                    Criar Conta Grátis
+                </a>
+                <a href="#features" class="btn btn--secondary btn--large">
+                    Ver Funcionalidades
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+<footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__top">
+            <div class="footer__brand">
+                <div class="footer__brand-header">
+                    <div class="footer__logo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+                        </svg>
+                    </div>
+                    <span class="footer__name">Equilibrio</span>
+                </div>
+                <p class="footer__desc">
+                    A sua jornada para uma vida mais saudável e equilibrada começa aqui. 
+                    Fitness, bem-estar e comunidade.
+                </p>
+            </div>
+            <div class="footer__column">
+                <h4>Navegação</h4>
+                <ul class="footer__links">
+                    <li><a href="#features" class="footer__link">Funcionalidades</a></li>
+                    <li><a href="#classes" class="footer__link">Aulas</a></li>
+                    <li><a href="#trainers" class="footer__link">Treinadores</a></li>
+                    <li><a href="pages/auth.html" class="footer__link">Entrar</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h4>Aulas</h4>
+                <ul class="footer__links">
+                    <li><a href="#" class="footer__link">Yoga</a></li>
+                    <li><a href="#" class="footer__link">Spinning</a></li>
+                    <li><a href="#" class="footer__link">HIIT</a></li>
+                    <li><a href="#" class="footer__link">Pilates</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h4>Contacto</h4>
+                <ul class="footer__links">
+                    <li><a href="mailto:info@equilibrio.pt" class="footer__link">info@equilibrio.pt</a></li>
+                    <li><a href="tel:+351912345678" class="footer__link">+351 912 345 678</a></li>
+                    <li><a href="#" class="footer__link">Lisboa, Portugal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__copy">&copy; 2025 Equilibrio. Todos os direitos reservados.</p>
+            <div class="footer__socials">
+                <a href="#" class="footer__social" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="#" class="footer__social" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="footer__social" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
