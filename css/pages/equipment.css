@@ -1,0 +1,416 @@
+/* ============================================================
+   equipment.css — Disponibilidade de equipamento
+   ============================================================ */
+
+.equipment-page {
+  padding-top: 70px;
+  min-height: 100vh;
+}
+
+.equipment-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+/* Header */
+.equipment-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-lg);
+}
+
+.equipment-header__info h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.equipment-header__info p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* Status Summary */
+.equipment-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.summary-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.summary-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.summary-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.summary-card__icon--available {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.summary-card__icon--occupied {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.summary-card__icon--maintenance {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.summary-card__icon--total {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.summary-card__info {
+  flex: 1;
+}
+
+.summary-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.summary-card__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Filters */
+.equipment-filters {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.equipment-search {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.equipment-search__icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+}
+
+.equipment-search__input {
+  width: 100%;
+  padding: 12px 14px 12px 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  transition: all var(--transition);
+}
+
+.equipment-search__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+/* Equipment Grid */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* Equipment Card */
+.equipment-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.equipment-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.equipment-card__image {
+  height: 160px;
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.equipment-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.equipment-card__placeholder {
+  width: 64px;
+  height: 64px;
+  color: var(--color-text-light);
+}
+
+.equipment-card__status {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge--available {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge--occupied {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge--maintenance {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.equipment-card__content {
+  padding: var(--space-lg);
+}
+
+.equipment-card__category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-xs);
+}
+
+.equipment-card__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.equipment-card__location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.equipment-card__location svg {
+  width: 14px;
+  height: 14px;
+}
+
+.equipment-card__details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.equipment-card__count {
+  font-size: 0.9rem;
+  color: var(--color-text-sub);
+}
+
+.equipment-card__count strong {
+  color: var(--color-text);
+}
+
+/* Floor Map View */
+.floor-map {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.floor-map__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.floor-map__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.floor-map__legend {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.legend-item__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+}
+
+.legend-item__dot--available { background: #16a34a; }
+.legend-item__dot--occupied { background: #d97706; }
+.legend-item__dot--maintenance { background: #dc2626; }
+
+.floor-map__grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--space-sm);
+  background: var(--color-bg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.floor-map__item {
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.floor-map__item:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.floor-map__item--available {
+  background: #dcfce7;
+  border: 2px solid #16a34a;
+}
+
+.floor-map__item--occupied {
+  background: #fef3c7;
+  border: 2px solid #d97706;
+}
+
+.floor-map__item--maintenance {
+  background: #fee2e2;
+  border: 2px solid #dc2626;
+}
+
+.floor-map__item svg {
+  width: 20px;
+  height: 20px;
+  color: inherit;
+}
+
+.floor-map__item--available svg { color: #16a34a; }
+.floor-map__item--occupied svg { color: #d97706; }
+.floor-map__item--maintenance svg { color: #dc2626; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .equipment-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .floor-map__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .equipment-container {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .equipment-header {
+    flex-direction: column;
+  }
+
+  .equipment-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .equipment-filters {
+    flex-direction: column;
+  }
+
+  .equipment-search {
+    width: 100%;
+  }
+
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .floor-map__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .floor-map__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
