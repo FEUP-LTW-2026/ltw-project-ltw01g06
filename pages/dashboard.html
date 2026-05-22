@@ -1,248 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FitLife Gym — Dashboard</title>
+    <title>Equilibrio — Dashboard</title>
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages/dashboard.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../javascript/components.js" defer></script>
 </head>
-<body>
+<body class="dashboard-page">
 
-<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<!-- Navbar -->
 <nav class="navbar">
-    <a href="#" class="navbar__brand">
-        <div class="navbar__logo" aria-hidden="true">
+    <a href="../index.html" class="navbar__brand">
+        <div class="navbar__logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
             </svg>
         </div>
-        <span class="navbar__name">FitLife Gym</span>
+        <span>Equilibrio</span>
     </a>
-
-    <ul class="navbar__links">
-        <li>
-            <a href="dashboard.html" class="navbar__link navbar__link--active">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                    <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-                </svg>
-                Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="classes.html" class="navbar__link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-                Classes
-            </a>
-        </li>
-        <li>
-            <a href="trainers.html" class="navbar__link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                Trainers
-            </a>
-        </li>
-        <li>
-            <a href="equipment.html" class="navbar__link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                </svg>
-                Equipment
-            </a>
-        </li>
-    </ul>
-
-    <div class="navbar__avatar" aria-label="User menu">U</div>
+    <div class="navbar__links">
+        <a href="schedule.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Horario
+        </a>
+        <a href="trainers.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Treinadores
+        </a>
+        <a href="equipment.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/></svg>
+            Equipamento
+        </a>
+    </div>
+    <div class="navbar__actions">
+        <a href="profile.html" class="btn btn--ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Perfil
+        </a>
+        <a href="auth.html" class="btn btn--secondary">Sair</a>
+    </div>
 </nav>
 
-<!-- ── Main ────────────────────────────────────────────────────── -->
-<main class="main">
-
-    <!-- Page header -->
-    <header class="page-header">
-        <h1 class="page-header__title">Welcome back, !</h1>
-        <p class="page-header__subtitle">Here's what's happening in your fitness journey.</p>
-    </header>
-
-    <!-- Stats grid -->
-    <section class="stats-grid" aria-label="Overview stats">
-
-        <div class="stat-card">
-            <p class="stat-card__label">Enrolled Classes</p>
-            <div class="stat-card__body">
-                <div class="stat-card__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-                        <line x1="3" y1="10" x2="21" y2="10"/>
-                    </svg>
-                </div>
-                <span class="stat-card__value">0</span>
-            </div>
-            <p class="stat-card__sub">Active bookings</p>
+<main class="dashboard-container">
+    <!-- Welcome Section -->
+    <section class="dashboard-welcome">
+        <div class="dashboard-welcome__content">
+            <p class="dashboard-welcome__greeting">Bom dia,</p>
+            <h1 class="dashboard-welcome__name">Joao Silva</h1>
+            <p class="dashboard-welcome__message">Pronto para mais um treino? Tem 2 aulas agendadas para hoje. Continue assim!</p>
         </div>
-
-        <div class="stat-card">
-            <p class="stat-card__label">Available Classes</p>
-            <div class="stat-card__body">
-                <div class="stat-card__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                </div>
-                <span class="stat-card__value">6</span>
-            </div>
-            <p class="stat-card__sub">This week</p>
-        </div>
-
-        <div class="stat-card">
-            <p class="stat-card__label">Equipment Available</p>
-            <div class="stat-card__body">
-                <div class="stat-card__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                    </svg>
-                </div>
-                <span class="stat-card__value">7</span>
-            </div>
-            <p class="stat-card__sub">Items ready</p>
-        </div>
-
-        <div class="stat-card">
-            <p class="stat-card__label">Streak</p>
-            <div class="stat-card__body">
-                <div class="stat-card__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                        <polyline points="17 6 23 6 23 12"/>
-                    </svg>
-                </div>
-                <span class="stat-card__value">7</span>
-            </div>
-            <p class="stat-card__sub">Days active</p>
-        </div>
-
     </section>
 
-    <!-- Bottom grid -->
-    <section class="bottom-grid">
+    <!-- Quick Stats -->
+    <section class="dashboard-stats">
+        <div class="dashboard-stat">
+            <div class="dashboard-stat__icon dashboard-stat__icon--classes">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div class="dashboard-stat__info">
+                <span class="dashboard-stat__value">12</span>
+                <span class="dashboard-stat__label">Aulas este mes</span>
+            </div>
+        </div>
+        <div class="dashboard-stat">
+            <div class="dashboard-stat__icon dashboard-stat__icon--attendance">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </div>
+            <div class="dashboard-stat__info">
+                <span class="dashboard-stat__value">95%</span>
+                <span class="dashboard-stat__label">Taxa de presenca</span>
+            </div>
+        </div>
+        <div class="dashboard-stat">
+            <div class="dashboard-stat__icon dashboard-stat__icon--streak">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="dashboard-stat__info">
+                <span class="dashboard-stat__value">8</span>
+                <span class="dashboard-stat__label">Dias consecutivos</span>
+            </div>
+        </div>
+        <div class="dashboard-stat">
+            <div class="dashboard-stat__icon dashboard-stat__icon--points">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+            </div>
+            <div class="dashboard-stat__info">
+                <span class="dashboard-stat__value">450</span>
+                <span class="dashboard-stat__label">Pontos ganhos</span>
+            </div>
+        </div>
+    </section>
 
+    <!-- Main Grid -->
+    <div class="dashboard-grid">
         <!-- Upcoming Classes -->
-        <div class="panel">
-            <div class="panel__header">
-                <h2 class="panel__title">Upcoming Classes</h2>
-                <p class="panel__subtitle">Your next scheduled sessions</p>
-            </div>
-            <div class="panel__body panel__body--empty">
-                <div class="empty-state">
-                    <div class="empty-state__icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
+        <section class="dashboard-section">
+            <header class="dashboard-section__header">
+                <h2 class="dashboard-section__title">Proximas Aulas</h2>
+                <a href="schedule.html" class="btn btn--ghost">Ver Todas</a>
+            </header>
+            <div class="dashboard-section__content">
+                <article class="upcoming-class">
+                    <div class="upcoming-class__date">
+                        <span class="upcoming-class__day">15</span>
+                        <span class="upcoming-class__month">Jan</span>
                     </div>
-                    <p class="empty-state__text">No upcoming classes</p>
-                    <a href="classes.html" class="btn btn--primary">Browse Classes</a>
+                    <div class="upcoming-class__info">
+                        <h3 class="upcoming-class__name">
+                            Yoga Matinal
+                            <span class="tag tag--yoga">Yoga</span>
+                        </h3>
+                        <div class="upcoming-class__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                08:00 - 09:00
+                            </span>
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                Ana Costa
+                            </span>
+                        </div>
+                    </div>
+                    <div class="upcoming-class__action">
+                        <button class="btn btn--secondary">Cancelar</button>
+                    </div>
+                </article>
+
+                <article class="upcoming-class">
+                    <div class="upcoming-class__date">
+                        <span class="upcoming-class__day">15</span>
+                        <span class="upcoming-class__month">Jan</span>
+                    </div>
+                    <div class="upcoming-class__info">
+                        <h3 class="upcoming-class__name">
+                            Spinning
+                            <span class="tag tag--spinning">Spinning</span>
+                        </h3>
+                        <div class="upcoming-class__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                18:00 - 19:00
+                            </span>
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                Miguel Santos
+                            </span>
+                        </div>
+                    </div>
+                    <div class="upcoming-class__action">
+                        <button class="btn btn--secondary">Cancelar</button>
+                    </div>
+                </article>
+
+                <article class="upcoming-class">
+                    <div class="upcoming-class__date">
+                        <span class="upcoming-class__day">17</span>
+                        <span class="upcoming-class__month">Jan</span>
+                    </div>
+                    <div class="upcoming-class__info">
+                        <h3 class="upcoming-class__name">
+                            HIIT Express
+                            <span class="tag tag--hiit">HIIT</span>
+                        </h3>
+                        <div class="upcoming-class__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                12:00 - 12:45
+                            </span>
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                Pedro Martins
+                            </span>
+                        </div>
+                    </div>
+                    <div class="upcoming-class__action">
+                        <button class="btn btn--secondary">Cancelar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Activity Feed -->
+        <section class="dashboard-section">
+            <header class="dashboard-section__header">
+                <h2 class="dashboard-section__title">Atividade Recente</h2>
+            </header>
+            <div class="dashboard-section__content">
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-item__icon activity-item__icon--class">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                        </div>
+                        <div class="activity-item__content">
+                            <p class="activity-item__text">Completou a aula de <strong>Pilates</strong></p>
+                            <span class="activity-item__time">Ontem as 10:00</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-item__icon activity-item__icon--achievement">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                        </div>
+                        <div class="activity-item__content">
+                            <p class="activity-item__text">Ganhou badge <strong>7 dias consecutivos</strong></p>
+                            <span class="activity-item__time">ha 2 dias</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-item__icon activity-item__icon--review">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <div class="activity-item__content">
+                            <p class="activity-item__text">Deixou review em <strong>Yoga Matinal</strong></p>
+                            <span class="activity-item__time">ha 3 dias</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-item__icon activity-item__icon--class">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                        </div>
+                        <div class="activity-item__content">
+                            <p class="activity-item__text">Inscreveu-se em <strong>Spinning</strong></p>
+                            <span class="activity-item__time">ha 4 dias</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="panel">
-            <div class="panel__header">
-                <h2 class="panel__title">Quick Actions</h2>
-                <p class="panel__subtitle">Get started with these shortcuts</p>
-            </div>
-            <div class="panel__body">
-                <ul class="quick-actions">
-
-                    <li class="quick-action">
-                        <div class="quick-action__icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-                                <line x1="3" y1="10" x2="21" y2="10"/>
-                            </svg>
-                        </div>
-                        <div class="quick-action__text">
-                            <span class="quick-action__title">Browse Classes</span>
-                            <span class="quick-action__desc">Find and enroll in fitness classes</span>
-                        </div>
-                    </li>
-
-                    <li class="quick-action">
-                        <div class="quick-action__icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                            </svg>
-                        </div>
-                        <div class="quick-action__text">
-                            <span class="quick-action__title">View Trainers</span>
-                            <span class="quick-action__desc">Meet our expert instructors</span>
-                        </div>
-                    </li>
-
-                    <li class="quick-action">
-                        <div class="quick-action__icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                            </svg>
-                        </div>
-                        <div class="quick-action__text">
-                            <span class="quick-action__title">Check Equipment</span>
-                            <span class="quick-action__desc">See what's available in the gym</span>
-                        </div>
-                    </li>
-
-                    <li class="quick-action">
-                        <div class="quick-action__icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                            </svg>
-                        </div>
-                        <div class="quick-action__text">
-                            <span class="quick-action__title">Edit Profile</span>
-                            <span class="quick-action__desc">Update your account information</span>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </section>
-
+        </section>
+    </div>
 </main>
 
 </body>

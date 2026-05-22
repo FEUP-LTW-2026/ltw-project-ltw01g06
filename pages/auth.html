@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FitLife Gym — Login / Register</title>
+    <title>Equilibrio — Login / Registar</title>
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages/auth.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="auth-page">
 
 <main class="auth-container">
+
+    <!-- Back link -->
+    <a href="../index.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Voltar à página inicial
+    </a>
 
     <!-- Brand -->
     <header class="brand">
@@ -22,126 +31,94 @@
                 <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
             </svg>
         </div>
-        <h1 class="brand__name">FitLife Gym</h1>
-        <p class="brand__tagline">Your journey to better health starts here</p>
+        <h1 class="brand__name">Equilibrio</h1>
+        <p class="brand__tagline">A sua jornada para uma vida mais saudável começa aqui</p>
     </header>
 
     <!-- Tab switcher -->
-    <nav class="auth-tabs" role="tablist" aria-label="Authentication options">
+    <nav class="auth-tabs" role="tablist" aria-label="Opções de autenticação">
         <button class="auth-tabs__tab auth-tabs__tab--active"
                 role="tab" aria-selected="true" aria-controls="panel-login"
-                id="tab-login" onclick="switchTab('login')">
-            Login
+                id="tab-login" data-tab="login">
+            Entrar
         </button>
         <button class="auth-tabs__tab"
                 role="tab" aria-selected="false" aria-controls="panel-register"
-                id="tab-register" onclick="switchTab('register')">
-            Register
+                id="tab-register" data-tab="register">
+            Registar
         </button>
     </nav>
 
     <!-- Login Panel -->
     <section class="auth-card" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
         <div class="auth-card__header">
-            <h2 class="auth-card__title">Welcome Back</h2>
-            <p class="auth-card__subtitle">Sign in to your account to continue</p>
+            <h2 class="auth-card__title">Bem-vindo de volta</h2>
+            <p class="auth-card__subtitle">Inicie sessão na sua conta para continuar</p>
         </div>
 
-        <form class="form" action="login.php" method="post" novalidate>
+        <form class="form" novalidate>
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form__group">
                 <label class="form__label" for="login-email">Email</label>
                 <input class="form__input" type="email" id="login-email" name="email"
-                       placeholder="you@example.com" autocomplete="email" required />
+                       placeholder="o-seu-email@exemplo.com" autocomplete="email" required />
             </div>
 
             <div class="form__group">
-                <label class="form__label" for="login-password">Password</label>
+                <label class="form__label" for="login-password">Palavra-passe</label>
                 <input class="form__input" type="password" id="login-password" name="password"
                        placeholder="••••••••" autocomplete="current-password" required />
             </div>
 
-            <button class="btn btn--primary btn--full" type="submit">Sign In</button>
+            <button class="btn btn--primary btn--full" type="submit">Entrar</button>
         </form>
-
-        <aside class="demo-box">
-            <p class="demo-box__title">Demo accounts:</p>
-            <ul class="demo-box__list">
-                <li>Member: <code>member@gym.com</code> / <code>member</code></li>
-                <li>Trainer: <code>trainer@gym.com</code> / <code>trainer</code></li>
-                <li>Admin: <code>admin@gym.com</code> / <code>admin</code></li>
-            </ul>
-        </aside>
     </section>
 
     <!-- Register Panel -->
     <section class="auth-card auth-card--hidden" id="panel-register" role="tabpanel" aria-labelledby="tab-register">
         <div class="auth-card__header">
-            <h2 class="auth-card__title">Create Account</h2>
-            <p class="auth-card__subtitle">Join our fitness community today</p>
+            <h2 class="auth-card__title">Criar Conta</h2>
+            <p class="auth-card__subtitle">Junte-se à nossa comunidade fitness hoje</p>
         </div>
 
-        <form class="form" action="register.php" method="post" novalidate>
+        <form class="form" novalidate>
             <input type="hidden" name="csrf_token" value="" />
 
             <div class="form__group">
-                <label class="form__label" for="reg-name">Full Name</label>
+                <label class="form__label" for="reg-name">Nome Completo</label>
                 <input class="form__input" type="text" id="reg-name" name="full_name"
-                       placeholder="John Doe" autocomplete="name" required />
+                       placeholder="João Silva" autocomplete="name" required />
             </div>
 
             <div class="form__group">
-                <label class="form__label" for="reg-username">Username</label>
+                <label class="form__label" for="reg-username">Nome de Utilizador</label>
                 <input class="form__input" type="text" id="reg-username" name="username"
-                       placeholder="johndoe" autocomplete="username" required />
+                       placeholder="joaosilva" autocomplete="username" required />
             </div>
 
             <div class="form__group">
                 <label class="form__label" for="reg-email">Email</label>
                 <input class="form__input" type="email" id="reg-email" name="email"
-                       placeholder="you@example.com" autocomplete="email" required />
+                       placeholder="o-seu-email@exemplo.com" autocomplete="email" required />
             </div>
 
             <div class="form__group">
-                <label class="form__label" for="reg-password">Password</label>
+                <label class="form__label" for="reg-password">Palavra-passe</label>
                 <input class="form__input" type="password" id="reg-password" name="password"
                        placeholder="••••••••" autocomplete="new-password" required />
             </div>
 
-            <button class="btn btn--primary btn--full" type="submit">Create Account</button>
+            <button class="btn btn--primary btn--full" type="submit">Criar Conta</button>
         </form>
     </section>
 
 </main>
 
 <!-- Help button -->
-<button class="help-btn" aria-label="Help">?</button>
+<button class="help-btn" aria-label="Ajuda">?</button>
 
-<script>
-    function switchTab(tab) {
-        const loginPanel    = document.getElementById('panel-login');
-        const registerPanel = document.getElementById('panel-register');
-        const loginTab      = document.getElementById('tab-login');
-        const registerTab   = document.getElementById('tab-register');
-
-        if (tab === 'login') {
-            loginPanel.classList.remove('auth-card--hidden');
-            registerPanel.classList.add('auth-card--hidden');
-            loginTab.classList.add('auth-tabs__tab--active');
-            loginTab.setAttribute('aria-selected', 'true');
-            registerTab.classList.remove('auth-tabs__tab--active');
-            registerTab.setAttribute('aria-selected', 'false');
-        } else {
-            registerPanel.classList.remove('auth-card--hidden');
-            loginPanel.classList.add('auth-card--hidden');
-            registerTab.classList.add('auth-tabs__tab--active');
-            registerTab.setAttribute('aria-selected', 'true');
-            loginTab.classList.remove('auth-tabs__tab--active');
-            loginTab.setAttribute('aria-selected', 'false');
-        }
-    }
-</script>
-
+<script src="../javascript/components.js" defer></script>
+<script src="../javascript/auth-ui.js" defer></script>
 </body>
 </html>
