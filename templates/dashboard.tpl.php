@@ -27,8 +27,8 @@ function drawDashboardStats(int $totalEnrollments, object $user): void {
                 </svg>
             </div>
             <div class="dashboard-stat__info">
-                <span class="dashboard-stat__value"><?= htmlspecialchars(ucfirst($user->membershipType ?? 'Standard')) ?></span>
-                <span class="dashboard-stat__label">Plano atual</span>
+                <span class="dashboard-stat__value"><?= htmlspecialchars(ucfirst($user->role)) ?></span>
+                <span class="dashboard-stat__label">Tipo de conta</span>
             </div>
         </div>
 
@@ -39,7 +39,7 @@ function drawDashboardStats(int $totalEnrollments, object $user): void {
                 </svg>
             </div>
             <div class="dashboard-stat__info">
-                <span class="dashboard-stat__value"><?= htmlspecialchars(ucfirst($user->membershipStatus ?? 'Ativo')) ?></span>
+                <span class="dashboard-stat__value"><?= $user->isActive ? 'Ativa' : 'Inativa' ?></span>
                 <span class="dashboard-stat__label">Estado</span>
             </div>
         </div>
