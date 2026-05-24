@@ -46,7 +46,7 @@ $stats = [
     'classes'  => count($allClasses),
 ];
 
-drawHeader($session, 'Admin Dashboard');
+drawHeader($session, 'Admin Dashboard', '/css/pages/admin.css');
 ?>
 
 <div class="admin-layout">

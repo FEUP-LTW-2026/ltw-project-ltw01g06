@@ -22,7 +22,7 @@ $db = getDatabaseConnection();
 $allClasses = GymClass::getAllClasses($db, false); // incluir inativas
 $trainers   = User::getAllUsers($db, 'trainer');
 
-drawHeader($session, 'Gestão de Aulas — Admin');
+drawHeader($session, 'Gestão de Aulas — Admin', '/css/pages/admin.css');
 ?>
 
 <div class="admin-layout">

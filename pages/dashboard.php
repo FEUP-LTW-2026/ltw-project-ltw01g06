@@ -50,7 +50,7 @@ usort($upcomingClasses, function(GymClass $a, GymClass $b) use ($dayOrder) {
 $totalEnrollments = count($enrollments);
 $recentEnrollments = array_slice($enrollments, 0, 4); // para a atividade recente
 
-drawHeader($session, 'Dashboard');
+drawHeader($session, 'Dashboard', '/css/pages/dashboard.css');
 ?>
 
 <main class="dashboard-container">

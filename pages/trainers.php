@@ -12,7 +12,7 @@
 
   $trainers = TrainerProfile::getAllProfiles($db);
 
-  drawHeader($session, 'Treinadores');
+  drawHeader($session, 'Treinadores', '/css/pages/trainers.css');
 ?>
 
 <section class="page-header">

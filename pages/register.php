@@ -1,61 +1,167 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types=1);
 
-  require_once(__DIR__ . '/../utils/session.php');
-  require_once(__DIR__ . '/../templates/common.tpl.php');
+require_once(__DIR__ . '/../utils/session.php');
 
-  $session = new Session();
+$session = new Session();
 
-  if ($session->isLoggedIn()) {
-    header('Location: profile.php');
+if ($session->isLoggedIn()) {
+    header('Location: dashboard.php');
     exit;
-  }
+}
 
-  drawHeader($session, 'Registar');
+$messages = $session->getMessages();
 ?>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equilibrio — Registar</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/auth.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
 
-<section class="auth-page">
-  <div class="auth-container">
-    <h1><i class="fas fa-user-plus"></i> Criar Conta</h1>
-    <p>Junta-te a comunidade Equilibrio Gym</p>
-    
-    <form action="../actions/action_register.php" method="post" class="auth-form">
-      <div class="form-group">
-        <label for="name">Nome Completo *</label>
-        <input type="text" id="name" name="name" placeholder="O teu nome" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="email">Email *</label>
-        <input type="email" id="email" name="email" placeholder="email@exemplo.com" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="phone">Telefone</label>
-        <input type="tel" id="phone" name="phone" placeholder="+351 912 345 678">
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Password *</label>
-        <input type="password" id="password" name="password" placeholder="Minimo 6 caracteres" required minlength="6">
-      </div>
-      
-      <div class="form-group">
-        <label for="confirm_password">Confirmar Password *</label>
-        <input type="password" id="confirm_password" name="confirm_password" placeholder="Repete a password" required>
-      </div>
-      
-      <button type="submit" class="btn btn-primary btn-block">
-        <i class="fas fa-user-plus"></i> Criar Conta
-      </button>
-    </form>
-    
-    <p class="auth-switch">
-      Ja tens conta? <a href="login.php">Entrar</a>
-    </p>
-  </div>
-</section>
+<main class="auth-container">
 
-<?php
-  drawFooter();
-?>
+    <a href="../index.php" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Voltar à página inicial
+    </a>
+
+    <?php if (!empty($messages)): ?>
+        <?php foreach ($messages as $msg): ?>
+            <div style="width:100%;padding:.75rem 1rem;border-radius:8px;font-size:.875rem;
+                background:<?= $msg['type'] === 'success' ? '#d4edda' : '#f8d7da' ?>;
+                color:<?= $msg['type'] === 'success' ? '#2d6a4f' : '#d62828' ?>;
+                border-left:4px solid <?= $msg['type'] === 'success' ? '#2d6a4f' : '#d62828' ?>;">
+                <?= htmlspecialchars($msg['text']) ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <header class="brand">
+        <div class="brand__logo" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+            </svg>
+        </div>
+        <h1 class="brand__name">Equilibrio</h1>
+        <p class="brand__tagline">A sua jornada para uma vida mais saudável começa aqui</p>
+    </header>
+
+    <nav class="auth-tabs" role="tablist" aria-label="Opções de autenticação">
+        <button class="auth-tabs__tab"
+                role="tab" aria-selected="false" data-tab="login">
+            Entrar
+        </button>
+        <button class="auth-tabs__tab auth-tabs__tab--active"
+                role="tab" aria-selected="true" data-tab="register">
+            Registar
+        </button>
+    </nav>
+
+    <!-- Login Panel (hidden by default on this page) -->
+    <section class="auth-card auth-card--hidden" id="panel-login" role="tabpanel">
+        <div class="auth-card__header">
+            <h2 class="auth-card__title">Bem-vindo de volta</h2>
+            <p class="auth-card__subtitle">Inicie sessão na sua conta para continuar</p>
+        </div>
+
+        <form class="form" method="post" action="../actions/action_login.php">
+            <div class="form__group">
+                <label class="form__label" for="login-field">Email ou Username</label>
+                <input class="form__input" type="text" id="login-field" name="login"
+                       placeholder="email@exemplo.com ou username" autocomplete="username" required />
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="login-password">Palavra-passe</label>
+                <input class="form__input" type="password" id="login-password" name="password"
+                       placeholder="••••••••" autocomplete="current-password" required />
+            </div>
+            <button class="btn btn--primary btn--full" type="submit">Entrar</button>
+        </form>
+    </section>
+
+    <!-- Register Panel (active by default on this page) -->
+    <section class="auth-card" id="panel-register" role="tabpanel">
+        <div class="auth-card__header">
+            <h2 class="auth-card__title">Criar Conta</h2>
+            <p class="auth-card__subtitle">Junte-se à nossa comunidade fitness hoje</p>
+        </div>
+
+        <form class="form" method="post" action="../actions/action_register.php">
+            <div class="form__group">
+                <label class="form__label" for="reg-name">Nome Completo</label>
+                <input class="form__input" type="text" id="reg-name" name="full_name"
+                       placeholder="João Silva" autocomplete="name" required />
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="reg-username">Username</label>
+                <input class="form__input" type="text" id="reg-username" name="username"
+                       placeholder="joaosilva" autocomplete="username" required />
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="reg-email">Email</label>
+                <input class="form__input" type="email" id="reg-email" name="email"
+                       placeholder="o-seu-email@exemplo.com" autocomplete="email" required />
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="reg-password">Palavra-passe</label>
+                <input class="form__input" type="password" id="reg-password" name="password"
+                       placeholder="••••••••" minlength="8" autocomplete="new-password" required />
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="reg-confirm">Confirmar Palavra-passe</label>
+                <input class="form__input" type="password" id="reg-confirm" name="confirm_password"
+                       placeholder="••••••••" autocomplete="new-password" required />
+            </div>
+            <button class="btn btn--primary btn--full" type="submit">Criar Conta</button>
+        </form>
+    </section>
+
+</main>
+
+<button class="help-btn" aria-label="Ajuda">?</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-tab]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var tab = btn.getAttribute('data-tab');
+            document.querySelectorAll('.auth-tabs__tab').forEach(function(t) {
+                t.classList.remove('auth-tabs__tab--active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.auth-card').forEach(function(c) {
+                c.classList.add('auth-card--hidden');
+            });
+            btn.classList.add('auth-tabs__tab--active');
+            btn.setAttribute('aria-selected', 'true');
+            document.getElementById('panel-' + tab).classList.remove('auth-card--hidden');
+        });
+    });
+
+    var form = document.querySelector('#panel-register form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            var pw = form.querySelector('[name="password"]').value;
+            var cf = form.querySelector('[name="confirm_password"]').value;
+            if (pw !== cf) {
+                e.preventDefault();
+                alert('As palavras-passe não coincidem.');
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

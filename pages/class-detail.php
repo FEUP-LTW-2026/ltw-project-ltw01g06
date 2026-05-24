@@ -47,7 +47,7 @@ $reviews      = Review::getClassReviews($db, $classId);
 $reviewStats  = Review::getClassStats($db, $classId);
 $userReview   = Review::getUserReview($db, $userId, $classId);
 
-drawHeader($session, htmlspecialchars($gymClass->name) . ' — Equilibrio');
+drawHeader($session, htmlspecialchars($gymClass->name), '/css/pages/classe-detail.css' . ' — Equilibrio');
 ?>
 
 <main class="class-detail-container">

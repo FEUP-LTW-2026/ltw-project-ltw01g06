@@ -17,7 +17,7 @@ foreach ($equipment as $item) {
     $byCategory[$cat][] = $item;
 }
 
-drawHeader($session, 'Equipamento');
+drawHeader($session, 'Equipamento', '/css/pages/equipment.css');
 ?>
 
 <section class="page-header">

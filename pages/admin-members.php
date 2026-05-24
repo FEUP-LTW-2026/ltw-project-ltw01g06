@@ -43,7 +43,7 @@ $totalPages   = max(1, (int)ceil($total / $perPage));
 $currentPage  = max(1, min($totalPages, (int)filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ?: 1));
 $pageUsers    = array_slice($allUsers, ($currentPage - 1) * $perPage, $perPage);
 
-drawHeader($session, 'Gestão de Membros — Admin');
+drawHeader($session, 'Gestão de Membros — Admin', '/css/pages/admin.css');
 ?>
 
 <div class="admin-layout">

@@ -19,7 +19,7 @@ if (!$session->isLoggedIn() || !$session->isAdmin()) {
 $db        = getDatabaseConnection();
 $equipment = Equipment::getAll($db);
 
-drawHeader($session, 'Equipamento — Admin');
+drawHeader($session, 'Equipamento — Admin', '/css/pages/admin.css');
 ?>
 
 <div class="admin-layout">

@@ -87,7 +87,7 @@ $avgEnrollmentsPerMember = count($allMembers) > 0
     ? round($totalEnrollments / count($allMembers), 1)
     : 0;
 
-drawHeader($session, 'Analytics — Admin');
+drawHeader($session, 'Analytics — Admin', '/css/pages/analytics.css');
 ?>
 
 <div class="admin-layout">

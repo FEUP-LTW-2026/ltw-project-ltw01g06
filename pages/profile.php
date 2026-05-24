@@ -26,7 +26,7 @@
     exit;
   }
 
-  drawHeader($session, 'O Meu Perfil');
+  drawHeader($session, 'O Meu Perfil', '/css/pages/profile.css');
 ?>
 
 <section class="page-header">

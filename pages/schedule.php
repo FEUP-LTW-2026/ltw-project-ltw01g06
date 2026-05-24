@@ -12,7 +12,7 @@
 
   $classes = GymClass::getAllClasses($db);
 
-  drawHeader($session, 'Horarios');
+  drawHeader($session, 'Horarios', '/css/pages/schedule.css');
 ?>
 
 <section class="page-header">
