@@ -30,7 +30,7 @@ $parts    = explode(' ', $user->fullName);
 $initials = implode('', array_map(fn($p) => strtoupper(mb_substr($p, 0, 1)), $parts));
 $initials = mb_substr($initials, 0, 2);
 
-drawHeader($session, 'Editar Perfil', 'css/pages/profile.css');
+drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profile.css');
 ?>
 
 <main class="profile-container">
@@ -176,29 +176,5 @@ drawHeader($session, 'Editar Perfil', 'css/pages/profile.css');
     </section>
 </main>
 
-<script>
-// Validação visual dos requisitos de password
-var newPw = document.getElementById('new-password');
-if (newPw) {
-    newPw.addEventListener('input', function() {
-        var v = newPw.value;
-        setReq('req-length', v.length >= 8);
-        setReq('req-upper',  /[A-Z]/.test(v));
-        setReq('req-number', /[0-9]/.test(v));
-    });
-}
-
-function setReq(id, ok) {
-    var el  = document.getElementById(id);
-    var svg = el.querySelector('svg');
-    if (ok) {
-        svg.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/>';
-        el.style.color = 'var(--color-success, #16a34a)';
-    } else {
-        svg.innerHTML = '<circle cx="12" cy="12" r="10"/>';
-        el.style.color = '';
-    }
-}
-</script>
 
 <?php drawFooter(); ?>

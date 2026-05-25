@@ -43,7 +43,7 @@ drawHeader($session, 'Equipamento', '/css/pages/equipment.css');
             <h1>Equipamento Disponível</h1>
             <p>Verifique a disponibilidade do equipamento na área de musculação</p>
         </div>
-        <a href="/pages/equipment.php" class="btn btn--secondary">
+        <a href="equipment.php" class="btn btn--secondary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                 <path d="M23 4v6h-6M1 20v-6h6"/>
                 <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
@@ -184,29 +184,5 @@ drawHeader($session, 'Equipamento', '/css/pages/equipment.css');
     </section>
 </main>
 
-<script>
-(function() {
-    var search   = document.getElementById('eq-search');
-    var category = document.getElementById('eq-category');
-    var status   = document.getElementById('eq-status');
-
-    function filter() {
-        var q   = search.value.toLowerCase();
-        var cat = category.value;
-        var st  = status.value;
-
-        document.querySelectorAll('.equipment-card').forEach(function(card) {
-            var matchName = !q   || card.dataset.name.includes(q);
-            var matchCat  = !cat || card.dataset.category === cat;
-            var matchSt   = !st  || card.dataset.status === st;
-            card.style.display = (matchName && matchCat && matchSt) ? '' : 'none';
-        });
-    }
-
-    search.addEventListener('input', filter);
-    category.addEventListener('change', filter);
-    status.addEventListener('change', filter);
-})();
-</script>
 
 <?php drawFooter(); ?>

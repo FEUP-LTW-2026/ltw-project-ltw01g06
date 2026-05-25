@@ -85,7 +85,7 @@ drawHeader($session, 'Treinadores', '/css/pages/trainers.css');
                     <?php endif; ?>
 
                     <div class="trainer-card__actions">
-                        <a href="/pages/schedule.php" class="btn btn--primary">Ver Aulas</a>
+                        <a href="schedule.php" class="btn btn--primary">Ver Aulas</a>
                     </div>
                 </div>
             </article>
@@ -99,24 +99,5 @@ drawHeader($session, 'Treinadores', '/css/pages/trainers.css');
     </section>
 </main>
 
-<script>
-document.querySelectorAll('.trainers-filter').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.trainers-filter').forEach(function(b) {
-            b.classList.remove('trainers-filter--active');
-        });
-        btn.classList.add('trainers-filter--active');
-
-        var spec = btn.dataset.spec;
-        document.querySelectorAll('.trainer-card').forEach(function(card) {
-            if (!spec || card.dataset.specs.split(',').includes(spec)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-});
-</script>
 
 <?php drawFooter(); ?>

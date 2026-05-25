@@ -139,38 +139,6 @@ $messages = $session->getMessages();
 
 <button class="help-btn" aria-label="Ajuda">?</button>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Tab switching
-    document.querySelectorAll('[data-tab]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var tab = btn.getAttribute('data-tab');
-            document.querySelectorAll('.auth-tabs__tab').forEach(function(t) {
-                t.classList.remove('auth-tabs__tab--active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            document.querySelectorAll('.auth-card').forEach(function(c) {
-                c.classList.add('auth-card--hidden');
-            });
-            btn.classList.add('auth-tabs__tab--active');
-            btn.setAttribute('aria-selected', 'true');
-            document.getElementById('panel-' + tab).classList.remove('auth-card--hidden');
-        });
-    });
-
-    // Password confirmation
-    var form = document.querySelector('#panel-register form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            var pw = form.querySelector('[name="password"]').value;
-            var cf = form.querySelector('[name="confirm_password"]').value;
-            if (pw !== cf) {
-                e.preventDefault();
-                alert('As palavras-passe não coincidem.');
-            }
-        });
-    }
-});
-</script>
+<script src="../javascript/auth.js" defer></script>
 </body>
 </html>
