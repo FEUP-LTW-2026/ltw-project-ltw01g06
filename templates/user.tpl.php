@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 function drawProfileForm(object $user): void {
     ?>
-    <form action="/actions/action_edit_profile.php" method="post" class="auth-form">
+    <form action="../actions/action_edit_profile.php" method="post" class="auth-form">
         <div class="form-group">
             <label for="full_name">Nome Completo</label>
             <input type="text" id="full_name" name="full_name"
@@ -58,7 +58,7 @@ function drawUserEnrollments(array $enrollments): void {
         <h3><i class="fas fa-calendar-check"></i> As Minhas Inscrições</h3>
         <?php if (empty($enrollments)): ?>
             <p class="no-enrollments">Ainda não tens aulas inscritas.</p>
-            <a href="/pages/schedule.php" class="btn btn-primary btn-small">Ver Horário</a>
+            <a href="../pages/schedule.php" class="btn btn-primary btn-small">Ver Horário</a>
         <?php else: ?>
             <ul>
                 <?php foreach ($enrollments as $enrollment): ?>
@@ -70,7 +70,7 @@ function drawUserEnrollments(array $enrollments): void {
                                 Inscrito em <?= htmlspecialchars(date('d/m/Y', strtotime($enrollment->enrolledAt))) ?>
                             </span>
                         </div>
-                        <form action="/actions/action_enroll.php" method="post">
+                        <form action="../actions/action_enroll.php" method="post">
                             <input type="hidden" name="class_id" value="<?= $enrollment->classId ?>" />
                             <input type="hidden" name="action" value="cancel" />
                             <button type="submit" class="btn btn-danger btn-small"

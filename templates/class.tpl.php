@@ -97,7 +97,7 @@ function drawScheduleTable(array $classes, Session $session, PDO $db): void {
                                     $spotsClass = $isFull ? 'class-card__spots--full'
                                         : ($class->getAvailableSpots() <= 3 ? 'class-card__spots--low' : '');
                                 ?>
-                                    <a href="/pages/class-detail.php?id=<?= $class->id ?>"
+                                    <a href="../pages/class-detail.php?id=<?= $class->id ?>"
                                        class="class-card <?= $typeClass ?>"
                                        style="display:flex;flex-direction:column;text-decoration:none;"
                                        data-type="<?= htmlspecialchars(strtolower($class->type)) ?>"
@@ -153,7 +153,7 @@ function drawScheduleTable(array $classes, Session $session, PDO $db): void {
 
                             <div class="class-list-item__info">
                                 <h4 class="class-list-item__name">
-                                    <a href="/pages/class-detail.php?id=<?= $class->id ?>" style="color:inherit;">
+                                    <a href="../pages/class-detail.php?id=<?= $class->id ?>" style="color:inherit;">
                                         <?= htmlspecialchars($class->name) ?>
                                     </a>
                                     <span class="tag tag--<?= htmlspecialchars(strtolower($class->type)) ?>">
@@ -199,7 +199,7 @@ function drawScheduleTable(array $classes, Session $session, PDO $db): void {
                                 </div>
 
                                 <?php if ($isEnrolled): ?>
-                                    <form method="post" action="/actions/action_enroll.php">
+                                    <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
                                         <input type="hidden" name="action" value="cancel">
                                         <button type="submit" class="btn btn--secondary"
@@ -212,13 +212,13 @@ function drawScheduleTable(array $classes, Session $session, PDO $db): void {
                                         Lista de espera #<?= $waitlistPos ?>
                                     </span>
                                 <?php elseif (!$isFull): ?>
-                                    <form method="post" action="/actions/action_enroll.php">
+                                    <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
                                         <input type="hidden" name="action" value="enroll">
                                         <button type="submit" class="btn btn--primary">Inscrever</button>
                                     </form>
                                 <?php else: ?>
-                                    <form method="post" action="/actions/action_enroll.php">
+                                    <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
                                         <input type="hidden" name="action" value="waitlist">
                                         <button type="submit" class="btn btn--ghost">Lista de Espera</button>
@@ -238,54 +238,5 @@ function drawScheduleTable(array $classes, Session $session, PDO $db): void {
         <?php endif; ?>
     </section>
 
-    <script>
-    function switchView(view) {
-        document.getElementById('view-calendar').style.display = view === 'calendar' ? '' : 'none';
-        document.getElementById('view-list').style.display     = view === 'list'     ? 'flex' : 'none';
-        document.querySelectorAll('.calendar-view-btn').forEach(function(btn, i) {
-            btn.classList.toggle('calendar-view-btn--active', (view === 'calendar' && i === 0) || (view === 'list' && i === 1));
-        });
-    }
-
-    // Filtro por tipo
-    document.getElementById('filter-type').addEventListener('change', function() {
-        applyFilters();
-    });
-
-    // Filtro por nível
-    document.querySelectorAll('.filter-chip').forEach(function(chip) {
-        chip.addEventListener('click', function() {
-            document.querySelectorAll('.filter-chip').forEach(function(c) {
-                c.classList.remove('filter-chip--active');
-            });
-            chip.classList.add('filter-chip--active');
-            applyFilters();
-        });
-    });
-
-    function applyFilters() {
-        var type  = document.getElementById('filter-type').value;
-        var level = document.querySelector('.filter-chip--active').dataset.level;
-
-        // Vista lista
-        document.querySelectorAll('.class-list-item').forEach(function(item) {
-            var matchType  = !type  || item.dataset.type  === type;
-            var matchLevel = !level || item.dataset.level === level;
-            item.style.display = (matchType && matchLevel) ? '' : 'none';
-        });
-
-        // Vista calendário
-        document.querySelectorAll('.class-card').forEach(function(card) {
-            var matchType  = !type  || card.dataset.type  === type;
-            var matchLevel = !level || card.dataset.level === level;
-            card.style.display = (matchType && matchLevel) ? '' : 'none';
-        });
-    }
-
-    // Em mobile, mostrar lista por defeito
-    if (window.innerWidth < 1200) {
-        switchView('list');
-    }
-    </script>
     <?php
 }

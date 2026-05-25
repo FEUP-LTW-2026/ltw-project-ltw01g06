@@ -58,7 +58,7 @@ function drawEnrollmentSection(object $gymClass, bool $isEnrolled, bool $isOnWai
             <p class="status-pill status-pill--active" style="display:inline-block;margin-bottom:1rem;">
                 <i class="fas fa-check-circle"></i> Já estás inscrito nesta aula
             </p>
-            <form action="/actions/action_enroll.php" method="post">
+            <form action="../actions/action_enroll.php" method="post">
                 <input type="hidden" name="class_id" value="<?= $gymClass->id ?>" />
                 <input type="hidden" name="action" value="cancel" />
                 <button type="submit" class="btn btn-danger"
@@ -72,7 +72,7 @@ function drawEnrollmentSection(object $gymClass, bool $isEnrolled, bool $isOnWai
                 <i class="fas fa-hourglass-half"></i>
                 Estás na lista de espera na posição <strong><?= $waitlistPosition ?></strong>.
             </p>
-            <form action="/actions/action_enroll.php" method="post">
+            <form action="../actions/action_enroll.php" method="post">
                 <input type="hidden" name="class_id" value="<?= $gymClass->id ?>" />
                 <input type="hidden" name="action" value="waitlist_leave" />
                 <button type="submit" class="btn btn-danger">
@@ -85,7 +85,7 @@ function drawEnrollmentSection(object $gymClass, bool $isEnrolled, bool $isOnWai
                 <i class="fas fa-circle" style="color:var(--success-color)"></i>
                 <?= $gymClass->getAvailableSpots() ?> lugar(es) disponível(is)
             </p>
-            <form action="/actions/action_enroll.php" method="post">
+            <form action="../actions/action_enroll.php" method="post">
                 <input type="hidden" name="class_id" value="<?= $gymClass->id ?>" />
                 <input type="hidden" name="action" value="enroll" />
                 <button type="submit" class="btn btn-primary">
@@ -97,7 +97,7 @@ function drawEnrollmentSection(object $gymClass, bool $isEnrolled, bool $isOnWai
             <p style="margin-bottom:1rem; color:var(--error-color);">
                 <i class="fas fa-ban"></i> Aula cheia
             </p>
-            <form action="/actions/action_enroll.php" method="post">
+            <form action="../actions/action_enroll.php" method="post">
                 <input type="hidden" name="class_id" value="<?= $gymClass->id ?>" />
                 <input type="hidden" name="action" value="waitlist" />
                 <button type="submit" class="btn btn-secondary">
@@ -133,7 +133,7 @@ function drawReviewsSection(array $reviews, array $stats, ?object $userReview, i
                 <h3 style="margin-bottom:1rem;">
                     <?= $userReview ? 'A tua avaliação' : 'Deixar avaliação' ?>
                 </h3>
-                <form action="/actions/action_review.php" method="post">
+                <form action="../actions/action_review.php" method="post">
                     <input type="hidden" name="class_id" value="<?= $classId ?>" />
                     <div class="form-group">
                         <label>Classificação</label>

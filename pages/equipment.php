@@ -10,69 +10,203 @@ $session   = new Session();
 $db        = getDatabaseConnection();
 $equipment = Equipment::getAll($db);
 
-// Agrupar por categoria
-$byCategory = [];
+// Estatísticas
+$totalAvailable  = 0;
+$totalInUse      = 0;
+$totalMaintenance = 0;
+$totalQty        = 0;
+
 foreach ($equipment as $item) {
-    $cat = $item->category ?? 'Outro';
-    $byCategory[$cat][] = $item;
+    $totalAvailable  += $item->available;
+    $totalInUse      += ($item->quantity - $item->available);
+    $totalMaintenance += ($item->status === 'maintenance' ? 1 : 0);
+    $totalQty        += $item->quantity;
 }
+
+// Categorias únicas para filtro
+$categories = array_unique(array_filter(array_map(fn($e) => $e->category, $equipment)));
+sort($categories);
+
+// SVG por categoria
+$svgByCategory = [
+    'Cardio'  => '<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 6V4M18 6V4M6 18v2M18 18v2"/>',
+    'Weights' => '<path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>',
+    'default' => '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+];
 
 drawHeader($session, 'Equipamento', '/css/pages/equipment.css');
 ?>
 
-<section class="page-header">
-    <h1><i class="fas fa-dumbbell"></i> Equipamento</h1>
-    <p>Disponibilidade atual do equipamento do ginásio.</p>
-</section>
+<main class="equipment-container">
+    <header class="equipment-header">
+        <div class="equipment-header__info">
+            <h1>Equipamento Disponível</h1>
+            <p>Verifique a disponibilidade do equipamento na área de musculação</p>
+        </div>
+        <a href="/pages/equipment.php" class="btn btn--secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M23 4v6h-6M1 20v-6h6"/>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Atualizar
+        </a>
+    </header>
 
-<?php if (empty($equipment)): ?>
-    <p style="text-align:center;color:var(--gray-color);">Nenhum equipamento registado.</p>
-<?php else: ?>
-    <?php foreach ($byCategory as $category => $items): ?>
-        <section style="margin-bottom:2rem;">
-            <h2 style="color:var(--secondary-color);margin-bottom:1rem;border-bottom:2px solid var(--light-color);padding-bottom:.5rem;">
-                <?= htmlspecialchars($category) ?>
-            </h2>
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;">
-                <?php foreach ($items as $item): ?>
-                    <div class="feature-card" style="text-align:left;">
-                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;">
-                            <h3 style="font-size:1rem;"><?= htmlspecialchars($item->name) ?></h3>
-                            <?php $cls = match($item->status) {
-                                'available'   => 'active',
-                                'maintenance' => 'inactive',
-                                default       => 'inactive'
-                            }; ?>
-                            <span class="status-pill status-pill--<?= $cls ?>" style="font-size:.7rem;">
-                                <?= htmlspecialchars($item->getStatusLabel()) ?>
-                            </span>
-                        </div>
-
-                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">
-                            <span style="font-size:1.5rem;font-weight:700;color:<?= $item->available > 0 ? 'var(--success-color)' : 'var(--error-color)' ?>">
-                                <?= $item->available ?>
-                            </span>
-                            <span style="color:var(--gray-color);font-size:.875rem;">
-                                disponível<?= $item->available !== 1 ? 'is' : '' ?> de <?= $item->quantity ?>
-                            </span>
-                        </div>
-
-                        <!-- Barra de disponibilidade -->
-                        <?php $pct = $item->quantity > 0 ? round($item->available / $item->quantity * 100) : 0; ?>
-                        <div style="height:6px;background:#e9ecef;border-radius:3px;">
-                            <div style="height:6px;width:<?= $pct ?>%;background:<?= $pct > 50 ? 'var(--success-color)' : ($pct > 0 ? 'var(--warning-color)' : 'var(--error-color)') ?>;border-radius:3px;transition:width .3s;"></div>
-                        </div>
-
-                        <?php if ($item->notes): ?>
-                            <p style="margin-top:.5rem;font-size:.8rem;color:var(--gray-color);">
-                                <?= htmlspecialchars($item->notes) ?>
-                            </p>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
+    <!-- Resumo -->
+    <section class="equipment-summary">
+        <div class="summary-card">
+            <div class="summary-card__icon summary-card__icon--available">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <path d="M22 4L12 14.01l-3-3"/>
+                </svg>
             </div>
-        </section>
-    <?php endforeach; ?>
-<?php endif; ?>
+            <div class="summary-card__info">
+                <span class="summary-card__value"><?= $totalAvailable ?></span>
+                <span class="summary-card__label">Disponíveis</span>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-card__icon summary-card__icon--occupied">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+            </div>
+            <div class="summary-card__info">
+                <span class="summary-card__value"><?= $totalInUse ?></span>
+                <span class="summary-card__label">Em Uso</span>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-card__icon summary-card__icon--maintenance">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+            </div>
+            <div class="summary-card__info">
+                <span class="summary-card__value"><?= $totalMaintenance ?></span>
+                <span class="summary-card__label">Em Manutenção</span>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-card__icon summary-card__icon--total">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+                </svg>
+            </div>
+            <div class="summary-card__info">
+                <span class="summary-card__value"><?= $totalQty ?></span>
+                <span class="summary-card__label">Total</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="equipment-filters">
+        <div class="equipment-search">
+            <svg class="equipment-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="search" class="equipment-search__input" id="eq-search"
+                   placeholder="Pesquisar equipamento..." />
+        </div>
+        <select class="filter-select" id="eq-category">
+            <option value="">Todas as Categorias</option>
+            <?php foreach ($categories as $cat): ?>
+                <option value="<?= htmlspecialchars(strtolower($cat)) ?>"><?= htmlspecialchars($cat) ?></option>
+            <?php endforeach; ?>
+        </select>
+        <select class="filter-select" id="eq-status">
+            <option value="">Todos os Estados</option>
+            <option value="available">Disponíveis</option>
+            <option value="maintenance">Manutenção</option>
+            <option value="retired">Retirado</option>
+        </select>
+    </section>
+
+    <!-- Grid de Equipamento -->
+    <section class="equipment-grid">
+        <?php foreach ($equipment as $item):
+            $statusClass = match($item->status) {
+                'available'   => 'available',
+                'maintenance' => 'maintenance',
+                default       => 'maintenance'
+            };
+            $statusLabel = match($item->status) {
+                'available'   => 'Disponível',
+                'maintenance' => 'Manutenção',
+                'retired'     => 'Retirado',
+                default       => $item->status
+            };
+            $svg = $svgByCategory[$item->category] ?? $svgByCategory['default'];
+            $inUse = $item->quantity - $item->available;
+        ?>
+            <article class="equipment-card"
+                     data-name="<?= htmlspecialchars(strtolower($item->name)) ?>"
+                     data-category="<?= htmlspecialchars(strtolower($item->category ?? '')) ?>"
+                     data-status="<?= htmlspecialchars($item->status) ?>">
+                <div class="equipment-card__image">
+                    <svg class="equipment-card__placeholder" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.5">
+                        <?= $svg ?>
+                    </svg>
+                    <div class="equipment-card__status">
+                        <span class="status-badge status-badge--<?= $statusClass ?>">
+                            <span class="status-badge__dot"></span>
+                            <?= $statusLabel ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="equipment-card__content">
+                    <span class="equipment-card__category"><?= htmlspecialchars($item->category ?? 'Geral') ?></span>
+                    <h3 class="equipment-card__name"><?= htmlspecialchars($item->name) ?></h3>
+                    <?php if ($item->notes): ?>
+                        <p style="font-size:.8rem;color:var(--color-text-muted);margin-bottom:var(--space-sm);">
+                            <?= htmlspecialchars($item->notes) ?>
+                        </p>
+                    <?php endif; ?>
+                    <div class="equipment-card__details">
+                        <span class="equipment-card__count">
+                            <strong><?= $item->available ?></strong> de <?= $item->quantity ?> disponíveis
+                        </span>
+                    </div>
+                </div>
+            </article>
+        <?php endforeach; ?>
+
+        <?php if (empty($equipment)): ?>
+            <p style="grid-column:1/-1;text-align:center;color:var(--color-text-muted);padding:3rem;">
+                Nenhum equipamento registado.
+            </p>
+        <?php endif; ?>
+    </section>
+</main>
+
+<script>
+(function() {
+    var search   = document.getElementById('eq-search');
+    var category = document.getElementById('eq-category');
+    var status   = document.getElementById('eq-status');
+
+    function filter() {
+        var q   = search.value.toLowerCase();
+        var cat = category.value;
+        var st  = status.value;
+
+        document.querySelectorAll('.equipment-card').forEach(function(card) {
+            var matchName = !q   || card.dataset.name.includes(q);
+            var matchCat  = !cat || card.dataset.category === cat;
+            var matchSt   = !st  || card.dataset.status === st;
+            card.style.display = (matchName && matchCat && matchSt) ? '' : 'none';
+        });
+    }
+
+    search.addEventListener('input', filter);
+    category.addEventListener('change', filter);
+    status.addEventListener('change', filter);
+})();
+</script>
 
 <?php drawFooter(); ?>
