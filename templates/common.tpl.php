@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 /**
  * common.tpl.php
- * Funções partilhadas por todas as páginas: drawHeader() e drawFooter().
+ * drawHeader() — <head>, navbar, mensagens flash
+ * drawFooter() — footer + scripts JS
  *
- * drawHeader() gera o <head>, a navbar e o container de mensagens.
- * drawFooter() fecha o wrapper, gera o footer e carrega os scripts JS.
- *
- * @param object $session   Instância de Session
- * @param string $title     Título da página (sem o sufixo "— Equilibrio")
- * @param string $pageJs    Caminho relativo para o JS específico da página (ex: 'javascript/schedule.js')
- * @param string $pageCss   Caminho relativo para o CSS específico da página (ex: 'css/pages/schedule.css')
- * @param bool   $homeLinks Quando true, a navbar mostra âncoras de scroll (#features, etc.)
+ * @param object $session
+ * @param string $title      Título da página
+ * @param string $pageJs     Caminho relativo para o JS da página (ex: 'javascript/schedule.js')
+ * @param string $pageCss    Caminho relativo para o CSS da página (ex: 'css/pages/schedule.css')
+ * @param bool   $homeLinks  Se true, navbar mostra âncoras #features, #classes, #trainers
  */
 function drawHeader(
     object $session,
@@ -21,9 +19,10 @@ function drawHeader(
     string $pageCss   = '',
     bool   $homeLinks = false
 ): void {
-    $messages = $session->getMessages();
-    $inPages  = str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_FILENAME'] ?? ''), '/pages/');
-    $root     = $inPages ? '../' : '';
+    $messages    = $session->getMessages();
+    $inPages     = str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_FILENAME'] ?? ''), '/pages/');
+    $root        = $inPages ? '../' : '';
+    $currentPage = basename($_SERVER['SCRIPT_FILENAME'] ?? '');
     ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -31,20 +30,17 @@ function drawHeader(
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Equilibrio — <?= htmlspecialchars($title) ?></title>
-
     <link rel="stylesheet" href="<?= $root ?>css/reset.css" />
     <link rel="stylesheet" href="<?= $root ?>css/components.css" />
     <?php if ($pageCss): ?>
     <link rel="stylesheet" href="<?= $root ?><?= htmlspecialchars(ltrim($pageCss, '/')) ?>" />
     <?php endif; ?>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<!-- ── Navbar ── -->
 <nav class="navbar">
     <a href="<?= $root ?>index.php" class="navbar__brand">
         <div class="navbar__logo">
@@ -53,6 +49,9 @@ function drawHeader(
             </svg>
         </div>
         <span>Equilibrio</span>
+        <?php if ($session->isAdmin() && !$homeLinks): ?>
+            <span class="tag tag--advanced" style="margin-left:8px">Admin</span>
+        <?php endif; ?>
     </a>
 
     <ul class="navbar__links">
@@ -78,14 +77,16 @@ function drawHeader(
                 Treinadores
             </a></li>
         <?php else: ?>
-            <li><a href="<?= $root ?>pages/schedule.php" class="navbar__link">
+            <li><a href="<?= $root ?>pages/schedule.php"
+                   class="navbar__link <?= $currentPage === 'schedule.php' ? 'navbar__link--active' : '' ?>">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2"/>
                     <path d="M16 2v4M8 2v4M3 10h18"/>
                 </svg>
                 Horário
             </a></li>
-            <li><a href="<?= $root ?>pages/trainers.php" class="navbar__link">
+            <li><a href="<?= $root ?>pages/trainers.php"
+                   class="navbar__link <?= $currentPage === 'trainers.php' ? 'navbar__link--active' : '' ?>">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                     <circle cx="9" cy="7" r="4"/>
@@ -93,14 +94,16 @@ function drawHeader(
                 </svg>
                 Treinadores
             </a></li>
-            <li><a href="<?= $root ?>pages/equipment.php" class="navbar__link">
+            <li><a href="<?= $root ?>pages/equipment.php"
+                   class="navbar__link <?= $currentPage === 'equipment.php' ? 'navbar__link--active' : '' ?>">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
                 </svg>
                 Equipamento
             </a></li>
-            <?php if ($session->isLoggedIn()): ?>
-                <li><a href="<?= $root ?>pages/dashboard.php" class="navbar__link">
+            <?php if ($session->isLoggedIn() && !$session->isAdmin()): ?>
+                <li><a href="<?= $root ?>pages/dashboard.php"
+                       class="navbar__link <?= $currentPage === 'dashboard.php' ? 'navbar__link--active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="7" height="9"/>
                         <rect x="14" y="3" width="7" height="5"/>
@@ -109,29 +112,21 @@ function drawHeader(
                     </svg>
                     Dashboard
                 </a></li>
-                <?php if ($session->isAdmin()): ?>
-                    <li><a href="<?= $root ?>pages/admin.php" class="navbar__link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83
-                                     M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                        </svg>
-                        Admin
-                    </a></li>
-                <?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
     </ul>
 
     <div class="navbar__actions">
         <?php if ($session->isLoggedIn()): ?>
-            <a href="<?= $root ?>pages/profile.php" class="btn btn--ghost">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-                <?= htmlspecialchars($session->getName()) ?>
-            </a>
+            <?php if (!$session->isAdmin()): ?>
+                <a href="<?= $root ?>pages/profile.php" class="btn btn--ghost">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <?= htmlspecialchars($session->getName()) ?>
+                </a>
+            <?php endif; ?>
             <form action="<?= $root ?>actions/action_logout.php" method="post" style="display:inline">
                 <button type="submit" class="btn btn--secondary">Sair</button>
             </form>
@@ -140,16 +135,21 @@ function drawHeader(
             <a href="<?= $root ?>pages/register.php" class="btn btn--primary">Começar Agora</a>
         <?php endif; ?>
     </div>
+
+    <button class="mobile-menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
 </nav>
 
-<!-- ── Mensagens flash ── -->
 <?php if (!empty($messages)): ?>
-    <div id="flash-messages" style="max-width:1200px;margin:80px auto 0;padding:0 var(--space-xl);">
+    <div id="flash-messages"
+         style="max-width:1280px;margin:80px auto 0;padding:0 var(--space-xl);position:relative;z-index:10;">
         <?php foreach ($messages as $msg): ?>
-            <div class="message <?= htmlspecialchars($msg['type']) ?>"
+            <div class="message"
                  style="display:flex;align-items:center;gap:.75rem;padding:.875rem 1.25rem;
-                        margin-bottom:.75rem;border-radius:var(--radius-md);font-size:.875rem;
-                        font-weight:500;
+                        margin-bottom:.75rem;border-radius:var(--radius-md);font-size:.875rem;font-weight:500;
                         background:<?= $msg['type'] === 'success' ? '#f0fdf4' : '#fef2f2' ?>;
                         color:<?= $msg['type'] === 'success' ? '#166534' : '#991b1b' ?>;
                         border:1px solid <?= $msg['type'] === 'success' ? '#bbf7d0' : '#fecaca' ?>;">
@@ -162,18 +162,16 @@ function drawHeader(
     </div>
 <?php endif; ?>
 
-<!-- ── Conteúdo principal ── -->
-<div class="page-wrapper" style="padding-top:70px;">
-    <?php
+<div style="padding-top:70px">
+<?php
 }
 
 function drawFooter(string $pageJs = ''): void {
     $inPages = str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_FILENAME'] ?? ''), '/pages/');
     $root    = $inPages ? '../' : '';
     ?>
-</div><!-- /.page-wrapper -->
+</div>
 
-<!-- ── Footer ── -->
 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__top">
@@ -191,7 +189,6 @@ function drawFooter(string $pageJs = ''): void {
                     Fitness, bem-estar e comunidade.
                 </p>
             </div>
-
             <div class="footer__column">
                 <h4>Navegação</h4>
                 <ul class="footer__links">
@@ -201,7 +198,6 @@ function drawFooter(string $pageJs = ''): void {
                     <li><a href="<?= $root ?>pages/login.php"     class="footer__link">Entrar</a></li>
                 </ul>
             </div>
-
             <div class="footer__column">
                 <h4>Aulas</h4>
                 <ul class="footer__links">
@@ -211,17 +207,15 @@ function drawFooter(string $pageJs = ''): void {
                     <li><a href="<?= $root ?>pages/schedule.php" class="footer__link">Pilates</a></li>
                 </ul>
             </div>
-
             <div class="footer__column">
                 <h4>Contacto</h4>
                 <ul class="footer__links">
-                    <li><a href="mailto:info@equilibrio.pt"  class="footer__link">info@equilibrio.pt</a></li>
-                    <li><a href="tel:+351912345678"          class="footer__link">+351 912 345 678</a></li>
+                    <li><a href="mailto:info@equilibrio.pt" class="footer__link">info@equilibrio.pt</a></li>
+                    <li><a href="tel:+351912345678"         class="footer__link">+351 912 345 678</a></li>
                     <li><span class="footer__link">Lisboa, Portugal</span></li>
                 </ul>
             </div>
         </div>
-
         <div class="footer__bottom">
             <p class="footer__copy">&copy; <?= date('Y') ?> Equilibrio. Todos os direitos reservados.</p>
             <div class="footer__socials">
@@ -249,12 +243,11 @@ function drawFooter(string $pageJs = ''): void {
     </div>
 </footer>
 
-<!-- ── Scripts ── -->
 <script src="<?= $root ?>javascript/script.js" defer></script>
 <?php if ($pageJs): ?>
 <script src="<?= $root ?><?= htmlspecialchars(ltrim($pageJs, '/')) ?>" defer></script>
 <?php endif; ?>
 </body>
 </html>
-    <?php
+<?php
 }

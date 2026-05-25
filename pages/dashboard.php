@@ -17,19 +17,17 @@ if (!$session->isLoggedIn()) {
     exit;
 }
 
-$db = getDatabaseConnection();
-$user = User::getUser($db, $session->getId());
+$db          = getDatabaseConnection();
+$user        = User::getUser($db, $session->getId());
+$enrollments = Enrollment::getUserEnrollments($db, $session->getId());
 
 if (!$user) {
     $session->addMessage('error', 'Utilizador não encontrado.');
-    header('Location: index.php');
+    header('Location: login.php');
     exit;
 }
 
-// Inscrições ativas do utilizador
-$enrollments = Enrollment::getUserEnrollments($db, $session->getId());
-
-// Para cada inscrição, buscar os detalhes da aula
+// Buscar detalhes das aulas inscritas
 $upcomingClasses = [];
 foreach ($enrollments as $enrollment) {
     $gymClass = GymClass::getClass($db, $enrollment->classId);
@@ -40,29 +38,26 @@ foreach ($enrollments as $enrollment) {
 
 // Ordenar por dia da semana e hora
 $dayOrder = ['monday'=>1,'tuesday'=>2,'wednesday'=>3,'thursday'=>4,'friday'=>5,'saturday'=>6,'sunday'=>7];
-usort($upcomingClasses, function(GymClass $a, GymClass $b) use ($dayOrder) {
-    $dayDiff = ($dayOrder[$a->dayOfWeek] ?? 8) - ($dayOrder[$b->dayOfWeek] ?? 8);
-    if ($dayDiff !== 0) return $dayDiff;
-    return strcmp($a->startTime, $b->startTime);
+usort($upcomingClasses, function (GymClass $a, GymClass $b) use ($dayOrder) {
+    $diff = ($dayOrder[$a->dayOfWeek] ?? 8) - ($dayOrder[$b->dayOfWeek] ?? 8);
+    return $diff !== 0 ? $diff : strcmp($a->startTime, $b->startTime);
 });
 
-// Estatísticas simples baseadas nas inscrições
-$totalEnrollments = count($enrollments);
-$recentEnrollments = array_slice($enrollments, 0, 4); // para a atividade recente
+$recentEnrollments = array_slice($enrollments, 0, 4);
 
-drawHeader($session, 'Dashboard', '/css/pages/dashboard.css');
+drawHeader($session, 'Dashboard', '', 'css/pages/dashboard.css');
 ?>
 
 <main class="dashboard-container">
 
-    <!-- Welcome Section -->
+    <!-- Boas-vindas -->
     <section class="dashboard-welcome">
         <div class="dashboard-welcome__content">
             <p class="dashboard-welcome__greeting">Bem-vindo,</p>
             <h1 class="dashboard-welcome__name"><?= htmlspecialchars($user->fullName) ?></h1>
             <p class="dashboard-welcome__message">
-                <?php if ($totalEnrollments > 0): ?>
-                    Tens <?= $totalEnrollments ?> aula<?= $totalEnrollments !== 1 ? 's' : '' ?> inscrita<?= $totalEnrollments !== 1 ? 's' : '' ?>. Continua assim!
+                <?php if (count($upcomingClasses) > 0): ?>
+                    Tens <?= count($upcomingClasses) ?> aula<?= count($upcomingClasses) !== 1 ? 's' : '' ?> inscrita<?= count($upcomingClasses) !== 1 ? 's' : '' ?>. Continua assim!
                 <?php else: ?>
                     Ainda não tens aulas inscritas. Explora o horário e inscreve-te!
                 <?php endif; ?>
@@ -70,13 +65,13 @@ drawHeader($session, 'Dashboard', '/css/pages/dashboard.css');
         </div>
     </section>
 
-    <!-- Quick Stats -->
-    <?php drawDashboardStats($totalEnrollments, $user); ?>
+    <!-- Estatísticas -->
+    <?php drawDashboardStats(count($enrollments), $user); ?>
 
-    <!-- Main Grid -->
+    <!-- Grelha principal -->
     <div class="dashboard-grid">
 
-        <!-- Upcoming Classes -->
+        <!-- Próximas aulas -->
         <section class="dashboard-section">
             <header class="dashboard-section__header">
                 <h2 class="dashboard-section__title">Próximas Aulas</h2>
@@ -84,7 +79,9 @@ drawHeader($session, 'Dashboard', '/css/pages/dashboard.css');
             </header>
             <div class="dashboard-section__content">
                 <?php if (empty($upcomingClasses)): ?>
-                    <p class="dashboard-empty">Não tens aulas inscritas. <a href="schedule.php">Ver horário</a></p>
+                    <p class="dashboard-empty">
+                        Não tens aulas inscritas. <a href="schedule.php">Ver horário</a>
+                    </p>
                 <?php else: ?>
                     <?php foreach ($upcomingClasses as $gymClass): ?>
                         <?php drawUpcomingClass($gymClass, $session->getId(), $db); ?>
@@ -93,7 +90,7 @@ drawHeader($session, 'Dashboard', '/css/pages/dashboard.css');
             </div>
         </section>
 
-        <!-- Activity Feed -->
+        <!-- Atividade recente -->
         <section class="dashboard-section">
             <header class="dashboard-section__header">
                 <h2 class="dashboard-section__title">Atividade Recente</h2>
