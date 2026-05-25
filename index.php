@@ -11,9 +11,7 @@ $session  = new Session();
 $db       = getDatabaseConnection();
 $classes  = array_slice(GymClass::getAllClasses($db), 0, 4);
 $trainers = TrainerProfile::getAllProfiles($db);
-
-$totalClasses  = count(GymClass::getAllClasses($db));
-$totalTrainers = count($trainers);
+$total    = count(GymClass::getAllClasses($db));
 
 drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
 ?>
@@ -22,23 +20,19 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
 <section class="hero">
     <div class="hero__container">
         <div class="hero__content">
-
             <div class="hero__badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                 </svg>
                 Novo: Aulas de Yoga ao ar livre
             </div>
-
             <h1 class="hero__title">
                 Encontre o seu <span>Equilíbrio</span> perfeito
             </h1>
-
             <p class="hero__subtitle">
                 Transforme a sua vida com aulas de fitness personalizadas, treinadores especializados
                 e um ambiente motivador. A sua jornada para uma vida mais saudável começa aqui.
             </p>
-
             <div class="hero__actions">
                 <?php if ($session->isLoggedIn()): ?>
                     <a href="pages/schedule.php" class="btn btn--primary btn--large">
@@ -49,7 +43,7 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     </a>
                     <a href="pages/dashboard.php" class="btn btn--secondary btn--large">Dashboard</a>
                 <?php else: ?>
-                    <a href="pages/register.php" class="btn btn--primary btn--large">
+                    <a href="pages/login.php" class="btn btn--primary btn--large">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -58,23 +52,21 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     <a href="#features" class="btn btn--secondary btn--large">Saber Mais</a>
                 <?php endif; ?>
             </div>
-
             <div class="hero__stats">
                 <div class="hero__stat">
                     <span class="hero__stat-value">500+</span>
                     <span class="hero__stat-label">Membros Ativos</span>
                 </div>
                 <div class="hero__stat">
-                    <span class="hero__stat-value"><?= $totalClasses ?>+</span>
+                    <span class="hero__stat-value"><?= $total ?>+</span>
                     <span class="hero__stat-label">Aulas Semanais</span>
                 </div>
                 <div class="hero__stat">
-                    <span class="hero__stat-value"><?= $totalTrainers ?></span>
+                    <span class="hero__stat-value"><?= count($trainers) ?></span>
                     <span class="hero__stat-label">Treinadores Expert</span>
                 </div>
             </div>
         </div>
-
         <div class="hero__visual">
             <div class="hero__image-container">
                 <div class="hero__image" aria-label="Pessoa a fazer exercício"></div>
@@ -87,12 +79,12 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     </svg>
                 </div>
                 <div class="hero__card-text">
-                    <span class="hero__card-value"><?= $totalClasses ?></span>
+                    <span class="hero__card-value"><?= $total ?></span>
                     <span class="hero__card-label">Aulas Hoje</span>
                 </div>
             </div>
             <div class="hero__card hero__card--streak">
-                <div class="hero__card-icon" style="margin:0 auto var(--space-sm);">
+                <div class="hero__card-icon" style="margin:0 auto var(--space-sm)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                     </svg>
@@ -175,7 +167,8 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                         <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
                 </div>
                 <h3 class="feature-card__title">Comunidade Motivadora</h3>
@@ -201,7 +194,7 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
     </div>
 </section>
 
-<!-- ── Aulas em destaque (dados reais) ── -->
+<!-- ── Classes Preview (dados reais) ── -->
 <section class="classes-preview" id="classes">
     <div class="classes-preview__container">
         <header class="section-header">
@@ -220,14 +213,32 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     'advanced'     => 'Avançado',
                     default        => ucfirst($class->level)
                 };
+            // Ícone SVG por tipo de aula
+            $icons = [
+                'yoga'     => '<path d="M12 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 14c-4.418 0-8 1.79-8 4v1h16v-1c0-2.21-3.582-4-8-4z"/><path d="M6 12c0-3 2.686-5 6-5s6 2 6 5"/>',
+                'hiit'     => '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+                'spinning' => '<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2"/>',
+                'pilates'  => '<ellipse cx="12" cy="12" rx="10" ry="4"/><path d="M12 8c-2 0-3.5.9-3.5 2S10 12 12 12s3.5-.9 3.5-2S14 8 12 8z"/>',
+                'zumba'    => '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+                'weights'  => '<path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>',
+                'default'  => '<path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>',
+            ];
+            $typeKey = strtolower(str_replace(' ', '', $class->type));
+            $iconPath = $icons[$typeKey] ?? $icons['default'];
             ?>
                 <article class="class-card">
-                    <div class="class-card__image" aria-label="Aula de <?= htmlspecialchars($class->name) ?>"></div>
-                    <div class="class-card__content">
-                        <div class="class-card__tags">
+                    <div class="class-card__image">
+                        <svg class="class-card__image-icon" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="1.2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <?= $iconPath ?>
+                        </svg>
+                        <div class="class-card__image-tags">
                             <span class="tag tag--<?= $typeSlug ?>"><?= htmlspecialchars($class->type) ?></span>
                             <span class="tag tag--<?= htmlspecialchars($class->level) ?>"><?= $levelLabel ?></span>
                         </div>
+                    </div>
+                    <div class="class-card__content">
                         <h3 class="class-card__title"><?= htmlspecialchars($class->name) ?></h3>
                         <div class="class-card__meta">
                             <span>
@@ -251,16 +262,10 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                 </article>
             <?php endforeach; ?>
         </div>
-        <div style="text-align:center;margin-top:var(--space-2xl);">
-            <a href="pages/<?= $session->isLoggedIn() ? 'schedule' : 'login' ?>.php"
-               class="btn btn--primary btn--large">
-                Ver Todas as Aulas
-            </a>
-        </div>
     </div>
 </section>
 
-<!-- ── Treinadores (dados reais) ── -->
+<!-- ── Trainers (dados reais) ── -->
 <section class="trainers" id="trainers">
     <div class="trainers__container">
         <header class="section-header">
@@ -280,7 +285,9 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                 $specs = $trainer->getSpecializationsArray();
             ?>
                 <div class="trainer-card">
-                    <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                    <div class="trainer-card__image">
+                        <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                    </div>
                     <h3 class="trainer-card__name"><?= htmlspecialchars($trainer->fullName ?? '') ?></h3>
                     <?php if (!empty($specs)): ?>
                         <p class="trainer-card__specialty"><?= htmlspecialchars($specs[0]) ?></p>
@@ -298,11 +305,6 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
-        </div>
-        <div style="text-align:center;margin-top:var(--space-2xl);">
-            <a href="pages/trainers.php" class="btn btn--secondary btn--large">
-                Ver Todos os Treinadores
-            </a>
         </div>
     </div>
 </section>
@@ -339,9 +341,7 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                         </svg>
                         Criar Conta Grátis
                     </a>
-                    <a href="#features" class="btn btn--secondary btn--large">
-                        Ver Funcionalidades
-                    </a>
+                    <a href="#features" class="btn btn--secondary btn--large">Ver Funcionalidades</a>
                 <?php endif; ?>
             </div>
         </div>
