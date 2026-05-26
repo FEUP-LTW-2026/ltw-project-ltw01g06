@@ -1,31 +1,45 @@
 /**
  * auth.js
- * Lógica de autenticação: tab switching e validação de password.
+ * Tab switching com slider animado e validação de password.
  */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* ── Tab switching (login ↔ registar) ── */
-    document.querySelectorAll('[data-tab]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var tab = btn.getAttribute('data-tab');
+    var nav = document.querySelector('.auth-tabs');
 
-            document.querySelectorAll('.auth-tabs__tab').forEach(function (t) {
-                t.classList.remove('auth-tabs__tab--active');
-                t.setAttribute('aria-selected', 'false');
-            });
+    function switchTab(tab) {
+        document.querySelectorAll('.auth-tabs__tab').forEach(function (t) {
+            t.classList.remove('auth-tabs__tab--active');
+            t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.auth-card').forEach(function (c) {
+            c.classList.add('auth-card--hidden');
+        });
 
-            document.querySelectorAll('.auth-card').forEach(function (c) {
-                c.classList.add('auth-card--hidden');
-            });
-
+        var btn = document.querySelector('[data-tab="' + tab + '"]');
+        if (btn) {
             btn.classList.add('auth-tabs__tab--active');
             btn.setAttribute('aria-selected', 'true');
+        }
 
-            var panel = document.getElementById('panel-' + tab);
-            if (panel) panel.classList.remove('auth-card--hidden');
+        if (nav) nav.setAttribute('data-active', tab);
+
+        var panel = document.getElementById('panel-' + tab);
+        if (panel) panel.classList.remove('auth-card--hidden');
+    }
+
+    /* ── Tab switching ao clicar ── */
+    document.querySelectorAll('[data-tab]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            switchTab(btn.getAttribute('data-tab'));
         });
     });
+
+    /* ── Abrir tab de registo se URL tiver #register ── */
+    if (window.location.hash === '#register') {
+        switchTab('register');
+        history.replaceState(null, '', window.location.pathname);
+    }
 
     /* ── Confirmação de password no registo ── */
     var registerForm = document.querySelector('#panel-register form');

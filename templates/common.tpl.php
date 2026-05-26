@@ -3,25 +3,25 @@ declare(strict_types=1);
 
 /**
  * common.tpl.php
- * drawHeader() — <head>, navbar, mensagens flash
- * drawFooter() — footer + scripts JS
+ * drawHeader() — gera <head>, navbar e mensagens flash.
+ * drawFooter() — fecha wrapper, gera footer, carrega scripts JS.
  *
  * @param object $session
  * @param string $title      Título da página
- * @param string $pageJs     Caminho relativo para o JS da página (ex: 'javascript/schedule.js')
- * @param string $pageCss    Caminho relativo para o CSS da página (ex: 'css/pages/schedule.css')
- * @param bool   $homeLinks  Se true, navbar mostra âncoras #features, #classes, #trainers
+ * @param string $pageJs     Caminho relativo ao JS específico (ex: 'javascript/schedule.js')
+ * @param string $pageCss    Caminho relativo ao CSS específico (ex: 'css/pages/schedule.css')
+ * @param bool   $homeLinks  Se true, navbar mostra âncoras de scroll em vez de links de páginas
  */
 function drawHeader(
     object $session,
-    string $title     = 'Equilibrio',
-    string $pageJs    = '',
-    string $pageCss   = '',
+    string $title    = 'Equilibrio',
+    string $pageJs   = '',
+    string $pageCss  = '',
     bool   $homeLinks = false
 ): void {
-    $messages    = $session->getMessages();
-    $inPages     = str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_FILENAME'] ?? ''), '/pages/');
-    $root        = $inPages ? '../' : '';
+    $messages = $session->getMessages();
+    $inPages  = str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_FILENAME'] ?? ''), '/pages/');
+    $root     = $inPages ? '../' : '';
     $currentPage = basename($_SERVER['SCRIPT_FILENAME'] ?? '');
     ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ function drawHeader(
             </svg>
         </div>
         <span>Equilibrio</span>
-        <?php if ($session->isAdmin() && !$homeLinks): ?>
+        <?php if ($session->isAdmin()): ?>
             <span class="tag tag--advanced" style="margin-left:8px">Admin</span>
         <?php endif; ?>
     </a>
@@ -101,7 +101,7 @@ function drawHeader(
                 </svg>
                 Equipamento
             </a></li>
-            <?php if ($session->isLoggedIn() && !$session->isAdmin()): ?>
+            <?php if ($session->isLoggedIn()): ?>
                 <li><a href="<?= $root ?>pages/dashboard.php"
                        class="navbar__link <?= $currentPage === 'dashboard.php' ? 'navbar__link--active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -117,46 +117,43 @@ function drawHeader(
     </ul>
 
     <div class="navbar__actions">
-        <?php if ($session->isLoggedIn()): ?>
-            <?php if (!$session->isAdmin()): ?>
-                <a href="<?= $root ?>pages/profile.php" class="btn btn--ghost">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    <?= htmlspecialchars($session->getName()) ?>
-                </a>
-            <?php endif; ?>
+        <?php if ($session->isAdmin() && !$homeLinks): ?>
+            <!-- Admin: só botão Sair, sem avatar -->
+            <form action="<?= $root ?>actions/action_logout.php" method="post" style="display:inline">
+                <button type="submit" class="btn btn--secondary">Sair</button>
+            </form>
+        <?php elseif ($session->isLoggedIn()): ?>
+            <a href="<?= $root ?>pages/profile.php" class="btn btn--ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <?= htmlspecialchars($session->getName()) ?>
+            </a>
             <form action="<?= $root ?>actions/action_logout.php" method="post" style="display:inline">
                 <button type="submit" class="btn btn--secondary">Sair</button>
             </form>
         <?php else: ?>
             <a href="<?= $root ?>pages/login.php" class="btn btn--ghost">Entrar</a>
-            <a href="<?= $root ?>pages/register.php" class="btn btn--primary">Começar Agora</a>
+            <a href="<?= $root ?>pages/login.php#register" class="btn btn--primary">Começar Agora</a>
         <?php endif; ?>
     </div>
-
-    <button class="mobile-menu-btn" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-    </button>
 </nav>
 
 <?php if (!empty($messages)): ?>
-    <div id="flash-messages"
-         style="max-width:1280px;margin:80px auto 0;padding:0 var(--space-xl);position:relative;z-index:10;">
+    <div id="flash-messages" style="max-width:1200px;margin:80px auto 0;padding:0 var(--space-xl);">
         <?php foreach ($messages as $msg): ?>
-            <div class="message"
-                 style="display:flex;align-items:center;gap:.75rem;padding:.875rem 1.25rem;
-                        margin-bottom:.75rem;border-radius:var(--radius-md);font-size:.875rem;font-weight:500;
-                        background:<?= $msg['type'] === 'success' ? '#f0fdf4' : '#fef2f2' ?>;
-                        color:<?= $msg['type'] === 'success' ? '#166534' : '#991b1b' ?>;
-                        border:1px solid <?= $msg['type'] === 'success' ? '#bbf7d0' : '#fecaca' ?>;">
+            <div class="message" style="display:flex;align-items:center;gap:.75rem;
+                padding:.875rem 1.25rem;margin-bottom:.75rem;border-radius:var(--radius-md);
+                font-size:.875rem;font-weight:500;
+                background:<?= $msg['type'] === 'success' ? '#f0fdf4' : '#fef2f2' ?>;
+                color:<?= $msg['type'] === 'success' ? '#166534' : '#991b1b' ?>;
+                border:1px solid <?= $msg['type'] === 'success' ? '#bbf7d0' : '#fecaca' ?>;">
                 <?= htmlspecialchars($msg['text']) ?>
                 <button data-close-message aria-label="Fechar"
-                        style="margin-left:auto;background:none;border:none;cursor:pointer;
-                               font-size:1.25rem;line-height:1;color:inherit;opacity:.6;">×</button>
+                        style="margin-left:auto;background:none;border:none;
+                               cursor:pointer;font-size:1.25rem;line-height:1;
+                               color:inherit;opacity:.6;">×</button>
             </div>
         <?php endforeach; ?>
     </div>
