@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+ini_set("display_errors", 1); error_reporting(E_ALL);
 require_once(__DIR__ . '/../utils/bootstrap.php');
 require_once(__DIR__ . '/../database/enrollment.class.php');
 require_once(__DIR__ . '/../database/review.class.php');

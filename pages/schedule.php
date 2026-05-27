@@ -18,7 +18,7 @@ if (!$session->isLoggedIn()) {
 $db      = getDatabaseConnection();
 $classes = GymClass::getAllClasses($db);
 
-drawHeader($session, 'Horário de Aulas', '/css/pages/schedule.css');
+drawHeader($session, 'Horário de Aulas', 'javascript/schedule.js', 'css/pages/schedule.css');
 ?>
 
 <main class="schedule-container">
@@ -32,4 +32,4 @@ drawHeader($session, 'Horário de Aulas', '/css/pages/schedule.css');
     <?php drawScheduleTable($classes, $session, $db); ?>
 </main>
 
-<?php drawFooter(); ?>
+<?php drawFooter('javascript/schedule.js'); ?>

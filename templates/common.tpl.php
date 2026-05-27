@@ -53,7 +53,7 @@ function drawHeader(
             <span class="tag tag--advanced" style="margin-left:8px">Admin</span>
         <?php endif; ?>
     </a>
-
+    
     <ul class="navbar__links">
         <?php if ($homeLinks): ?>
             <li><a href="#features" class="navbar__link">
@@ -123,11 +123,36 @@ function drawHeader(
                 <button type="submit" class="btn btn--secondary">Sair</button>
             </form>
         <?php elseif ($session->isLoggedIn()): ?>
-            <a href="<?= $root ?>pages/profile.php" class="btn btn--ghost">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
+            <?php
+            // Buscar foto diretamente da BD — não depende da sessão
+            $navPhoto = null;
+            if ($session->getId()) {
+                try {
+                    $navDb   = getDatabaseConnection();
+                    $navStmt = $navDb->prepare('SELECT photo FROM users WHERE id = ?');
+                    $navStmt->execute([$session->getId()]);
+                    $navRow  = $navStmt->fetch();
+                    $navPhotoFile = $navRow['photo'] ?? null;
+                    if ($navPhotoFile && $navPhotoFile !== 'default_profile.png') {
+                        $navPhoto = $root . 'docs/uploads/' . htmlspecialchars($navPhotoFile);
+                    }
+                } catch (\Exception $e) {
+                    // Silencioso — mostra ícone por defeito
+                }
+            }
+            ?>
+            <a href="<?= $root ?>pages/profile.php" class="btn btn--ghost"
+               style="display:flex;align-items:center;gap:.5rem">
+                <?php if ($navPhoto): ?>
+                    <img src="<?= $navPhoto ?>" alt="Foto de perfil"
+                         style="width:28px;height:28px;border-radius:50%;object-fit:cover;" />
+                <?php else: ?>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         width="18" height="18">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                <?php endif; ?>
                 <?= htmlspecialchars($session->getName()) ?>
             </a>
             <form action="<?= $root ?>actions/action_logout.php" method="post" style="display:inline">
@@ -240,9 +265,9 @@ function drawFooter(string $pageJs = ''): void {
     </div>
 </footer>
 
-<script src="<?= $root ?>javascript/script.js" defer></script>
+<script src="<?= $root ?>javascript/script.js"></script>
 <?php if ($pageJs): ?>
-<script src="<?= $root ?><?= htmlspecialchars(ltrim($pageJs, '/')) ?>" defer></script>
+<script src="<?= $root ?><?= htmlspecialchars(ltrim($pageJs, '/')) ?>"></script>
 <?php endif; ?>
 </body>
 </html>

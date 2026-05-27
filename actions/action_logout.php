@@ -6,5 +6,5 @@
   $session->logout();
   $session->addMessage('success', 'Logout efetuado com sucesso!');
 
-  header('Location: ../pages/index.php');
+  header('Location: ../index.php');
 ?>

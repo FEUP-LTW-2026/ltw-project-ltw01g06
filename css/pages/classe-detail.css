@@ -411,7 +411,7 @@
   width: 28px;
   height: 28px;
   color: var(--color-border);
-  fill: transparent;
+  fill: var(--color-border);
   transition: all var(--transition);
 }
 

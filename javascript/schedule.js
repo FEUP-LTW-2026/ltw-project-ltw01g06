@@ -55,4 +55,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    /* ── Aplicar filtro de treinador via URL (?trainer=ID) ── */
+    var params     = new URLSearchParams(window.location.search);
+    var trainerId  = params.get('trainer');
+
+    if (trainerId && filterTrainer) {
+        filterTrainer.value = trainerId;
+        switchView('list');
+        applyFilters();
+    }
+
 });

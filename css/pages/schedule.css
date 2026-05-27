@@ -70,7 +70,7 @@
   border-radius: var(--radius-md);
   font-size: 0.9rem;
   color: var(--color-text);
-  background: var(--color-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background: var(--color-surface);
   cursor: pointer;
   min-width: 160px;
   transition: all var(--transition);
@@ -86,6 +86,7 @@
   display: flex;
   gap: var(--space-sm);
   flex-wrap: wrap;
+  background-color: var(--color-surface);
 }
 
 .filter-chip {
@@ -93,7 +94,7 @@
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 500;
-  background: var(--color-bg);
+  background-color: var(--color-surface);
   color: var(--color-text-sub);
   border: 1px solid var(--color-border);
   cursor: pointer;
@@ -126,7 +127,7 @@
   justify-content: space-between;
   padding: var(--space-lg);
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg);
+  background-color: var(--color-surface);
 }
 
 .calendar-nav {
@@ -205,7 +206,7 @@
 .calendar-grid__day-header {
   padding: var(--space-md);
   text-align: center;
-  background: var(--color-bg);
+  background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
 }
@@ -245,8 +246,9 @@
   text-align: right;
   font-size: 0.8rem;
   color: var(--color-text-muted);
-  background: var(--color-bg);
+  background-color: var(--color-surface);
   border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .calendar-grid__body {
@@ -257,18 +259,22 @@
   display: contents;
 }
 
+/* ── Célula corrigida — aulas empilham verticalmente ── */
 .calendar-grid__cell {
   min-height: 80px;
   padding: var(--space-xs);
   border-bottom: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .calendar-grid__cell:last-child {
   border-right: none;
 }
 
-/* Class Card */
+/* Class Card (calendário) */
 .class-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -276,31 +282,36 @@
   padding: var(--space-sm);
   cursor: pointer;
   transition: all var(--transition);
-  border-left: 3px solid var(--color-yoga);
+  border-left: 3px solid var(--color-primary);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .class-card:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-.class-card--spinning { border-left-color: var(--color-spinning); }
-.class-card--hiit { border-left-color: var(--color-hiit); }
-.class-card--pilates { border-left-color: var(--color-pilates); }
-.class-card--boxing { border-left-color: var(--color-boxing); }
+.class-card--spinning { border-left-color: var(--color-spinning, #16a34a); }
+.class-card--hiit     { border-left-color: var(--color-hiit, #dc2626); }
+.class-card--pilates  { border-left-color: var(--color-pilates, #9333ea); }
+.class-card--boxing   { border-left-color: var(--color-boxing, #ea580c); }
+.class-card--yoga     { border-left-color: var(--color-yoga, #0284c7); }
+.class-card--zumba    { border-left-color: #db2777; }
+.class-card--weights  { border-left-color: #64748b; }
 
 .class-card__time {
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--color-text-muted);
-  margin-bottom: 2px;
 }
 
 .class-card__name {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 2px;
 }
 
 .class-card__trainer {
@@ -310,17 +321,12 @@
 
 .class-card__spots {
   font-size: 0.65rem;
-  color: var(--color-text-light);
-  margin-top: var(--space-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
 }
 
-.class-card__spots--full {
-  color: #dc2626;
-}
-
-.class-card__spots--low {
-  color: #d97706;
-}
+.class-card__spots--full { color: #dc2626; }
+.class-card__spots--low  { color: #d97706; }
 
 /* List View */
 .schedule-list {
@@ -338,7 +344,7 @@
 
 .schedule-list__day-header {
   padding: var(--space-md) var(--space-lg);
-  background: var(--color-bg);
+  background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -346,11 +352,6 @@
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
-}
-
-.schedule-list__day-date {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
 }
 
 .schedule-list__classes {
@@ -380,12 +381,14 @@
 }
 
 .class-list-item__time-start {
+  display: block;
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
 }
 
 .class-list-item__time-end {
+  display: block;
   font-size: 0.85rem;
   color: var(--color-text-muted);
 }
@@ -402,6 +405,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  flex-wrap: wrap;
 }
 
 .class-list-item__meta {
@@ -428,6 +432,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: var(--space-xs);
+  min-width: 160px;
 }
 
 .spots-indicator {
@@ -452,14 +457,6 @@
   transition: width var(--transition);
 }
 
-.spots-indicator__fill--full {
-  background: #dc2626;
-}
-
-.spots-indicator__fill--low {
-  background: #d97706;
-}
-
 .spots-indicator__text {
   color: var(--color-text-muted);
   min-width: 70px;
@@ -468,7 +465,7 @@
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .calendar-grid {
+  .schedule-calendar {
     display: none;
   }
 
@@ -491,10 +488,7 @@
     align-items: stretch;
   }
 
-  .filter-group {
-    width: 100%;
-  }
-
+  .filter-group,
   .filter-select {
     width: 100%;
   }
@@ -502,7 +496,6 @@
   .class-list-item {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-md);
   }
 
   .class-list-item__spots {
