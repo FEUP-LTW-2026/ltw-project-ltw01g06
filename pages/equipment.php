@@ -7,6 +7,11 @@ require_once(__DIR__ . '/../database/equipment.class.php');
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
 $session   = new Session();
+if (!$session->isLoggedIn()) {
+    $session->addMessage('error', 'Precisas de estar autenticado.');
+    header('Location: login.php');
+    exit;
+}
 $db        = getDatabaseConnection();
 $equipment = Equipment::getAll($db);
 
