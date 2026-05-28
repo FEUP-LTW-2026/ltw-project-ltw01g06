@@ -24,8 +24,8 @@ if (!$user) {
     header('Location: dashboard.php');
     exit;
 }
-
-$parts    = explode(' ', $user->fullName);
+$fullName = $user->full_name ?? 'Utilizador';
+$parts = explode(' ', $fullName);
 $initials = mb_substr(
     implode('', array_map(fn($p) => strtoupper(mb_substr($p, 0, 1)), $parts)),
     0, 2
@@ -97,7 +97,7 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="full-name">Nome Completo</label>
                     <input class="profile-form__input" type="text" id="full-name" name="full_name"
-                           value="<?= htmlspecialchars($user->fullName) ?>" required />
+                           value="<?= htmlspecialchars($user->full_name) ?>" required />
                 </div>
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="username">Nome de Utilizador</label>
@@ -220,4 +220,4 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
 
 </main>
 
-<?php drawFooter('javascript/profile.js'); ?>
+<?php drawFooter(); ?>

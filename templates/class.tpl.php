@@ -4,18 +4,19 @@ declare(strict_types=1);
 /**
  * class.tpl.php
  * drawScheduleTable() — calendário semanal + vista lista com filtros.
- * Usa as classes CSS de schedule.css ao detalhe.
+ * Usa as classes CSS de schedule.css.
  * O JS de interação (toggle + filtros) está em javascript/schedule.js.
  */
 function drawScheduleTable(array $classes, object $session, object $db): void {
     require_once(__DIR__ . '/../database/enrollment.class.php');
     require_once(__DIR__ . '/../database/waitlist.class.php');
 
-    $userId = $session->isLoggedIn() ? $session->getId() : null;
+    $userId    = $session->isLoggedIn() ? $session->getId() : null;
+    $isTrainer = (bool)($GLOBALS['scheduleIsTrainer'] ?? false);
 
-    $days      = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
-    $dayShort  = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
-    $dayFull   = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado','Domingo'];
+    $days     = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+    $dayShort = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+    $dayFull  = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado','Domingo'];
 
     // Agrupar aulas por dia
     $byDay = array_fill_keys($days, []);
@@ -37,9 +38,19 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
     }
     sort($types);
     asort($trainers);
+
+    // Pré-calcular inscrições do utilizador (evita N queries dentro dos loops)
+    $enrolledIds = [];
+    if ($userId && !$isTrainer) {
+        foreach ($classes as $c) {
+            if (Enrollment::isUserEnrolled($db, $userId, $c->id)) {
+                $enrolledIds[$c->id] = true;
+            }
+        }
+    }
     ?>
 
-    <!-- ── Filtros ─────────────────────────────────── -->
+    <!-- ── Filtros ───────────────────────────────────────── -->
     <section class="schedule-filters">
         <div class="schedule-filters__row">
             <div class="filter-group">
@@ -74,12 +85,13 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         </div>
     </section>
 
-    <!-- ── Vista Calendário ────────────────────────── -->
+    <!-- ── Vista Calendário ──────────────────────────────── -->
     <section class="schedule-calendar" id="view-calendar">
         <header class="calendar-header">
             <div class="calendar-nav">
                 <h2 class="calendar-header__title">Horário Semanal</h2>
             </div>
+            <!-- Toggle só aparece acima de 1200px (via CSS) -->
             <div class="calendar-view-toggle">
                 <button class="calendar-view-btn calendar-view-btn--active" id="btn-week">Semana</button>
                 <button class="calendar-view-btn" id="btn-list">Lista</button>
@@ -89,6 +101,7 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         <div class="calendar-grid">
             <!-- Cabeçalho dos dias -->
             <div class="calendar-grid__header">
+                <!-- Célula vazia do canto: alinha com coluna de horas -->
                 <div class="calendar-grid__day-header"></div>
                 <?php foreach ($dayShort as $label): ?>
                     <div class="calendar-grid__day-header">
@@ -111,16 +124,20 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                             <div class="calendar-grid__cell">
                                 <?php foreach ($byDay[$day] as $class):
                                     if ($class->startTime !== $time) continue;
-                                    $typeSlug = strtolower(str_replace(' ', '-', $class->type));
-                                    $isFull   = !$class->hasAvailableSpots();
-                                    $spots    = $class->getAvailableSpots();
+                                    $typeSlug   = strtolower(str_replace(' ', '-', $class->type));
+                                    $isFull     = !$class->hasAvailableSpots();
+                                    $spots      = $class->getAvailableSpots();
+                                    $isEnrolled = isset($enrolledIds[$class->id]);
+
+                                    // Classes CSS extras no card
+                                    $cardExtra  = $isFull ? ' class-card--full'
+                                        : ($isEnrolled ? ' class-card--enrolled' : '');
                                 ?>
                                     <a href="class-detail.php?id=<?= $class->id ?>"
-                                       class="class-card class-card--<?= $typeSlug ?>"
+                                       class="class-card class-card--<?= $typeSlug ?><?= $cardExtra ?>"
                                        data-type="<?= htmlspecialchars(strtolower($class->type)) ?>"
                                        data-level="<?= htmlspecialchars($class->level) ?>"
-                                       data-trainer="<?= (int)$class->trainerId ?>"
-                                       style="text-decoration:none">
+                                       data-trainer="<?= (int)$class->trainerId ?>">
                                         <span class="class-card__time">
                                             <?= htmlspecialchars($class->startTime) ?> – <?= htmlspecialchars($class->getEndTime()) ?>
                                         </span>
@@ -128,9 +145,13 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                                         <span class="class-card__trainer">
                                             <?= htmlspecialchars($class->trainerName ?? '—') ?>
                                         </span>
-                                        <span class="class-card__spots <?= $isFull ? 'class-card__spots--full' : ($spots <= 3 ? 'class-card__spots--low' : '') ?>">
-                                            <?= $isFull ? 'Cheia' : "$spots vaga" . ($spots !== 1 ? 's' : '') ?>
-                                        </span>
+                                        <?php if ($isEnrolled && !$isTrainer): ?>
+                                            <span class="class-card__enrolled-badge">✓ Inscrito</span>
+                                        <?php else: ?>
+                                            <span class="class-card__spots <?= $isFull ? 'class-card__spots--full' : ($spots <= 3 ? 'class-card__spots--low' : '') ?>">
+                                                <?= $isFull ? 'Cheia' : "$spots vaga" . ($spots !== 1 ? 's' : '') ?>
+                                            </span>
+                                        <?php endif; ?>
                                     </a>
                                 <?php endforeach; ?>
                             </div>
@@ -141,7 +162,7 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         </div>
     </section>
 
-    <!-- ── Vista Lista ──────────────────────────────── -->
+    <!-- ── Vista Lista ───────────────────────────────────── -->
     <section class="schedule-list" id="view-list" style="display:none">
         <?php foreach ($days as $i => $day):
             if (empty($byDay[$day])) continue;
@@ -160,16 +181,22 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                             ? round($class->currentEnrollment / $class->capacity * 100) : 0;
                         $fillClass   = $isFull ? 'spots-indicator__fill--full'
                             : ($spots <= 3 ? 'spots-indicator__fill--low' : '');
-                        $isEnrolled  = $userId ? Enrollment::isUserEnrolled($db, $userId, $class->id) : false;
-                        $waitlistPos = $userId ? Waitlist::getUserPosition($db, $userId, $class->id) : null;
+                        $isEnrolled  = isset($enrolledIds[$class->id]);
+                        $waitlistPos = ($userId && !$isTrainer && !$isEnrolled)
+                            ? Waitlist::getUserPosition($db, $userId, $class->id)
+                            : null;
                         $levelLabel  = match($class->level) {
                             'beginner'     => 'Iniciante',
                             'intermediate' => 'Intermédio',
                             'advanced'     => 'Avançado',
                             default        => ucfirst($class->level)
                         };
+
+                        // Classes CSS extra no item da lista
+                        $itemExtra = $isFull ? ' class-list-item--full'
+                            : ($isEnrolled ? ' class-list-item--enrolled' : '');
                     ?>
-                        <div class="class-list-item"
+                        <div class="class-list-item<?= $itemExtra ?>"
                              data-type="<?= htmlspecialchars(strtolower($class->type)) ?>"
                              data-level="<?= htmlspecialchars($class->level) ?>"
                              data-trainer="<?= (int)$class->trainerId ?>">
@@ -181,12 +208,15 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
 
                             <div class="class-list-item__info">
                                 <h4 class="class-list-item__name">
-                                    <a href="class-detail.php?id=<?= $class->id ?>"
-                                       style="color:inherit;text-decoration:none">
+                                    <!-- Link sem style inline -->
+                                    <a href="class-detail.php?id=<?= $class->id ?>" class="class-list-item__link">
                                         <?= htmlspecialchars($class->name) ?>
                                     </a>
                                     <span class="tag tag--<?= $typeSlug ?>"><?= htmlspecialchars($class->type) ?></span>
                                     <span class="tag tag--<?= htmlspecialchars($class->level) ?>"><?= $levelLabel ?></span>
+                                    <?php if ($isEnrolled && !$isTrainer): ?>
+                                        <span class="enrolled-badge">✓ Inscrito</span>
+                                    <?php endif; ?>
                                 </h4>
                                 <div class="class-list-item__meta">
                                     <?php if ($class->trainerName): ?>
@@ -219,7 +249,12 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                                     </span>
                                 </div>
 
-                                <?php if ($isEnrolled): ?>
+                                <?php if ($isTrainer): ?>
+                                    <!-- Treinador: só pode ver os detalhes, não se inscrever -->
+                                    <a href="class-detail.php?id=<?= $class->id ?>" class="btn btn--ghost">
+                                        Ver Detalhes
+                                    </a>
+                                <?php elseif ($isEnrolled): ?>
                                     <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
                                         <input type="hidden" name="action" value="cancel">
@@ -229,9 +264,7 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                                         </button>
                                     </form>
                                 <?php elseif ($waitlistPos !== null): ?>
-                                    <span style="font-size:.8rem;color:var(--color-text-muted)">
-                                        Lista de espera #<?= $waitlistPos ?>
-                                    </span>
+                                    <span class="waitlist-badge">Lista de espera #<?= $waitlistPos ?></span>
                                 <?php elseif (!$isFull): ?>
                                     <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
