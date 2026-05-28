@@ -1,26 +1,35 @@
-/**
- * trainers.js
- * Filtro por especialização na página de treinadores.
- */
+document.addEventListener('DOMContentLoaded', () => {
+  const filters = document.querySelectorAll('.trainers-filter');
+  const cards   = document.querySelectorAll('.trainer-card');
+  const grid    = document.querySelector('.trainers-grid');
 
-document.addEventListener('DOMContentLoaded', function () {
+  // Mensagem "sem resultados"
+  let emptyMsg = grid.querySelector('.trainers-empty');
+  if (!emptyMsg) {
+    emptyMsg = document.createElement('p');
+    emptyMsg.className = 'trainers-empty';
+    emptyMsg.textContent = 'Nenhum treinador encontrado para esta categoria.';
+    emptyMsg.style.display = 'none';
+    grid.appendChild(emptyMsg);
+  }
 
-    document.querySelectorAll('.trainers-filter').forEach(function (btn) {
-        btn.addEventListener('click', function () {
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Atualiza botão ativo
+      filters.forEach(b => b.classList.remove('trainers-filter--active'));
+      btn.classList.add('trainers-filter--active');
 
-            document.querySelectorAll('.trainers-filter').forEach(function (b) {
-                b.classList.remove('trainers-filter--active');
-            });
-            btn.classList.add('trainers-filter--active');
+      const selected = btn.dataset.spec.toLowerCase();
+      let visible = 0;
 
-            var spec = btn.dataset.spec;
+      cards.forEach(card => {
+        const specs = card.dataset.specs || '';
+        const show  = selected === '' || specs.split(',').map(s => s.trim()).includes(selected);
+        card.classList.toggle('trainer-card--hidden', !show);
+        if (show) visible++;
+      });
 
-            document.querySelectorAll('.trainer-card').forEach(function (card) {
-                var specs = card.dataset.specs ? card.dataset.specs.split(',') : [];
-                card.style.display = (!spec || specs.includes(spec)) ? '' : 'none';
-            });
-
-        });
+      emptyMsg.style.display = visible === 0 ? 'block' : 'none';
     });
-
+  });
 });

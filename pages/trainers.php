@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+
 require_once(__DIR__ . '/../utils/session.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/trainer.class.php');
@@ -9,6 +10,17 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 $session  = new Session();
 $db       = getDatabaseConnection();
 $trainers = TrainerProfile::getAllProfiles($db);
+
+// DEBUG — remove depois de resolver
+if (empty($trainers)) {
+    // Testa a query sem o filtro is_active
+    $raw = $db->query('SELECT COUNT(*) as total FROM trainer_profiles')->fetch();
+    $users = $db->query('SELECT id, full_name FROM users LIMIT 5')->fetchAll();
+    echo '<pre style="background:#1e1e1e;color:#0f0;padding:1rem;margin:1rem">';
+    echo "trainer_profiles count: " . $raw['total'] . "\n";
+    echo "users sample: " . print_r($users, true);
+    echo '</pre>';
+}
 
 $allSpecs = [];
 foreach ($trainers as $t) {
@@ -42,14 +54,22 @@ drawHeader($session, 'Treinadores', 'javascript/trainers.js', 'css/pages/trainer
     <section class="trainers-grid">
         <?php foreach ($trainers as $trainer):
             $parts      = explode(' ', $trainer->fullName ?? '');
-            $initials   = mb_substr(implode('', array_map(fn($p) => strtoupper(mb_substr($p, 0, 1)), $parts)), 0, 2);
-            $specs      = $trainer->getSpecializationsArray();
+$initials = substr(implode('', array_map(fn($p) => strtoupper(substr($p, 0, 1)), $parts)), 0, 2);            $specs      = $trainer->getSpecializationsArray();
             $certs      = $trainer->getCertificationsArray();
             $specsLower = implode(',', array_map('strtolower', $specs));
         ?>
             <article class="trainer-card" data-specs="<?= htmlspecialchars($specsLower) ?>">
                 <div class="trainer-card__image">
-                    <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                    <?php if ($trainer->photo && $trainer->photo !== 'default_profile.png'
+                            && file_exists(__DIR__ . '/../uploads/' . $trainer->photo)): ?>
+                        <img 
+                            src="../uploads/<?= htmlspecialchars($trainer->photo) ?>" 
+                            alt="<?= htmlspecialchars($trainer->fullName ?? '') ?>"
+                            class="trainer-card__photo"
+                        >
+                    <?php else: ?>
+                        <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                     <?php endif; ?>
                 </div>
                 <div class="trainer-card__content">
                     <h3 class="trainer-card__name"><?= htmlspecialchars($trainer->fullName ?? '') ?></h3>
