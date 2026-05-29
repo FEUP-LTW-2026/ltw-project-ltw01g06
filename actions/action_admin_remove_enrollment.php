@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/enrollment.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) {
     if (isset($_POST['ajax'])) { header('Content-Type: application/json'); echo json_encode(['ok'=>false]); exit; }
     header('Location: ../pages/login.php'); exit;
+if (!isset($_POST['ajax'])) { validateCsrfOrDie($session); }
 }
 
 $enrollmentId = (int)($_POST['enrollment_id'] ?? 0);

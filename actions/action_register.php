@@ -2,8 +2,10 @@
   declare(strict_types = 1);
 
   require_once(__DIR__ . '/../utils/bootstrap.php');
+  require_once(__DIR__ . '/../utils/csrf.php');
   require_once(__DIR__ . '/../database/user.class.php');
 
+  validateCsrfOrDie($session);
   $fullName        = trim($_POST['full_name'] ?? '');
   $username        = trim($_POST['username'] ?? '');
   $email           = trim($_POST['email'] ?? '');

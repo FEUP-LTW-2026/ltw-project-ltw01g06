@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 ini_set("display_errors", 1); error_reporting(E_ALL);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/enrollment.class.php');
 require_once(__DIR__ . '/../database/review.class.php');
 
@@ -10,6 +11,7 @@ if (!$session->isLoggedIn()) {
     $session->addMessage('error', 'Tens de estar autenticado para avaliar uma aula.');
     header('Location: ../pages/login.php');
     exit;
+    validateCsrfOrDie($session);
 }
 
 $classId = (int)($_POST['class_id'] ?? 0);

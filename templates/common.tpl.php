@@ -194,6 +194,10 @@ function drawHeader(
 <?php
 }
 
+function csrfInput(object $session): string {
+    return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars($session->getCsrfToken()) . '" />';
+}
+
 function drawFooter(string $pageJs = ''): void {
     $inPages = str_contains(str_replace('\\', '/', $_SERVER['SCRIPT_FILENAME'] ?? ''), '/pages/');
     $root    = $inPages ? '../' : '';

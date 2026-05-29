@@ -45,8 +45,8 @@ drawHeader($session, $title, '', 'css/pages/admin.css');
             </div>
             <form method="post"
                   action="<?= $isNew ? '../actions/action_admin_create_equipment.php' : '../actions/action_admin_edit_equipment.php' ?>"
-                  <?= csrfInput($session) ?>"
                   style="padding:var(--space-xl);display:flex;flex-direction:column;gap:var(--space-lg)">
+                <?= csrfInput($session) ?>
 
                 <?php if (!$isNew): ?>
                     <input type="hidden" name="equipment_id" value="<?= $item->id ?>">

@@ -2,6 +2,7 @@
   declare(strict_types = 1);
 
   require_once(__DIR__ . '/../utils/bootstrap.php');
+  require_once(__DIR__ . '/../utils/csrf.php');
   require_once(__DIR__ . '/../database/class.class.php');
   require_once(__DIR__ . '/../database/enrollment.class.php');
   require_once(__DIR__ . '/../database/waitlist.class.php');
@@ -10,6 +11,8 @@
     $session->addMessage('error', 'Tem de estar autenticado para se inscrever numa aula.');
     header('Location: ../pages/index.php');
     exit;
+  
+    validateCsrfOrDie($session);
   }
 
   $classId = (int)($_POST['class_id'] ?? 0);
@@ -33,7 +36,6 @@
 
   try {
     if ($action === 'cancel') {
-      // O trigger trg_promote_from_waitlist trata da lista de espera automaticamente
       $result = Enrollment::cancel($db, $userId, $classId);
       $message = $result ? 'Inscrição cancelada.' : 'Não foi possível cancelar a inscrição.';
       $type    = $result ? 'success' : 'error';
@@ -54,7 +56,6 @@
       $session->addMessage($type, $message);
 
     } else {
-      // Inscrição normal
       if (!$class->hasAvailableSpots()) {
         $session->addMessage('error', 'Esta aula está cheia. Podes entrar na lista de espera.');
       } else {
@@ -68,7 +69,6 @@
     }
 
   } catch (\Exception $e) {
-    // O trigger da DB pode lançar "Class is full" se houver race condition
     $session->addMessage('error', 'Não foi possível completar a operação. Tenta novamente.');
   }
 

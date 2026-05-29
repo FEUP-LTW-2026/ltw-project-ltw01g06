@@ -2,11 +2,13 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) {
     header('Location: ../pages/login.php');
     exit;
+validateCsrfOrDie($session);
 }
 
 $userId = (int)($_POST['user_id'] ?? 0);

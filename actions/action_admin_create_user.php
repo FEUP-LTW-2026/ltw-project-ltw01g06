@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) { header('Location: ../pages/login.php'); exit; }
@@ -15,6 +16,7 @@ $bio      = trim($_POST['bio'] ?? '') ?: null;
 if (!$fullName || !$username || !$email || !$password) {
     $session->addMessage('error', 'Preenche todos os campos obrigatórios.');
     header('Location: ../pages/admin-user-create.php'); exit;
+validateCsrfOrDie($session);
 }
 if (strlen($password) < 8) {
     $session->addMessage('error', 'A palavra-passe deve ter pelo menos 8 caracteres.');

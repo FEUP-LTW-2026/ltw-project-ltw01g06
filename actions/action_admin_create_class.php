@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/class.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) { header('Location: ../pages/login.php'); exit; }
@@ -21,6 +22,7 @@ $validLevels = ['beginner','intermediate','advanced'];
 if (!$name || !$type || !$dayOfWeek || !$startTime) {
     $session->addMessage('error', 'Preenche todos os campos obrigatórios.');
     header('Location: ../pages/admin-class-create.php'); exit;
+validateCsrfOrDie($session);
 }
 if (!in_array($dayOfWeek, $validDays) || !in_array($level, $validLevels)) {
     $session->addMessage('error', 'Dados inválidos.');

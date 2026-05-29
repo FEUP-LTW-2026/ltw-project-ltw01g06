@@ -2,12 +2,14 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 if (!$session->isLoggedIn()) {
     $session->addMessage('error', 'Tem de estar autenticado para atualizar o perfil.');
     header('Location: ../pages/login.php');
     exit;
+validateCsrfOrDie($session);
 }
 
 $user = User::getUser($db, $session->getId());
@@ -23,7 +25,7 @@ if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0775, true);
 }
 
-/* ── Remover foto ── */
+
 if (isset($_POST['remove_photo'])) {
     if ($user->photo && $user->photo !== 'default_profile.png') {
         $oldPath = $uploadDir . $user->photo;
@@ -35,14 +37,19 @@ if (isset($_POST['remove_photo'])) {
     exit;
 }
 
-/* ── Upload de foto ── */
 if (!empty($_FILES['photo']['name'])) {
     $file    = $_FILES['photo'];
-    $ext     = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-    $maxSize = 2 * 1024 * 1024;
+    $ext          = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $allowedExts  = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    $maxSize      = 2 * 1024 * 1024;
 
-    if (!in_array($ext, $allowed)) {
+    // Verificar extensão E MIME type real (previne upload de ficheiros PHP renomeados)
+    $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    if (!in_array($ext, $allowedExts) || !in_array($mimeType, $allowedMimes)) {
         $session->addMessage('error', 'Formato não suportado. Use JPG, PNG, GIF ou WebP.');
         header('Location: ../pages/profile.php');
         exit;
@@ -54,13 +61,21 @@ if (!empty($_FILES['photo']['name'])) {
         exit;
     }
 
+    $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+    if (!in_array($mimeType, ['image/jpeg','image/png','image/gif','image/webp'])) {
+        $session->addMessage('error', 'Formato não suportado.');
+        header('Location: ../pages/profile.php');
+        exit;
+    }
+
     if ($file['error'] !== UPLOAD_ERR_OK) {
         $session->addMessage('error', 'Erro ao fazer upload da imagem.');
         header('Location: ../pages/profile.php');
         exit;
     }
 
-    // Apagar foto antiga
     if ($user->photo && $user->photo !== 'default_profile.png') {
         $oldPath = $uploadDir . $user->photo;
         if (file_exists($oldPath)) unlink($oldPath);
@@ -76,7 +91,6 @@ if (!empty($_FILES['photo']['name'])) {
     $user->updatePhoto($db, $filename);
 }
 
-/* ── Atualizar dados de perfil ── */
 $fullName        = trim($_POST['full_name'] ?? '');
 $username        = trim($_POST['username'] ?? '');
 $bio             = trim($_POST['bio'] ?? '');
@@ -99,7 +113,6 @@ if (!empty($fullName)) {
     $session->addMessage('success', 'Perfil atualizado com sucesso!');
 }
 
-/* ── Atualizar password ── */
 if (!empty($newPassword)) {
     if (strlen($newPassword) < 8) {
         $session->addMessage('error', 'A nova password deve ter pelo menos 8 caracteres.');

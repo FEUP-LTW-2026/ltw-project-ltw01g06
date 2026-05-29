@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/enrollment.class.php');
 require_once(__DIR__ . '/../database/class.class.php');
 
@@ -9,6 +10,7 @@ if (!$session->isLoggedIn() || !$session->isAdmin()) {
     header('Content-Type: application/json');
     echo json_encode(['ok' => false, 'error' => 'Sem permissões.']);
     exit;
+validateCsrfOrDie($session);
 }
 
 $classId = (int)($_POST['class_id'] ?? 0);

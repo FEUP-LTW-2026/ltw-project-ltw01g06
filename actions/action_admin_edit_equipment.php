@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/equipment.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) { header('Location: ../pages/login.php'); exit; }
@@ -11,6 +12,7 @@ $item        = $equipmentId > 0 ? Equipment::getById($db, $equipmentId) : null;
 if (!$item) {
     $session->addMessage('error', 'Equipamento não encontrado.');
     header('Location: ../pages/admin-equipment.php'); exit;
+validateCsrfOrDie($session);
 }
 
 $name      = trim($_POST['name']     ?? '') ?: $item->name;

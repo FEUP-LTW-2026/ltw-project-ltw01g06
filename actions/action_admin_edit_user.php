@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) { header('Location: ../pages/login.php'); exit; }
@@ -20,6 +21,7 @@ $newPass  = $_POST['new_password'] ?? '';
 if (!in_array($role, ['member','trainer','admin'])) {
     $session->addMessage('error', 'Papel inválido.');
     header('Location: ../pages/admin-user-edit.php?id='.$userId); exit;
+validateCsrfOrDie($session);
 }
 if ($username !== $user->username && User::usernameExists($db, $username)) {
     $session->addMessage('error', 'Este username já está em uso.');

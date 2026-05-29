@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../utils/bootstrap.php');
+require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/equipment.class.php');
 
 if (!$session->isLoggedIn() || !$session->isAdmin()) { header('Location: ../pages/login.php'); exit; }
@@ -15,6 +16,7 @@ $notes     = trim($_POST['notes'] ?? '') ?: null;
 if (!$name) {
     $session->addMessage('error', 'O nome é obrigatório.');
     header('Location: ../pages/admin-equipment-edit.php'); exit;
+validateCsrfOrDie($session);
 }
 if (!in_array($status, ['available','maintenance','retired'])) {
     $session->addMessage('error', 'Estado inválido.');
