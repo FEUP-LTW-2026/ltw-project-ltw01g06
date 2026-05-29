@@ -77,6 +77,7 @@ $messages = $session->getMessages();
         </div>
 
         <form class="form" method="post" action="../actions/action_login.php">
+                <?= csrfInput($session) ?>
             <div class="form__group">
                 <label class="form__label" for="login-field">Email ou Username</label>
                 <input class="form__input" type="text" id="login-field" name="login"
@@ -101,6 +102,7 @@ $messages = $session->getMessages();
         </div>
 
         <form class="form" method="post" action="../actions/action_register.php">
+                <?= csrfInput($session) ?>
             <div class="form__group">
                 <label class="form__label" for="reg-name">Nome Completo</label>
                 <input class="form__input" type="text" id="reg-name" name="full_name"

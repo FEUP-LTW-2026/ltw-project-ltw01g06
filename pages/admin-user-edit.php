@@ -35,6 +35,7 @@ drawHeader($session, 'Editar Utilizador', '', 'css/pages/admin.css');
             <div class="admin-table-card__header"><h2 class="admin-table-card__title">Informações</h2></div>
             <form method="post" action="../actions/action_admin_edit_user.php"
                   style="padding:var(--space-xl);display:flex;flex-direction:column;gap:var(--space-lg)">
+                <?= csrfInput($session) ?>
                 <input type="hidden" name="user_id" value="<?= $user->id ?>">
                 <div class="form-group">
                     <label class="form-label">Nome Completo</label>

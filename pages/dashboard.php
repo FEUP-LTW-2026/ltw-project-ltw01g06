@@ -406,6 +406,7 @@ drawHeader($session, 'Dashboard', '', 'css/pages/dashboard.css');
                             <?php if (!$isTrainer): ?>
                                 <div class="upcoming-class__action">
                                     <form method="post" action="../actions/action_enroll.php">
+                <?= csrfInput($session) ?>
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
                                         <input type="hidden" name="action" value="cancel">
                                         <button type="submit" class="btn btn--secondary"

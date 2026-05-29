@@ -233,6 +233,7 @@ drawHeader($session, htmlspecialchars($gymClass->name), 'javascript/class-detail
             </div>
             <div class="enrollment-actions" style="margin-top: var(--space-md)">
                 <form method="post" action="../actions/action_enroll.php">
+                <?= csrfInput($session) ?>
                     <input type="hidden" name="class_id" value="<?= $classId ?>">
                     <input type="hidden" name="action" value="cancel">
                     <button type="submit" class="btn btn--secondary"
@@ -255,6 +256,7 @@ drawHeader($session, htmlspecialchars($gymClass->name), 'javascript/class-detail
                     <span class="waitlist-notice__text">Estás na posição <?= $waitlistPos ?>.</span>
                 </div>
                 <form method="post" action="../actions/action_enroll.php">
+                <?= csrfInput($session) ?>
                     <input type="hidden" name="class_id" value="<?= $classId ?>">
                     <input type="hidden" name="action" value="waitlist_leave">
                     <button type="submit" class="btn btn--secondary">Sair da Lista</button>
@@ -265,6 +267,7 @@ drawHeader($session, htmlspecialchars($gymClass->name), 'javascript/class-detail
             <!-- Vaga disponível -->
             <div class="enrollment-actions">
                 <form method="post" action="../actions/action_enroll.php">
+                <?= csrfInput($session) ?>
                     <input type="hidden" name="class_id" value="<?= $classId ?>">
                     <input type="hidden" name="action" value="enroll">
                     <button type="submit" class="btn btn--primary btn--large">
@@ -286,6 +289,7 @@ drawHeader($session, htmlspecialchars($gymClass->name), 'javascript/class-detail
                     <span class="waitlist-notice__text">Pode juntar-se à lista de espera.</span>
                 </div>
                 <form method="post" action="../actions/action_enroll.php">
+                <?= csrfInput($session) ?>
                     <input type="hidden" name="class_id" value="<?= $classId ?>">
                     <input type="hidden" name="action" value="waitlist">
                     <button type="submit" class="btn btn--secondary">Juntar à Lista de Espera</button>
@@ -338,6 +342,7 @@ drawHeader($session, htmlspecialchars($gymClass->name), 'javascript/class-detail
         <!-- Formulário de review (só membros inscritos) -->
         <?php if ($isEnrolled): ?>
             <form class="review-form" method="post" action="../actions/action_review.php">
+                <?= csrfInput($session) ?>
                 <input type="hidden" name="class_id" value="<?= $classId ?>">
                 <h3 class="review-form__title">
                     <?= $userReview ? 'Atualizar avaliação' : 'Deixe a sua avaliação' ?>

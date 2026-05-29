@@ -70,6 +70,7 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
                 <?php if ($hasPhoto): ?>
                     <form method="post" action="../actions/action_edit_profile.php"
                           style="display:inline">
+                <?= csrfInput($session) ?>
                         <input type="hidden" name="remove_photo" value="1" />
                         <button type="submit" class="btn btn--ghost"
                                 onclick="return confirm('Remover foto de perfil?')">
@@ -86,6 +87,7 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
     <!-- Formulário principal (com enctype para upload) -->
     <form class="profile-form" method="post" action="../actions/action_edit_profile.php"
           enctype="multipart/form-data" id="profile-form">
+                <?= csrfInput($session) ?>
 
         <!-- Campo de foto oculto dentro do form principal -->
         <input type="file" name="photo" id="photo-file" accept="image/*" style="display:none" />
@@ -192,6 +194,7 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
                             </span>
                         </div>
                         <form method="post" action="../actions/action_enroll.php">
+                <?= csrfInput($session) ?>
                             <input type="hidden" name="class_id" value="<?= $e->classId ?>">
                             <input type="hidden" name="action" value="cancel">
                             <button type="submit" class="btn btn--ghost"

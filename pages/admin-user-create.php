@@ -31,6 +31,7 @@ drawHeader($session, 'Criar Utilizador', '', 'css/pages/admin.css');
             <div class="admin-table-card__header"><h2 class="admin-table-card__title">Novo Utilizador</h2></div>
             <form method="post" action="../actions/action_admin_create_user.php"
                   style="padding:var(--space-xl);display:flex;flex-direction:column;gap:var(--space-lg)">
+                <?= csrfInput($session) ?>
                 <div class="form-group">
                     <label class="form-label">Nome Completo *</label>
                     <input type="text" name="full_name" class="form-input" placeholder="João Silva" required />
