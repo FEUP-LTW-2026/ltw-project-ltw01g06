@@ -4,32 +4,29 @@ declare(strict_types=1);
 /**
  * class.tpl.php
  * drawScheduleTable() — calendário semanal + vista lista com filtros.
- * Usa as classes CSS de schedule.css ao detalhe.
- * O JS de interação (toggle + filtros) está em javascript/schedule.js.
  */
 function drawScheduleTable(array $classes, object $session, object $db): void {
     require_once(__DIR__ . '/../database/enrollment.class.php');
     require_once(__DIR__ . '/../database/waitlist.class.php');
 
-    $userId = $session->isLoggedIn() ? $session->getId() : null;
+    $userId          = $session->isLoggedIn() ? $session->getId() : null;
+    $isTrainer       = (bool)($GLOBALS['scheduleIsTrainer'] ?? false);
+    $activeTrainerId = $GLOBALS['scheduleTrainerId'] ?? null; // pré-seleção do dropdown
 
-    $days      = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
-    $dayShort  = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
-    $dayFull   = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado','Domingo'];
+    $days     = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+    $dayShort = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+    $dayFull  = ['Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado','Domingo'];
 
-    // Agrupar aulas por dia
     $byDay = array_fill_keys($days, []);
     foreach ($classes as $class) {
         $byDay[$class->dayOfWeek][] = $class;
     }
 
-    // Horas únicas ordenadas
     $times = [];
     foreach ($classes as $class) { $times[$class->startTime] = true; }
     ksort($times);
     $times = array_keys($times);
 
-    // Tipos e treinadores únicos para filtros
     $types    = array_unique(array_map(fn($c) => $c->type, $classes));
     $trainers = [];
     foreach ($classes as $c) {
@@ -37,9 +34,18 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
     }
     sort($types);
     asort($trainers);
+
+    $enrolledIds = [];
+    if ($userId && !$isTrainer) {
+        foreach ($classes as $c) {
+            if (Enrollment::isUserEnrolled($db, $userId, $c->id)) {
+                $enrolledIds[$c->id] = true;
+            }
+        }
+    }
     ?>
 
-    <!-- ── Filtros ─────────────────────────────────── -->
+    <!-- ── Filtros ───────────────────────────────────────── -->
     <section class="schedule-filters">
         <div class="schedule-filters__row">
             <div class="filter-group">
@@ -58,7 +64,10 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                 <select class="filter-select" id="filter-trainer">
                     <option value="">Todos os Treinadores</option>
                     <?php foreach ($trainers as $tid => $tname): ?>
-                        <option value="<?= $tid ?>"><?= htmlspecialchars($tname) ?></option>
+                        <option value="<?= $tid ?>"
+                            <?= $activeTrainerId === $tid ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($tname) ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -74,7 +83,7 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         </div>
     </section>
 
-    <!-- ── Vista Calendário ────────────────────────── -->
+    <!-- ── Vista Calendário ──────────────────────────────── -->
     <section class="schedule-calendar" id="view-calendar">
         <header class="calendar-header">
             <div class="calendar-nav">
@@ -87,7 +96,6 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         </header>
 
         <div class="calendar-grid">
-            <!-- Cabeçalho dos dias -->
             <div class="calendar-grid__header">
                 <div class="calendar-grid__day-header"></div>
                 <?php foreach ($dayShort as $label): ?>
@@ -97,7 +105,6 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                 <?php endforeach; ?>
             </div>
 
-            <!-- Linhas por hora -->
             <div class="calendar-grid__body">
                 <?php if (empty($times)): ?>
                     <div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--color-text-muted)">
@@ -111,16 +118,18 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                             <div class="calendar-grid__cell">
                                 <?php foreach ($byDay[$day] as $class):
                                     if ($class->startTime !== $time) continue;
-                                    $typeSlug = strtolower(str_replace(' ', '-', $class->type));
-                                    $isFull   = !$class->hasAvailableSpots();
-                                    $spots    = $class->getAvailableSpots();
+                                    $typeSlug   = strtolower(str_replace(' ', '-', $class->type));
+                                    $isFull     = !$class->hasAvailableSpots();
+                                    $spots      = $class->getAvailableSpots();
+                                    $isEnrolled = isset($enrolledIds[$class->id]);
+                                    $cardExtra  = $isFull ? ' class-card--full'
+                                        : ($isEnrolled ? ' class-card--enrolled' : '');
                                 ?>
                                     <a href="class-detail.php?id=<?= $class->id ?>"
-                                       class="class-card class-card--<?= $typeSlug ?>"
+                                       class="class-card class-card--<?= $typeSlug ?><?= $cardExtra ?>"
                                        data-type="<?= htmlspecialchars(strtolower($class->type)) ?>"
                                        data-level="<?= htmlspecialchars($class->level) ?>"
-                                       data-trainer="<?= (int)$class->trainerId ?>"
-                                       style="text-decoration:none">
+                                       data-trainer="<?= (int)$class->trainerId ?>">
                                         <span class="class-card__time">
                                             <?= htmlspecialchars($class->startTime) ?> – <?= htmlspecialchars($class->getEndTime()) ?>
                                         </span>
@@ -128,9 +137,13 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                                         <span class="class-card__trainer">
                                             <?= htmlspecialchars($class->trainerName ?? '—') ?>
                                         </span>
-                                        <span class="class-card__spots <?= $isFull ? 'class-card__spots--full' : ($spots <= 3 ? 'class-card__spots--low' : '') ?>">
-                                            <?= $isFull ? 'Cheia' : "$spots vaga" . ($spots !== 1 ? 's' : '') ?>
-                                        </span>
+                                        <?php if ($isEnrolled && !$isTrainer): ?>
+                                            <span class="class-card__enrolled-badge">✓ Inscrito</span>
+                                        <?php else: ?>
+                                            <span class="class-card__spots <?= $isFull ? 'class-card__spots--full' : ($spots <= 3 ? 'class-card__spots--low' : '') ?>">
+                                                <?= $isFull ? 'Cheia' : "$spots vaga" . ($spots !== 1 ? 's' : '') ?>
+                                            </span>
+                                        <?php endif; ?>
                                     </a>
                                 <?php endforeach; ?>
                             </div>
@@ -141,7 +154,7 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         </div>
     </section>
 
-    <!-- ── Vista Lista ──────────────────────────────── -->
+    <!-- ── Vista Lista ───────────────────────────────────── -->
     <section class="schedule-list" id="view-list" style="display:none">
         <?php foreach ($days as $i => $day):
             if (empty($byDay[$day])) continue;
@@ -160,16 +173,20 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                             ? round($class->currentEnrollment / $class->capacity * 100) : 0;
                         $fillClass   = $isFull ? 'spots-indicator__fill--full'
                             : ($spots <= 3 ? 'spots-indicator__fill--low' : '');
-                        $isEnrolled  = $userId ? Enrollment::isUserEnrolled($db, $userId, $class->id) : false;
-                        $waitlistPos = $userId ? Waitlist::getUserPosition($db, $userId, $class->id) : null;
+                        $isEnrolled  = isset($enrolledIds[$class->id]);
+                        $waitlistPos = ($userId && !$isTrainer && !$isEnrolled)
+                            ? Waitlist::getUserPosition($db, $userId, $class->id)
+                            : null;
                         $levelLabel  = match($class->level) {
                             'beginner'     => 'Iniciante',
                             'intermediate' => 'Intermédio',
                             'advanced'     => 'Avançado',
                             default        => ucfirst($class->level)
                         };
+                        $itemExtra = $isFull ? ' class-list-item--full'
+                            : ($isEnrolled ? ' class-list-item--enrolled' : '');
                     ?>
-                        <div class="class-list-item"
+                        <div class="class-list-item<?= $itemExtra ?>"
                              data-type="<?= htmlspecialchars(strtolower($class->type)) ?>"
                              data-level="<?= htmlspecialchars($class->level) ?>"
                              data-trainer="<?= (int)$class->trainerId ?>">
@@ -181,12 +198,14 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
 
                             <div class="class-list-item__info">
                                 <h4 class="class-list-item__name">
-                                    <a href="class-detail.php?id=<?= $class->id ?>"
-                                       style="color:inherit;text-decoration:none">
+                                    <a href="class-detail.php?id=<?= $class->id ?>" class="class-list-item__link">
                                         <?= htmlspecialchars($class->name) ?>
                                     </a>
                                     <span class="tag tag--<?= $typeSlug ?>"><?= htmlspecialchars($class->type) ?></span>
                                     <span class="tag tag--<?= htmlspecialchars($class->level) ?>"><?= $levelLabel ?></span>
+                                    <?php if ($isEnrolled && !$isTrainer): ?>
+                                        <span class="enrolled-badge">✓ Inscrito</span>
+                                    <?php endif; ?>
                                 </h4>
                                 <div class="class-list-item__meta">
                                     <?php if ($class->trainerName): ?>
@@ -219,7 +238,11 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                                     </span>
                                 </div>
 
-                                <?php if ($isEnrolled): ?>
+                                <?php if ($isTrainer): ?>
+                                    <a href="class-detail.php?id=<?= $class->id ?>" class="btn btn--ghost">
+                                        Ver Detalhes
+                                    </a>
+                                <?php elseif ($isEnrolled): ?>
                                     <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
                                         <input type="hidden" name="action" value="cancel">
@@ -229,9 +252,7 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
                                         </button>
                                     </form>
                                 <?php elseif ($waitlistPos !== null): ?>
-                                    <span style="font-size:.8rem;color:var(--color-text-muted)">
-                                        Lista de espera #<?= $waitlistPos ?>
-                                    </span>
+                                    <span class="waitlist-badge">Lista de espera #<?= $waitlistPos ?></span>
                                 <?php elseif (!$isFull): ?>
                                     <form method="post" action="../actions/action_enroll.php">
                                         <input type="hidden" name="class_id" value="<?= $class->id ?>">
@@ -253,10 +274,13 @@ function drawScheduleTable(array $classes, object $session, object $db): void {
         <?php endforeach; ?>
 
         <?php if (array_sum(array_map('count', $byDay)) === 0): ?>
-            <p style="text-align:center;color:var(--color-text-muted);padding:3rem">
-                Nenhuma aula disponível.
-            </p>
+            <p class="schedule-list__empty">Nenhuma aula disponível.</p>
         <?php endif; ?>
+
+        <!-- Mensagem dinâmica quando os filtros não têm resultados (controlada por JS) -->
+        <p class="schedule-list__empty" id="schedule-list-empty" style="display:none">
+            Nenhuma aula encontrada com os filtros selecionados.
+        </p>
     </section>
 <?php
 }

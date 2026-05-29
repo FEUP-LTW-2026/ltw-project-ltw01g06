@@ -5,7 +5,7 @@
     public int $userId;
     public string $specializations;
     public string $certifications;
-    public string $updatedAt;
+    public ?string $updatedAt;
     // Campos vindos do JOIN com users
     public ?string $fullName;
     public ?string $username;
@@ -71,27 +71,25 @@
     }
 
     public static function getAllProfiles(PDO $db) : array {
-      $stmt = $db->query('
+    $stmt = $db->query('
         SELECT tp.*, u.full_name, u.username, u.email, u.bio, u.photo
         FROM trainer_profiles tp
         JOIN users u ON tp.user_id = u.id
-        WHERE u.is_active = 1
         ORDER BY u.full_name
-      ');
-
-      $profiles = array();
-      while ($row = $stmt->fetch()) {
+    ');
+    $profiles = array();
+    while ($row = $stmt->fetch()) {
         $profiles[] = self::hydrate($row);
-      }
-      return $profiles;
     }
+    return $profiles;
+}
 
     private static function hydrate(array $row) : self {
       return new self(
         (int)$row['user_id'],
         $row['specializations'] ?? '',
         $row['certifications']  ?? '',
-        $row['updated_at'],
+        $row['updated_at'] ?? null,  
         $row['full_name'] ?? null,
         $row['username']  ?? null,
         $row['email']     ?? null,
