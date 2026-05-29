@@ -13,7 +13,6 @@
   padding: var(--space-2xl) var(--space-xl);
 }
 
-/* Welcome Section */
 .dashboard-welcome {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
   border-radius: var(--radius-xl);
@@ -22,7 +21,6 @@
   margin-bottom: var(--space-xl);
   position: relative;
   overflow: hidden;
-  /* MELHORIA: flex para alinhar conteúdo e badges */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,7 +61,6 @@
   max-width: 500px;
 }
 
-/* MELHORIA: badges de resumo rápido no banner */
 .dashboard-welcome__badges {
   display: flex;
   gap: var(--space-md);
@@ -315,7 +312,6 @@
 .occupancy-bar__label--busy  { color: #d97706; }
 .occupancy-bar__label--full  { color: #dc2626; }
 
-/* Activity Feed */
 .activity-list {
   display: flex;
   flex-direction: column;

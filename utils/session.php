@@ -62,6 +62,17 @@ class Session {
         return $this->getRole() === 'member';
     }
 
+    public function getCsrfToken(): string {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+
+    public function validateCsrf(string $token): bool {
+        return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+    }
+
     public function addMessage(string $type, string $text): void {
         $_SESSION['messages'][] = ['type' => $type, 'text' => $text];
     }
