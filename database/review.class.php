@@ -101,6 +101,17 @@ class Review {
         ];
     }
 
+    public static function countUserReviews(PDO $db, int $userId): int {
+    $stmt = $db->prepare('
+        SELECT COUNT(*) AS total
+        FROM reviews
+        WHERE user_id = ?
+    ');
+    $stmt->execute(array($userId));
+    $row = $stmt->fetch();
+    return (int)($row['total'] ?? 0);
+}
+
     private static function hydrate(array $row): self {
         return new self(
             (int)$row['id'],

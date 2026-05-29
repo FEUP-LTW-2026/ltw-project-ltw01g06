@@ -227,14 +227,14 @@ function drawFooter(string $pageJs = ''): void {
                 </ul>
             </div>
             <div class="footer__column">
-                <h4>Aulas</h4>
-                <ul class="footer__links">
-                    <li><a href="<?= $root ?>pages/schedule.php" class="footer__link">Yoga</a></li>
-                    <li><a href="<?= $root ?>pages/schedule.php" class="footer__link">Spinning</a></li>
-                    <li><a href="<?= $root ?>pages/schedule.php" class="footer__link">HIIT</a></li>
-                    <li><a href="<?= $root ?>pages/schedule.php" class="footer__link">Pilates</a></li>
-                </ul>
-            </div>
+    <h4>Aulas</h4>
+    <ul class="footer__links">
+        <li><a href="<?= $root ?>pages/schedule.php?type=yoga" class="footer__link">Yoga</a></li>
+        <li><a href="<?= $root ?>pages/schedule.php?type=spinning" class="footer__link">Spinning</a></li>
+        <li><a href="<?= $root ?>pages/schedule.php?type=hiit" class="footer__link">HIIT</a></li>
+        <li><a href="<?= $root ?>pages/schedule.php?type=pilates" class="footer__link">Pilates</a></li>
+    </ul>
+</div>
             <div class="footer__column">
                 <h4>Contacto</h4>
                 <ul class="footer__links">

@@ -74,7 +74,6 @@ if (!empty($_FILES['photo']['name'])) {
     }
 
     $user->updatePhoto($db, $filename);
-    $session->setPhoto($filename);
 }
 
 /* ── Atualizar dados de perfil ── */
