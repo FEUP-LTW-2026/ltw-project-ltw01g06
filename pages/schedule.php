@@ -80,4 +80,5 @@ drawHeader($session, 'Horário de Aulas', 'javascript/schedule.js', 'css/pages/s
 
 </main>
 
-<?php drawFooter(); ?>
+<?php
+drawFooter('javascript/schedule.js');

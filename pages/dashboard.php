@@ -311,7 +311,7 @@ drawHeader($session, 'Dashboard', '', 'css/pages/dashboard.css');
                 <h2 class="dashboard-section__title">
                     <?= $isTrainer ? 'Próximas Aulas a Lecionar' : 'Próximas Aulas' ?>
                 </h2>
-                <a href="schedule.php" class="btn btn--ghost">Ver Todas</a>
+                <a href="schedule.php?trainer=<?= (int) $user->id ?>" class="btn btn--ghost">Ver Todas</a>
             </header>
             <div class="dashboard-section__content">
 

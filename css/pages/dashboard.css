@@ -925,3 +925,15 @@
     width: 16px;
     height: 16px;
 }
+
+.upcoming-class {
+    position: relative;
+}
+
+.upcoming-class__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+}

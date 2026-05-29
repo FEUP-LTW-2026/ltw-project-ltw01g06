@@ -97,12 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ── Filtro de treinador via URL (?trainer=ID) ── */
   var params    = new URLSearchParams(window.location.search);
-  var trainerId = params.get('trainer');
-  if (trainerId && filterTrainer) {
-    filterTrainer.value = trainerId;
-    /* Força vista lista para melhor legibilidade quando vem de um treinador */
+  var typeParam = params.get('type');
+if (typeParam && filterType) {
+    filterType.value = typeParam;
     switchView('list');
     applyFilters();
-  }
+}
 
 });
