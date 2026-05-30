@@ -35,6 +35,6 @@
 
 ## Credentials
 If using our populated database:
-ADMIN: admin | admin123
-TRAINER: ex. sofia_t | trainer123
-USER: ex. tiago_m | user123
+- ADMIN: admin | admin123
+- TRAINER: ex. sofia_t | trainer123
+- USER: ex. tiago_m | user123
