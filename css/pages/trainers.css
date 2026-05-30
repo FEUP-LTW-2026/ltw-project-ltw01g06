@@ -1,0 +1,206 @@
+.trainers-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.trainers-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.trainers-header__title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--color-text, #1a1a1a);
+  margin-bottom: 0.5rem;
+}
+.trainers-header__subtitle {
+  color: var(--color-text-muted, #6b7280);
+  font-size: 1rem;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.trainers-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+.trainers-filter {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid #d1d5db;
+  background: transparent;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.trainers-filter:hover {
+  border-color: var(--color-primary, #d97706);
+  color: var(--color-primary, #d97706);
+}
+.trainers-filter--active {
+  background: var(--color-primary, #d97706);
+  border-color: var(--color-primary, #d97706);
+  color: #fff;
+}
+
+.trainers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.trainer-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.trainer-card--hidden {
+  display: none;
+}
+
+.trainer-card__image {
+  background: linear-gradient(135deg, var(--color-primary, #d97706) 0%, #f59e0b 100%);
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trainer-card__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: 3px solid rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.trainer-card__photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.6);
+}
+
+.trainer-card__content {
+  padding: 1.25rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+.trainer-card__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+.trainer-card__role {
+  font-size: 0.85rem;
+  color: var(--color-primary, #d97706);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+.trainer-card__bio {
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.55;
+  margin: 0.25rem 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.trainer-card__specializations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+.tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.trainer-card__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.25rem;
+}
+.trainer-card__stat {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: #4b5563;
+}
+.trainer-card__stat-value {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.trainer-card__actions {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+.btn--primary {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: var(--color-primary, #d97706);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  box-sizing: border-box;
+}
+.btn--primary:hover {
+  background: #b45309;
+}
+
+.trainers-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-text-muted, #9ca3af);
+  padding: 3rem;
+  font-size: 1rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .trainers-grid {
+    grid-template-columns: 1fr;
+  }
+  .trainers-filters {
+    gap: 0.4rem;
+  }
+}

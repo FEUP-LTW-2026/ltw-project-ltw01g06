@@ -1,0 +1,350 @@
+/* ============================================================
+   equipment.css — Disponibilidade de equipamento
+   ============================================================ */
+
+.equipment-page {
+  padding-top: 70px;
+  min-height: 100vh;
+}
+
+.equipment-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.equipment-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-lg);
+}
+
+.equipment-header__info h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.equipment-header__info p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* ── Summary cards ──────────────────────────────────────── */
+.equipment-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.summary-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  transition: box-shadow var(--transition);
+}
+
+/* Destaque quando há equipamento em manutenção */
+.summary-card--has-issues {
+  border-color: #fca5a5;
+  background: #fff8f8;
+}
+
+.summary-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.summary-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.summary-card__icon--available  { background: #dcfce7; color: #16a34a; }
+.summary-card__icon--occupied   { background: #fef3c7; color: #d97706; }
+.summary-card__icon--maintenance { background: #fee2e2; color: #dc2626; }
+.summary-card__icon--total      { background: var(--color-primary-light); color: var(--color-primary); }
+
+.summary-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.summary-card__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* ── Filters ────────────────────────────────────────────── */
+.equipment-filters {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.equipment-search {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.equipment-search__icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.equipment-search__input {
+  width: 100%;
+  padding: 12px 14px 12px 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  transition: all var(--transition);
+}
+
+.equipment-search__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+.filter-select {
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  cursor: pointer;
+  min-width: 160px;
+  transition: all var(--transition);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+/* ── Equipment Grid ─────────────────────────────────────── */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* ── Equipment Card ─────────────────────────────────────── */
+.equipment-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  cursor: default;
+}
+
+
+/* Cards em manutenção com borda vermelha à esquerda */
+.equipment-card--maintenance {
+  border-left: 3px solid #dc2626;
+}
+
+.equipment-card__content {
+  padding: var(--space-lg);
+}
+
+.equipment-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.equipment-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+/* ── Category badge com cor por tipo ────────────────────── */
+.equipment-card__category {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm, 4px);
+  margin-bottom: var(--space-md);
+}
+
+/* Cores por categoria — ajusta os nomes conforme os teus dados */
+.equipment-card__category--cardio    { background: #dbeafe; color: #1d4ed8; }
+.equipment-card__category--weights   { background: #f3e8ff; color: #7e22ce; }
+.equipment-card__category--yoga      { background: #d1fae5; color: #065f46; }
+.equipment-card__category--pilates   { background: #fce7f3; color: #9d174d; }
+.equipment-card__category--funcional { background: #fef3c7; color: #92400e; }
+.equipment-card__category--geral     { background: #f1f5f9; color: #475569; }
+/* fallback para categorias não mapeadas */
+.equipment-card__category:not([class*="--"]) { background: #f1f5f9; color: #475569; }
+
+/* ── Progress bar de disponibilidade ────────────────────── */
+.equipment-card__progress {
+  margin-bottom: var(--space-md);
+}
+
+.progress-track {
+  height: 5px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.progress-bar--good { background: #16a34a; }
+.progress-bar--warn { background: #d97706; }
+.progress-bar--low  { background: #dc2626; }
+
+/* ── Card footer ─────────────────────────────────────────── */
+.equipment-card__details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.equipment-card__count {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.equipment-card__count strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.equipment-card__in-use {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #d97706;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* ── Status badge ────────────────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status-badge--available   { background: #dcfce7; color: #16a34a; }
+.status-badge--occupied    { background: #fef3c7; color: #d97706; }
+.status-badge--maintenance { background: #fee2e2; color: #dc2626; }
+.status-badge--retired     { background: #f1f5f9; color: #64748b; }
+
+.status-badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Estado vazio (sem resultados) ──────────────────────── */
+.equipment-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  grid-column: 1 / -1;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .equipment-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .equipment-container {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .equipment-header {
+    flex-direction: column;
+  }
+
+  .equipment-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .equipment-filters {
+    flex-direction: column;
+  }
+
+  .equipment-search {
+    width: 100%;
+  }
+
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .equipment-summary {
+    grid-template-columns: 1fr;
+  }
+}

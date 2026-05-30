@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equilibrio — Detalhes da Aula</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/class-detail.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../javascript/components.js" defer></script>
+</head>
+<body class="class-detail-page">
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+        <div class="navbar__logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/>
+            </svg>
+        </div>
+        <span>Equilibrio</span>
+    </a>
+    <div class="navbar__links">
+        <a href="schedule.html" class="navbar__link navbar__link--active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Horario
+        </a>
+        <a href="trainers.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Treinadores
+        </a>
+        <a href="equipment.html" class="navbar__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v6M6 14v6M18 4v6M18 14v6M3 7h6M15 7h6M3 17h6M15 17h6"/></svg>
+            Equipamento
+        </a>
+    </div>
+    <div class="navbar__actions">
+        <a href="dashboard.html" class="btn btn--ghost">Dashboard</a>
+        <div class="avatar avatar--sm">JS</div>
+    </div>
+</nav>
+
+<main class="class-detail-container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="schedule.html" class="breadcrumb__link">Horario</a>
+        <span class="breadcrumb__separator">/</span>
+        <span class="breadcrumb__current">Yoga Matinal</span>
+    </nav>
+
+    <!-- Class Header -->
+    <article class="class-header">
+        <div class="class-header__banner">
+            <div class="class-header__banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+        </div>
+        <div class="class-header__content">
+            <div class="class-header__tags">
+                <span class="tag tag--yoga">Yoga</span>
+                <span class="tag tag--beginner">Iniciante</span>
+            </div>
+            <h1 class="class-header__title">Yoga Matinal</h1>
+            <p class="class-header__description">
+                Comece o seu dia com uma sessao revitalizante de Hatha Yoga. Esta aula e perfeita para todos os niveis, com foco na respiracao, alongamento e relaxamento. Prepare-se para uma experiencia que vai equilibrar o seu corpo e mente.
+            </p>
+            <div class="class-header__meta">
+                <div class="class-meta-item">
+                    <div class="class-meta-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    </div>
+                    <div class="class-meta-item__info">
+                        <span class="class-meta-item__label">Data</span>
+                        <span class="class-meta-item__value">Segunda, 15 Jan</span>
+                    </div>
+                </div>
+                <div class="class-meta-item">
+                    <div class="class-meta-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="class-meta-item__info">
+                        <span class="class-meta-item__label">Horario</span>
+                        <span class="class-meta-item__value">08:00 - 09:00</span>
+                    </div>
+                </div>
+                <div class="class-meta-item">
+                    <div class="class-meta-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="class-meta-item__info">
+                        <span class="class-meta-item__label">Treinador</span>
+                        <span class="class-meta-item__value">Ana Costa</span>
+                    </div>
+                </div>
+                <div class="class-meta-item">
+                    <div class="class-meta-item__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="class-meta-item__info">
+                        <span class="class-meta-item__label">Local</span>
+                        <span class="class-meta-item__value">Sala 1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Enrollment Section -->
+    <section class="enrollment-section">
+        <header class="enrollment-section__header">
+            <h2 class="enrollment-section__title">Inscricao</h2>
+            <div class="enrollment-section__spots">
+                <div class="spots-progress">
+                    <div class="spots-progress__fill" style="width: 80%"></div>
+                </div>
+                <span class="spots-text"><strong>12</strong> de 15 vagas ocupadas</span>
+            </div>
+        </header>
+        <div class="enrollment-actions">
+            <button class="btn btn--secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                Guardar
+            </button>
+            <button class="btn btn--primary btn--large">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                Inscrever-me nesta Aula
+            </button>
+        </div>
+
+        <!-- Waitlist Notice (shown when class is full) -->
+        <div class="waitlist-notice" style="display: none;">
+            <div class="waitlist-notice__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="waitlist-notice__content">
+                <span class="waitlist-notice__title">Aula Completa</span>
+                <span class="waitlist-notice__text">Pode juntar-se a lista de espera. Sera notificado se uma vaga abrir.</span>
+            </div>
+            <button class="btn btn--secondary">Juntar a Lista de Espera</button>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <header class="reviews-header">
+            <div class="reviews-header__info">
+                <h2>Avaliacoes e Reviews</h2>
+                <span class="reviews-header__count">32 avaliacoes</span>
+            </div>
+            <button class="btn btn--secondary">Todas as Reviews</button>
+        </header>
+
+        <!-- Rating Summary -->
+        <div class="rating-summary">
+            <div class="rating-summary__score">
+                <span class="rating-summary__number">4.8</span>
+                <div class="rating-summary__stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <span class="rating-summary__total">32 avaliacoes</span>
+            </div>
+            <div class="rating-bars">
+                <div class="rating-bar">
+                    <span class="rating-bar__label">5 estrelas</span>
+                    <div class="rating-bar__track">
+                        <div class="rating-bar__fill" style="width: 75%"></div>
+                    </div>
+                    <span class="rating-bar__count">24</span>
+                </div>
+                <div class="rating-bar">
+                    <span class="rating-bar__label">4 estrelas</span>
+                    <div class="rating-bar__track">
+                        <div class="rating-bar__fill" style="width: 18%"></div>
+                    </div>
+                    <span class="rating-bar__count">6</span>
+                </div>
+                <div class="rating-bar">
+                    <span class="rating-bar__label">3 estrelas</span>
+                    <div class="rating-bar__track">
+                        <div class="rating-bar__fill" style="width: 6%"></div>
+                    </div>
+                    <span class="rating-bar__count">2</span>
+                </div>
+                <div class="rating-bar">
+                    <span class="rating-bar__label">2 estrelas</span>
+                    <div class="rating-bar__track">
+                        <div class="rating-bar__fill" style="width: 0%"></div>
+                    </div>
+                    <span class="rating-bar__count">0</span>
+                </div>
+                <div class="rating-bar">
+                    <span class="rating-bar__label">1 estrela</span>
+                    <div class="rating-bar__track">
+                        <div class="rating-bar__fill" style="width: 0%"></div>
+                    </div>
+                    <span class="rating-bar__count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Form -->
+        <form class="review-form">
+            <h3 class="review-form__title">Deixe a sua avaliacao</h3>
+            <div class="review-form__rating">
+                <span class="review-form__rating-label">A sua avaliacao:</span>
+                <div class="star-rating">
+                    <button type="button" class="star-rating__btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </button>
+                    <button type="button" class="star-rating__btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </button>
+                    <button type="button" class="star-rating__btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </button>
+                    <button type="button" class="star-rating__btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </button>
+                    <button type="button" class="star-rating__btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <textarea class="review-form__textarea" placeholder="Partilhe a sua experiencia com esta aula..."></textarea>
+            <div class="review-form__actions">
+                <button type="submit" class="btn btn--primary">Submeter Review</button>
+            </div>
+        </form>
+
+        <!-- Review List -->
+        <div class="reviews-list">
+            <article class="review-card">
+                <header class="review-card__header">
+                    <div class="review-card__avatar">MS</div>
+                    <div class="review-card__info">
+                        <span class="review-card__name">Maria Santos</span>
+                        <span class="review-card__date">ha 2 dias</span>
+                    </div>
+                    <div class="review-card__rating">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                </header>
+                <p class="review-card__content">
+                    Aula fantastica! A Ana e uma instrutora incrivel, muito atenciosa e sempre a corrigir as posturas. Sai da aula completamente relaxada e cheia de energia. Recomendo a todos!
+                </p>
+            </article>
+
+            <article class="review-card">
+                <header class="review-card__header">
+                    <div class="review-card__avatar">PF</div>
+                    <div class="review-card__info">
+                        <span class="review-card__name">Pedro Ferreira</span>
+                        <span class="review-card__date">ha 1 semana</span>
+                    </div>
+                    <div class="review-card__rating">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                </header>
+                <p class="review-card__content">
+                    Excelente forma de comecar o dia! Nunca tinha feito yoga antes mas a aula e muito acessivel para iniciantes. A musica ambiente e o ambiente geral sao muito relaxantes.
+                </p>
+            </article>
+
+            <article class="review-card">
+                <header class="review-card__header">
+                    <div class="review-card__avatar">AC</div>
+                    <div class="review-card__info">
+                        <span class="review-card__name">Ana Carvalho</span>
+                        <span class="review-card__date">ha 2 semanas</span>
+                    </div>
+                    <div class="review-card__rating">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                </header>
+                <p class="review-card__content">
+                    Boa aula no geral. Gostava que fosse um pouco mais longa, 1 hora passa muito rapido! A instrutora e muito competente e atenciosa.
+                </p>
+            </article>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
