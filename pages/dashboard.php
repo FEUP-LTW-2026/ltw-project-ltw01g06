@@ -61,7 +61,7 @@ if ($isTrainer) {
 
     $upcomingClasses = [];
     foreach ($trainerClasses as $class) {
-        if ($class->isActive && isUpcoming($class->dayOfWeek, $class->startTime, $dayOrder)) {
+        if ($class->isActive) {
             $upcomingClasses[] = ['class' => $class, 'enrollment' => null];
         }
     }
@@ -103,7 +103,7 @@ if ($isTrainer) {
     $upcomingClasses = [];
     foreach ($enrollments as $e) {
         $class = GymClass::getClass($db, $e->classId);
-        if ($class && $class->isActive && isUpcoming($class->dayOfWeek, $class->startTime, $dayOrder)) {
+        if ($class && $class->isActive) {
             $upcomingClasses[] = ['class' => $class, 'enrollment' => $e];
         }
     }

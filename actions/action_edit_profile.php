@@ -2,14 +2,13 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/bootstrap.php');
-require_once(__DIR__ . '/../utils/csrf.php');
 require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/trainer.class.php');
 
 if (!$session->isLoggedIn()) {
     $session->addMessage('error', 'Tem de estar autenticado para atualizar o perfil.');
     header('Location: ../pages/login.php');
     exit;
-validateCsrfOrDie($session);
 }
 
 $user = User::getUser($db, $session->getId());
@@ -57,15 +56,6 @@ if (!empty($_FILES['photo']['name'])) {
 
     if ($file['size'] > $maxSize) {
         $session->addMessage('error', 'A imagem não pode ter mais de 2MB.');
-        header('Location: ../pages/profile.php');
-        exit;
-    }
-
-    $finfo    = finfo_open(FILEINFO_MIME_TYPE);
-    $mimeType = finfo_file($finfo, $file['tmp_name']);
-    finfo_close($finfo);
-    if (!in_array($mimeType, ['image/jpeg','image/png','image/gif','image/webp'])) {
-        $session->addMessage('error', 'Formato não suportado.');
         header('Location: ../pages/profile.php');
         exit;
     }
@@ -135,6 +125,23 @@ if (!empty($newPassword)) {
 
     $user->updatePassword($db, $newPassword);
     $session->addMessage('success', 'Password atualizada com sucesso!');
+}
+
+// Atualizar perfil de treinador se aplicável
+if ($user->role === 'trainer') {
+    $specializations = trim($_POST['specializations'] ?? '');
+    $certifications  = trim($_POST['certifications']  ?? '');
+
+    $trainerProfile = TrainerProfile::getProfile($db, $user->id);
+    if ($trainerProfile) {
+        $trainerProfile->specializations = $specializations;
+        $trainerProfile->certifications  = $certifications;
+        $trainerProfile->save($db);
+    } else {
+        // Criar perfil se não existir
+        $tp = new TrainerProfile($user->id, $specializations, $certifications, '');
+        $tp->save($db);
+    }
 }
 
 header('Location: ../pages/profile.php');

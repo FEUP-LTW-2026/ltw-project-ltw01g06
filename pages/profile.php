@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../utils/session.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/enrollment.class.php');
+require_once(__DIR__ . '/../database/trainer.class.php');
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
 $session = new Session();
@@ -33,6 +34,11 @@ $initials = mb_substr(
 
 $hasPhoto = $user->photo && $user->photo !== 'default_profile.png'
     && file_exists(__DIR__ . '/../docs/uploads/' . $user->photo);
+
+$trainerProfile = null;
+if ($user->role === 'trainer') {
+    $trainerProfile = TrainerProfile::getProfile($db, $user->id);
+}
 
 drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profile.css');
 ?>
@@ -120,6 +126,36 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
                 </div>
             </div>
         </section>
+
+
+        <!-- Perfil de Treinador -->
+        <?php if ($user->role === 'trainer'): ?>
+        <section class="profile-form__section">
+            <h2 class="profile-form__section-title">Perfil de Treinador</h2>
+            <div class="profile-form__grid">
+                <div class="profile-form__group profile-form__group--full">
+                    <label class="profile-form__label" for="specializations">Especializações</label>
+                    <input class="profile-form__input" type="text" id="specializations"
+                           name="specializations"
+                           value="<?= htmlspecialchars($trainerProfile?->specializations ?? '') ?>"
+                           placeholder="ex: HIIT, Yoga, Pilates (separados por vírgula)" />
+                    <span style="font-size:.8rem;color:var(--color-text-muted);margin-top:.25rem">
+                        Separa as especializações por vírgula
+                    </span>
+                </div>
+                <div class="profile-form__group profile-form__group--full">
+                    <label class="profile-form__label" for="certifications">Certificações</label>
+                    <input class="profile-form__input" type="text" id="certifications"
+                           name="certifications"
+                           value="<?= htmlspecialchars($trainerProfile?->certifications ?? '') ?>"
+                           placeholder="ex: NASM CPT, CrossFit Level 2 (separados por vírgula)" />
+                    <span style="font-size:.8rem;color:var(--color-text-muted);margin-top:.25rem">
+                        Separa as certificações por vírgula
+                    </span>
+                </div>
+            </div>
+        </section>
+        <?php endif; ?>
 
         <!-- Alterar Password -->
         <section class="profile-form__section">

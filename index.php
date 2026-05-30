@@ -124,26 +124,11 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                     'advanced'     => 'Avançado',
                     default        => ucfirst($class->level)
                 };
-            // Ícone SVG por tipo de aula
-            $icons = [
-                'yoga'     => '<path d=../docs/assets/class.svg/>',
-                'hiit'     => '<path d=../docs/assets/class.svg/>',
-                'spinning' => '<path d=../docs/assets/class.svg/>',
-                'pilates'  => '<path d=../docs/assets/class.svg/>',
-                'zumba'    => '<path d=../docs/assets/class.svg/>',
-                'weights'  => '<path d=../docs/assets/class.svg/>',
-                'default'  => '<path d=../docs/assets/class.svg/>',
-            ];
             $typeKey = strtolower(str_replace(' ', '', $class->type));
             $iconPath = $icons[$typeKey] ?? $icons['default'];
             ?>
                 <article class="class-card">
                     <div class="class-card__image">
-                        <svg class="class-card__image-icon" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="1.2"
-                             stroke-linecap="round" stroke-linejoin="round">
-                            <?= $iconPath ?>
-                        </svg>
                         <div class="class-card__image-tags">
                             <span class="tag tag--<?= $typeSlug ?>"><?= htmlspecialchars($class->type) ?></span>
                             <span class="tag tag--<?= htmlspecialchars($class->level) ?>"><?= $levelLabel ?></span>
@@ -197,7 +182,20 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
             ?>
                 <div class="trainer-card">
                     <div class="trainer-card__image">
-                        <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                        <?php
+                        $tPhoto = $trainer->photo ?? null;
+                        $tHasPhoto = $tPhoto && $tPhoto !== 'default_profile.png'
+                            && file_exists(__DIR__ . '/docs/uploads/' . $tPhoto);
+                        ?>
+                        <?php if ($tHasPhoto): ?>
+                            <div class="trainer-card__avatar" style="overflow:hidden;padding:0">
+                                <img src="docs/uploads/<?= htmlspecialchars($tPhoto) ?>"
+                                     alt="<?= htmlspecialchars($trainer->fullName ?? '') ?>"
+                                     style="width:100%;height:100%;object-fit:cover;border-radius:50%" />
+                            </div>
+                        <?php else: ?>
+                            <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                        <?php endif; ?>
                     </div>
                     <h3 class="trainer-card__name"><?= htmlspecialchars($trainer->fullName ?? '') ?></h3>
                     <?php if (!empty($specs)): ?>
@@ -240,7 +238,7 @@ drawHeader($session, 'Fitness & Wellness', '', 'css/pages/home.css', true);
                         Ver Horário de Aulas
                     </a>
                 <?php else: ?>
-                    <a href="pages/register.php" class="btn btn--primary btn--large">
+                    <a href="pages/login.php#register" class="btn btn--primary btn--large">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                             <circle cx="8.5" cy="7" r="4"/>

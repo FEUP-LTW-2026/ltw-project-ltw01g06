@@ -64,12 +64,15 @@ function trainerHasPhoto(?string $photo): bool {
         ?>
             <article class="trainer-card" data-specs="<?= htmlspecialchars($specsLower) ?>">
 
-                
-<div class="trainer-card__banner"></div>
-
-<div class="trainer-card__image">
-    <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
-</div>
+                <div class="trainer-card__image">
+                    <?php if ($hasPhoto): ?>
+                        <img src="../docs/uploads/<?= htmlspecialchars($trainer->photo) ?>"
+                             alt="<?= htmlspecialchars($trainer->fullName ?? '') ?>"
+                             style="width:100%;height:100%;object-fit:cover" />
+                    <?php else: ?>
+                        <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
+                    <?php endif; ?>
+                </div>
 
                 <div class="trainer-card__content">
 

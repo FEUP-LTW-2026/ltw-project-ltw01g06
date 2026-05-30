@@ -295,22 +295,6 @@
   gap: var(--space-md);
 }
 
-.feature-card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-lg);
-  background: var(--color-primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-primary);
-}
-
-.feature-card__icon svg {
-  width: 26px;
-  height: 26px;
-}
-
 .feature-card__title {
   font-size: 1.1rem;
   font-weight: 700;
@@ -357,13 +341,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
-
-.class-card__image-icon {
-  width: 64px;
-  height: 64px;
-  color: var(--color-primary);
-  opacity: 0.3;
 }
 
 .class-card__image-tags {
