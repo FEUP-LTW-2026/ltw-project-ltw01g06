@@ -127,7 +127,6 @@ drawHeader($session, 'Editar Perfil', 'javascript/profile.js', 'css/pages/profil
             </div>
         </section>
 
-
         <!-- Perfil de Treinador -->
         <?php if ($user->role === 'trainer'): ?>
         <section class="profile-form__section">

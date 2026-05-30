@@ -77,7 +77,6 @@ drawHeader($session, 'Horário de Aulas', 'javascript/schedule.js', 'css/pages/s
     </header>
 
     <?php drawScheduleTable($classes, $session, $db); ?>
-
 </main>
 
 <?php

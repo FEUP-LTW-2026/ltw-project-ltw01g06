@@ -109,35 +109,29 @@ $messages = $session->getMessages();
                 <input class="form__input" type="text" id="reg-name" name="full_name"
                        placeholder="João Silva" autocomplete="name" required />
             </div>
-
             <div class="form__group">
                 <label class="form__label" for="reg-username">Username</label>
                 <input class="form__input" type="text" id="reg-username" name="username"
                        placeholder="joaosilva" autocomplete="username" required />
             </div>
-
             <div class="form__group">
                 <label class="form__label" for="reg-email">Email</label>
                 <input class="form__input" type="email" id="reg-email" name="email"
                        placeholder="o-seu-email@exemplo.com" autocomplete="email" required />
             </div>
-
             <div class="form__group">
                 <label class="form__label" for="reg-password">Palavra-passe</label>
                 <input class="form__input" type="password" id="reg-password" name="password"
                        placeholder="••••••••" minlength="8" autocomplete="new-password" required />
             </div>
-
             <div class="form__group">
                 <label class="form__label" for="reg-confirm">Confirmar Palavra-passe</label>
                 <input class="form__input" type="password" id="reg-confirm" name="confirm_password"
                        placeholder="••••••••" autocomplete="new-password" required />
             </div>
-
             <button class="btn btn--primary btn--full" type="submit">Criar Conta</button>
         </form>
     </section>
-
 </main>
 
 <button class="help-btn" aria-label="Ajuda">?</button>

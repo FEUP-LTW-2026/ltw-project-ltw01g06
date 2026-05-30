@@ -234,23 +234,18 @@ drawHeader($session, 'Dashboard', '', 'css/pages/dashboard.css');
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
     </div>
-
     <div class="dashboard-stat__info">
-
         <span class="dashboard-stat__value">
             <?= count($trainerReviews) ?>
         </span>
-
         <span class="dashboard-stat__label">
             Reviews recebidas
         </span>
-
         <?php if ($avgRating > 0): ?>
             <span class="dashboard-stat__sublabel">
                 <?= $avgRating ?> ⭐ média
             </span>
         <?php endif; ?>
-
     </div>
 
 </a>

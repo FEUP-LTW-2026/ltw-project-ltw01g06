@@ -171,18 +171,15 @@ drawHeader($session, 'Equipamento', 'javascript/equipment.js', 'css/pages/equipm
                             <?= $statusLabel ?>
                         </span>
                     </div>
-
                     <span class="equipment-card__category equipment-card__category--<?= $categorySlug ?>">
                         <?= htmlspecialchars($item->category ?? 'Geral') ?>
                     </span>
-
                     <div class="equipment-card__progress">
                         <div class="progress-track">
                             <div class="progress-bar <?= $barClass ?>"
                                  style="width: <?= $availPct ?>%"></div>
                         </div>
                     </div>
-
                     <div class="equipment-card__details">
                         <span class="equipment-card__count">
                             <strong><?= $item->available ?></strong>/<?= $item->quantity ?> disponíveis
@@ -205,13 +202,11 @@ drawHeader($session, 'Equipamento', 'javascript/equipment.js', 'css/pages/equipm
         </svg>
         Nenhum equipamento encontrado com os filtros aplicados.
     </p>
-
     <?php if (empty($equipment)): ?>
         <p class="equipment-empty">
             Nenhum equipamento registado.
         </p>
     <?php endif; ?>
-
 </main>
 
 <?php drawFooter('javascript/equipment.js'); ?>

@@ -33,14 +33,12 @@ function trainerHasPhoto(?string $photo): bool {
 ?>
 
 <main class="trainers-container">
-
     <header class="trainers-header">
         <h1 class="trainers-header__title">Os Nossos Treinadores</h1>
         <p class="trainers-header__subtitle">
             Conheça a equipa de profissionais dedicados ao seu bem-estar e objetivos fitness
         </p>
     </header>
-
     <nav class="trainers-filters">
         <button class="trainers-filter trainers-filter--active" data-spec="">Todos</button>
         <?php foreach ($allSpecs as $slug => $label): ?>
@@ -49,7 +47,6 @@ function trainerHasPhoto(?string $photo): bool {
             </button>
         <?php endforeach; ?>
     </nav>
-
     <section class="trainers-grid">
         <?php foreach ($trainers as $trainer):
             $parts      = explode(' ', trim($trainer->fullName ?? ''));
@@ -63,7 +60,6 @@ function trainerHasPhoto(?string $photo): bool {
             $hasPhoto   = trainerHasPhoto($trainer->photo);
         ?>
             <article class="trainer-card" data-specs="<?= htmlspecialchars($specsLower) ?>">
-
                 <div class="trainer-card__image">
                     <?php if ($hasPhoto): ?>
                         <img src="../docs/uploads/<?= htmlspecialchars($trainer->photo) ?>"
@@ -73,11 +69,8 @@ function trainerHasPhoto(?string $photo): bool {
                         <div class="trainer-card__avatar"><?= htmlspecialchars($initials) ?></div>
                     <?php endif; ?>
                 </div>
-
                 <div class="trainer-card__content">
-
                     <h3 class="trainer-card__name"><?= htmlspecialchars($trainer->fullName ?? '') ?></h3>
-
                     <?php if ($trainer->bio): ?>
                         <p class="trainer-card__bio"><?= htmlspecialchars($trainer->bio) ?></p>
                     <?php endif; ?>
@@ -113,16 +106,13 @@ function trainerHasPhoto(?string $photo): bool {
                         <a href="schedule.php?trainer=<?= (int) $trainer->userId ?>"
                            class="btn btn--primary">Ver Horário</a>
                     </div>
-
                 </div>
             </article>
         <?php endforeach; ?>
-
         <?php if (empty($trainers)): ?>
             <p class="trainers-empty">Nenhum treinador disponível de momento.</p>
         <?php endif; ?>
+
     </section>
-
 </main>
-
 <?php drawFooter('javascript/trainers.js'); ?>

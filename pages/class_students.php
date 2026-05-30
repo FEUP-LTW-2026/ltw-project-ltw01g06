@@ -72,87 +72,59 @@ drawHeader(
 ?>
 
 <main class="dashboard-container">
-
     <section class="dashboard-section">
-
         <header class="dashboard-section__header">
-
             <h2 class="dashboard-section__title">
                 <?= htmlspecialchars($class->name) ?>
             </h2>
-
             <p>
                 <?= count($students) ?>
                 aluno<?= count($students) !== 1 ? 's' : '' ?>
                 inscrito<?= count($students) !== 1 ? 's' : '' ?>
             </p>
-
         </header>
-
         <div class="dashboard-section__content">
-
             <?php if (empty($students)): ?>
-
                 <div class="empty-state">
                     <h3 class="empty-state__title">
                         Ainda não existem alunos inscritos
                     </h3>
                 </div>
-
             <?php else: ?>
-
                 <div class="activity-list">
-
                     <?php foreach ($students as $student): ?>
-
                         <div class="activity-item">
-
                             <div class="roster-item__avatar">
-
                                 <?php if (
                                     !empty($student['photo']) &&
                                     file_exists(__DIR__ . '/../images/profiles/' . $student['photo'])
                                 ): ?>
-
                                     <img
                                         src="/images/profiles/<?= htmlspecialchars($student['photo']) ?>"
                                         alt="<?= htmlspecialchars($student['full_name']) ?>"
                                     >
-
                                 <?php else: ?>
-
                                     <span>
                                         <?= strtoupper(substr($student['full_name'], 0, 1)) ?>
                                     </span>
-
                                 <?php endif; ?>
 
                             </div>
-
                             <div class="activity-item__content">
-
                                 <p class="activity-item__text">
                                     <strong><?= htmlspecialchars($student['full_name']) ?></strong>
                                 </p>
-
                                 <span class="activity-item__time">
                                     <?= htmlspecialchars($student['email']) ?>
                                 </span>
-
                             </div>
-
                         </div>
-
                     <?php endforeach; ?>
-
                 </div>
-
             <?php endif; ?>
 
         </div>
-
     </section>
-
 </main>
 
 <?php drawFooter(); ?>

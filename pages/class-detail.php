@@ -306,7 +306,6 @@ drawHeader($session, htmlspecialchars($gymClass->name), 'javascript/class-detail
                 <span class="reviews-header__count"><?= $stats['total'] ?> avalia<?= $stats['total'] !== 1 ? 'ções' : 'ção' ?>
             </div>
         </header>
-
         <?php if ($stats['total'] > 0): ?>
             <div class="rating-summary">
                 <div class="rating-summary__score">
