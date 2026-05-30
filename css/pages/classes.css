@@ -1,0 +1,204 @@
+/* ============================================================
+   pages/classes.css — specific styles for the classes page
+   ============================================================ */
+
+/* ── Filters ─────────────────────────────────────────────────── */
+.filters {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.filters__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.filters__header svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-muted);
+}
+
+.filters__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.filter-group__label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Classes grid ────────────────────────────────────────────── */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* ── Class card ──────────────────────────────────────────────── */
+.class-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+  border-top: 4px solid transparent;
+}
+
+.class-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Top accent color per type */
+.class-card--yoga     { border-top-color: var(--color-yoga); }
+.class-card--spinning { border-top-color: var(--color-spinning); }
+.class-card--hiit     { border-top-color: var(--color-hiit); }
+.class-card--pilates  { border-top-color: var(--color-pilates); }
+.class-card--boxing   { border-top-color: var(--color-boxing); }
+
+.class-card__body {
+  padding: var(--space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.class-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.class-card__desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+.class-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+/* Info list */
+.class-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+  flex: 1;
+}
+
+.class-card__info li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.class-card__info li svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--color-text-light);
+}
+
+/* Divider */
+.class-card__divider {
+  height: 1px;
+  background: var(--color-border);
+  margin-bottom: var(--space-md);
+}
+
+/* Instructor */
+.class-card__instructor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-md);
+}
+
+.instructor__name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.instructor__role {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* Enroll button inside card */
+.class-card .btn--primary {
+  border-radius: 0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);
+  padding: 14px;
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .classes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters__row .filter-group:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: var(--space-lg) var(--space-md) var(--space-2xl);
+  }
+
+  .navbar {
+    padding: 0 var(--space-md);
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .page-header__title {
+    font-size: 1.5rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters__row {
+    grid-template-columns: 1fr;
+  }
+
+  .filters__row .filter-group:last-child {
+    grid-column: auto;
+  }
+}
